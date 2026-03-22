@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
     public void SetMoveInput(Vector2 input)
     {
         targetMoveDirection = new Vector3(input.x, 0, input.y).normalized;
+        Debug.Log($"{this.name} 플레이어 이동 호출됨");
     }
 
     // 방향 보간
