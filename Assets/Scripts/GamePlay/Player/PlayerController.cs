@@ -19,12 +19,13 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Debug.Log($"{this.name} 컨트롤 호출됨");
+        Debug.Log($"{this.name} Move 컨트롤 호출됨");
         player.SetMoveInput(input);
     }
 
-    public void OnInteractPrimary()
+    public void ControllInteractPrimary()
     {
+        Debug.Log($"{this.name} 상호작용1 컨트롤 호출됨");
         player.InteractPrimary();
     }
 }

@@ -5,11 +5,16 @@ public class InteractionFinder : MonoBehaviour
     public Transform targetTransform;       // 정면 기준 빈 오브젝트
     public Transform playerTransform;       // 탐색 범위 원점
     public float radius = 3f;
-    public LayerMask interactLayer;
+
+    // 탐색할 레이어
+    private int pickableLayer = 6;
+    private int nonPickableLayer = 7;
+    private int interactLayer = -1;
 
     private void Awake()
     {
         targetTransform.position = playerTransform.position + playerTransform.forward * radius;
+        interactLayer = (1 << pickableLayer) | (1 << nonPickableLayer);
     }
 
     // 플레이어 원점 기준 원형 범위 탐색 후 타겟 Transform과 제일 가까운 IInteractable 반환

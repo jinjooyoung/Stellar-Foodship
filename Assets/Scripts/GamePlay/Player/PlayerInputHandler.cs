@@ -21,6 +21,22 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
     }
 
+    private void Start()
+    {
+        string schemeName = controller.player.inputType == PlayerInputType.Keyboard ? "Keyboard&Mouse" : "Gamepad";
+
+        // 플레이어가 Keyboard 타입이면 Keyboard.current, Gamepad 타입이면 Gamepad.current
+        UnityEngine.InputSystem.InputDevice device = controller.player.inputType == PlayerInputType.Keyboard ? Keyboard.current : Gamepad.current;
+
+
+        // Device가 null이 아니면 스위치
+        if (device != null)
+        {
+            playerInput.SwitchCurrentControlScheme(schemeName, device);
+            Debug.Log($"컨트롤 타입 변경 {schemeName} for {device.displayName}");
+        }
+    }
+
     void OnEnable()
     {
         InputSystem.onDeviceChange += OnDeviceChange;
@@ -33,8 +49,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     void OnDeviceChange(UnityEngine.InputSystem.InputDevice device, InputDeviceChange change)
     {
-        Debug.Log($"디바이스 변화: {device} / {change}");
-
         // 게임패드 다시 연결됨
         if (change == InputDeviceChange.Reconnected && device is Gamepad)
         {
@@ -63,7 +77,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsCorrectDevice(context)) return;          // 플레이어 컴포넌트의 inputType과 다른 입력은 받지 않음
         Vector2 input = context.ReadValue<Vector2>();
-        Debug.Log($"{this.name} 인풋 호출됨");
+        Debug.Log($"{this.name} OnMove 인풋 호출됨");
         controller.Move(input);
     }
 
@@ -71,25 +85,24 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsCorrectDevice(context)) return;
 
-        if (context.performed)
+        Debug.Log($"{this.name} 상호작용1 인풋 호출됨");
+
+        if (context.started)
         {
-            controller.OnInteractPrimary();
+            controller.ControllInteractPrimary();
         }
     }
 
     bool IsCorrectDevice(InputAction.CallbackContext context)
     {
         var device = context.control.device;
-        Debug.Log($"디바이스 : {device}");
 
         if (controller.player.inputType == PlayerInputType.Keyboard)
         {
-            Debug.Log($"디바이스 상태 : {device is Keyboard}");
-            return device is Keyboard;
+            return device is Keyboard || device is Mouse;
         }
         else if (controller.player.inputType == PlayerInputType.Gamepad)
         {
-            Debug.Log($"디바이스 상태 : {device is Gamepad}");
             return device is Gamepad;
         }
 
