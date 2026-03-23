@@ -28,4 +28,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"{this.name} 상호작용1 컨트롤 호출됨");
         player.InteractPrimary();
     }
+
+    // Drop 호출
+    public void ControllDrop()
+    {
+        Debug.Log($"{this.name} 드랍 컨트롤 호출됨");
+        player.Drop();
+    }
 }

@@ -93,6 +93,16 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public void OnDrop(InputAction.CallbackContext context)
+    {
+        if (!IsCorrectDevice(context)) return;
+        Debug.Log($"{this.name} µå¶ø ÀÎÇ² È£ÃâµÊ");
+        if (context.started)
+        {
+            controller.ControllDrop();
+        }
+    }
+
     bool IsCorrectDevice(InputAction.CallbackContext context)
     {
         var device = context.control.device;

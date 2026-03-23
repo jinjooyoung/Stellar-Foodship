@@ -169,7 +169,18 @@ public class Player : MonoBehaviour
     // 아이템 집기
     public void Pickup(Pickable item)
     {
+        if (heldItem != null) return;       //이미 들고 있으면 무시(사랑 추가)
+
         Debug.Log($"{this.name} 플레이어 픽업 호출됨");
+
+        //NonPickable 위에 올려져 있던 아이템이면 해당 슬롯 비우기(사랑 추가)
+        NonPickable parentSlot = item.GetTransform().parent?
+            .GetComponent<NonPickable>();
+        if (parentSlot != null)
+        {
+            parentSlot.TakeItem();
+        }
+
         heldItem = item;
 
         // 홀드포인트 하위로 이동
@@ -197,10 +208,25 @@ public class Player : MonoBehaviour
 
         if (heldItem == null) return;
 
+        //타겟이 NonPickable이고 아이템을 받을 수 있으면 그 위에 올림
+        if (target != null)
+        {
+            NonPickable nonPickable = (target as MonoBehaviour)?.GetComponent<NonPickable>();
+            if (nonPickable != null && nonPickable.TryPlaceItem(heldItem as Pickable))
+            {
+                heldItem = null;
+                return;
+            }
+
+        }
+
         Transform itemTransform = heldItem.GetTransform();
         itemTransform.SetParent(null);
 
         heldItem = null;
+
+        // 올릴 곳 없으면 드랍 취소
+        Debug.Log("내려놓을 곳 없음. 드랍 취소");
     }
 
     // 던지기
