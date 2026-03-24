@@ -60,6 +60,10 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
         item.GetTransform().localPosition = Vector3.zero;
         item.GetTransform().localRotation = Quaternion.identity;
 
+        // 콜라이더 복구 (TryPlaceItem에서 껐던 것)
+        Collider col = item.GetTransform().GetComponent<Collider>();
+        if (col != null) col.enabled = false;
+
         return item;
     }
 

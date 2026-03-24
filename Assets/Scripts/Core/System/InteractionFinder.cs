@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class InteractionFinder : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class InteractionFinder : MonoBehaviour
     public IInteractable FindClosestInteractable()
     {
         Collider[] hits = Physics.OverlapSphere(playerTransform.position, radius, interactLayer);
-
+        Player player = playerTransform.GetComponent<Player>();
         Transform closest = null;
         float minDist = float.MaxValue;
 
@@ -29,6 +30,10 @@ public class InteractionFinder : MonoBehaviour
         {
             // 인터페이스 없는 애들은 제외
             if (!hit.TryGetComponent<IInteractable>(out var interactable))
+                continue;
+            
+            // 들고 있는 아이템 제외
+            if (interactable == player.heldItem)
                 continue;
 
             float dist = (hit.transform.position - targetTransform.position).sqrMagnitude;
