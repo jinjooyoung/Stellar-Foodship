@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
-using static UnityEditor.Progress;
-using static UnityEngine.GraphicsBuffer;
 
 public abstract class Pickable : MonoBehaviour, IInteractable
 {

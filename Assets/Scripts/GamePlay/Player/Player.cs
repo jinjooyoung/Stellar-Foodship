@@ -113,15 +113,8 @@ public class Player : MonoBehaviour
     public void InteractPrimary()
     {
         Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
-
-        //들고 있는 아이템이 있으면 target 없어도 Drop 실행
-        if (heldItem != null)
-        {
-            Drop();
-            return;
-        }
-
         if (target == null) return;
+
         target.Interact(this);
     }
 
@@ -194,7 +187,7 @@ public class Player : MonoBehaviour
     public void Pickup()
     {
         if (heldItem != null) return;
-        Debug.Log("플레이어 픽업 호출");
+
         if (target is Pickable pickable)
         {
             Debug.Log("플레이어 픽업 타겟이 픽커블");
