@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class Shelf : NonPickable
 {
+    public override bool CanPlace(Pickable item) => true;
+
     // 상호작용 - 들고 있으면 내려놓기, 없으면 집기
     public override void Interact(Player player)
     {

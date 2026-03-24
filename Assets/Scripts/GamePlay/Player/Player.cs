@@ -62,6 +62,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (heldItem  != null) Debug.Log($"플레이어 heldItem : {heldItem.ToString()}");
+
         targetUpdateTimer += Time.deltaTime;
 
         if (targetUpdateTimer >= targetUpdateInterval)
@@ -110,7 +112,6 @@ public class Player : MonoBehaviour
     // 상호작용1 : J / Button South
     public void InteractPrimary()
     {
-        Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
         if (target == null) return;
 
         target.Interact(this);
@@ -185,12 +186,22 @@ public class Player : MonoBehaviour
     public void Pickup()
     {
         if (heldItem != null) return;
-
+        Debug.Log("플레이어 픽업 호출");
         if (target is Pickable pickable)
         {
+            Debug.Log("플레이어 픽업 타겟이 픽커블");
             if (pickable.TryPickUp(this))
             {
                 heldItem = pickable;
+            }
+        }
+        else if (target != null)
+        {
+            Debug.Log("플레이어 픽업 타겟이 논픽커블");
+            NonPickable nonPickable = target as NonPickable;
+            if (nonPickable != null)
+            {
+                heldItem = nonPickable.TakeItem(this);
             }
         }
     }
@@ -205,6 +216,7 @@ public class Player : MonoBehaviour
         //타겟이 NonPickable이고 아이템을 받을 수 있으면 그 위에 올림
         if (target != null)
         {
+            Debug.Log("Drop 호출 타겟 Null 아님");
             NonPickable nonPickable = (target as MonoBehaviour)?.GetComponent<NonPickable>();
             if (nonPickable != null && nonPickable.CanPlace(heldItem as Pickable) && nonPickable.TryPlaceItem(heldItem as Pickable))
             {

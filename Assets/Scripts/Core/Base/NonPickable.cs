@@ -28,6 +28,7 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
         if (heldItem != null || item == null) return false;
 
         heldItem = item;
+        Debug.Log($"{this.name} helditem {heldItem.ToString()}");
 
         Transform t = item.GetTransform();
         t.SetParent(holdPoint);
@@ -37,19 +38,27 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
         // 콜라이더 복구 (Pickup에서 껐던 것)
         Collider col = t.GetComponent<Collider>();
         if (col != null) col.enabled = true;
-
+        Debug.Log("TryPlaceItem 호출");
         return true;
     }
 
     // 논픽커블 위에 있는 아이템 -> Player가 들기
-    public virtual IInteractable TakeItem()
+    public virtual IInteractable TakeItem(Player player)
     {
-        if (heldItem == null) return null;
+        Debug.Log("논픽커블 테이크아이템 호출됨");
+        if (heldItem == null)
+        {
+            Debug.Log("논픽커블 테이크아이템 > 헬드아이템 null 리턴됨");
+            return null;
+        }
 
         IInteractable item = heldItem;
         heldItem = null;
 
-        item.GetTransform().SetParent(null);
+        //item.GetTransform().SetParent(null);
+        item.GetTransform().SetParent(player.holdPoint);
+        item.GetTransform().localPosition = Vector3.zero;
+        item.GetTransform().localRotation = Quaternion.identity;
 
         return item;
     }

@@ -21,15 +21,12 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning($"{this.name} 컨트롤 비활성화 상태");
             return;
         }
-
-        Debug.Log($"{this.name} Move 컨트롤 호출됨");
         player.SetMoveInput(input);
     }
 
     // 상호작용1 : J / Button South
     public void ControlInteractPrimary()
     {
-        Debug.Log($"{this.name} 상호작용1 컨트롤 호출됨");
         player.InteractPrimary();
     }
 
