@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         Move();
     }
 
-    // 타겟 갱신
+    // 탐색
     void UpdateTarget()
     {
         if (interactionFinder == null) return;
@@ -89,7 +89,9 @@ public class Player : MonoBehaviour
         Debug.Log($"타겟 오브젝트 : {target}");
     }
 
-    // 입력 방향 설정 (Controller에서 호출)
+    //============================컨트롤러 호출(입력)============================
+
+    // 이동 : WASD / Left Stick
     public void SetMoveInput(Vector2 input)
     {
         Vector3 dir = new Vector3(input.x, 0, input.y);
@@ -104,6 +106,34 @@ public class Player : MonoBehaviour
             targetMoveDirection = Vector3.zero;
         }
     }
+
+    // 상호작용1 : J / Button South
+    public void InteractPrimary()
+    {
+        Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
+        if (target == null) return;
+
+        target.Interact(this);
+    }
+
+    // 상호작용2 : K / Button West
+    public void InteractSecondary()
+    {
+        Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
+        if (target == null) return;
+
+        target.InteractSecondary(this);
+    }
+
+    // 대쉬 : Space / Button East
+    public void Dash()
+    {
+        if (isDashing) return;
+
+        Debug.Log("Dash 실행");
+    }
+
+    //====================================이동====================================
 
     // 방향 보간
     void SmoothMoveDirection()
@@ -149,55 +179,19 @@ public class Player : MonoBehaviour
         );
     }
 
-    // 대쉬
-    public void Dash()
-    {
-        if (isDashing) return;
-
-        Debug.Log("Dash 실행");
-    }
-
-    // 상호작용
-    public void InteractPrimary()
-    {
-        Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
-        if (target == null) return;
-
-        target.Interact(this);
-    }
+    //====================================행동==========================================
 
     // 아이템 집기
-    public void Pickup(Pickable item)
+    public void Pickup()
     {
-        if (heldItem != null) return;       //이미 들고 있으면 무시(사랑 추가)
+        if (heldItem != null) return;
 
-        Debug.Log($"{this.name} 플레이어 픽업 호출됨");
-
-        //NonPickable 위에 올려져 있던 아이템이면 해당 슬롯 비우기(사랑 추가)
-        NonPickable parentSlot = item.GetTransform().parent?
-            .GetComponent<NonPickable>();
-        if (parentSlot != null)
+        if (target is Pickable pickable)
         {
-            parentSlot.TakeItem();
-        }
-
-        heldItem = item;
-
-        // 홀드포인트 하위로 이동
-        Transform t = item.GetTransform();
-        t.SetParent(holdPoint);
-        t.localPosition = Vector3.zero;
-
-        // 중력 false, 물리무시 true, constraints 고정, 콜라이더 off -> 드랍 로직에서 다시 켜줘야함
-        Rigidbody itemRigidbody = item.GetComponent<Rigidbody>();
-        Collider itemCollider = item.GetComponent<Collider>();
-
-        if (itemRigidbody != null)
-        {
-            itemRigidbody.useGravity = false;
-            itemRigidbody.isKinematic = true;
-            itemRigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePosition;
-            itemCollider.enabled = false;
+            if (pickable.TryPickUp(this))
+            {
+                heldItem = pickable;
+            }
         }
     }
 
@@ -212,7 +206,7 @@ public class Player : MonoBehaviour
         if (target != null)
         {
             NonPickable nonPickable = (target as MonoBehaviour)?.GetComponent<NonPickable>();
-            if (nonPickable != null && nonPickable.TryPlaceItem(heldItem as Pickable))
+            if (nonPickable != null && nonPickable.CanPlace(heldItem as Pickable) && nonPickable.TryPlaceItem(heldItem as Pickable))
             {
                 heldItem = null;
                 return;
@@ -227,6 +221,9 @@ public class Player : MonoBehaviour
 
         // 올릴 곳 없으면 드랍 취소
         Debug.Log("내려놓을 곳 없음. 드랍 취소");
+
+        /*내려놓을 NonPickable이 주변에 없거나 NonPickable != null 라면 helditem을 player 하위에서 분리하고
+        helditem=null + 물리 on -> 중력에 의해 그냥 바닥에 떨어지도록*/
     }
 
     // 던지기

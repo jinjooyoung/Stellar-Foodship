@@ -73,36 +73,6 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput.SwitchCurrentControlScheme(device);
     }
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        if (!IsCorrectDevice(context)) return;          // 플레이어 컴포넌트의 inputType과 다른 입력은 받지 않음
-        Vector2 input = context.ReadValue<Vector2>();
-        Debug.Log($"{this.name} OnMove 인풋 호출됨");
-        controller.Move(input);
-    }
-
-    public void OnInteractPrimary(InputAction.CallbackContext context)
-    {
-        if (!IsCorrectDevice(context)) return;
-
-        Debug.Log($"{this.name} 상호작용1 인풋 호출됨");
-
-        if (context.started)
-        {
-            controller.ControllInteractPrimary();
-        }
-    }
-
-    public void OnDrop(InputAction.CallbackContext context)
-    {
-        if (!IsCorrectDevice(context)) return;
-        Debug.Log($"{this.name} 드랍 인풋 호출됨");
-        if (context.started)
-        {
-            controller.ControllDrop();
-        }
-    }
-
     bool IsCorrectDevice(InputAction.CallbackContext context)
     {
         var device = context.control.device;
@@ -117,5 +87,55 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         return false;
+    }
+
+    //========================키 입력 전달========================
+
+    // 이동 : WASD / Left Stick
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        if (!IsCorrectDevice(context)) return;          // 플레이어 컴포넌트의 inputType과 다른 입력은 받지 않음
+        Vector2 input = context.ReadValue<Vector2>();
+        Debug.Log($"{this.name} OnMove 인풋 호출됨");
+        controller.ControlMove(input);
+    }
+
+    // 상호작용1 : J / Button South
+    public void OnInteractPrimary(InputAction.CallbackContext context)
+    {
+        if (!IsCorrectDevice(context)) return;
+
+        Debug.Log($"{this.name} 상호작용1 인풋 호출됨");
+
+        if (context.started)
+        {
+            controller.ControlInteractPrimary();
+        }
+    }
+
+    // 상호작용2 : K / Button West
+    public void OnInteractSecondary(InputAction.CallbackContext context)
+    {
+        if (!IsCorrectDevice(context)) return;
+
+        Debug.Log($"{this.name} 상호작용2 인풋 호출됨");
+
+        if (context.started)
+        {
+            controller.ControlInteractSecondary();
+        }
+    }
+
+    // 대쉬 : Space / Button East
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (!IsCorrectDevice(context)) return;
+
+        Debug.Log($"{this.name} 대쉬 인풋 호출됨");
+
+        if (context.started)
+        {
+            controller.ControlDash();
+        }
     }
 }

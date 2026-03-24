@@ -1,7 +1,10 @@
 using UnityEngine;
 
 /* 테스트 코드 입니다.  Drop() 은 target 이 NonPickable 일 때만 작동하는데,
-   테스트 할 NonPickable오브젝트가 씬에 없어 테스트합니당*/
+   테스트 할 NonPickable오브젝트가 씬에 없어 테스트합니당
+
+ ㄴ> 코드 너무 좋은 것 같아요!!! 리팩토링만 함! 테스트 코드가 아니라 그냥 이대로
+사용해도 될 듯 합니다!*/
 
 public class Shelf : NonPickable
 {
@@ -16,26 +19,14 @@ public class Shelf : NonPickable
         else if (heldItem != null)
         {
             // 플레이어가 비어있고 선반 위에 아이템 있으면 → 집기
-            player.Pickup(heldItem as Pickable);
+            player.Pickup();
         }
     }
 
-    // 모든 Pickable 수락, 슬롯이 비어있을 때만
-    public override bool TryPlaceItem(Pickable item)
+    public override void InteractSecondary(Player player)
     {
-        if (heldItem != null || item == null) return false;
-
-        heldItem = item;
-
-        Transform t = item.GetTransform();
-        t.SetParent(holdPoint);
-        t.localPosition = Vector3.zero;
-        t.localRotation = Quaternion.identity;
-
-        // 콜라이더 복구 (Pickup에서 껐던 것)
-        Collider col = t.GetComponent<Collider>();
-        if (col != null) col.enabled = true;
-
-        return true;
+        Debug.Log($"{name} Secondary Interact 없음");
     }
+
+    // TryPlaceItem 선반 말고도 도마나 조리기 등에도 쓰여서 NonPickable 클래스의 virtual 함수로 넘김
 }

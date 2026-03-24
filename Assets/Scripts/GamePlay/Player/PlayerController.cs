@@ -11,7 +11,10 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<Player>();
     }
 
-    public void Move(Vector2 input)
+    //========================해당 로직 호출========================
+
+    // 이동 : WASD / Left Stick
+    public void ControlMove(Vector2 input)
     {
         if (player.state == PlayerState.Uncontrollable)
         {
@@ -23,16 +26,24 @@ public class PlayerController : MonoBehaviour
         player.SetMoveInput(input);
     }
 
-    public void ControllInteractPrimary()
+    // 상호작용1 : J / Button South
+    public void ControlInteractPrimary()
     {
         Debug.Log($"{this.name} 상호작용1 컨트롤 호출됨");
         player.InteractPrimary();
     }
 
-    // Drop 호출
-    public void ControllDrop()
+    // 상호작용2 : K / Button West
+    public void ControlInteractSecondary()
     {
-        Debug.Log($"{this.name} 드랍 컨트롤 호출됨");
-        player.Drop();
+        Debug.Log($"{this.name} 상호작용2 컨트롤 호출됨");
+        player.InteractSecondary();
+    }
+
+    // 대쉬 : Space / Button East
+    public void ControlDash()
+    {
+        Debug.Log($"{this.name} 대쉬 컨트롤 호출됨");
+        player.Dash();
     }
 }
