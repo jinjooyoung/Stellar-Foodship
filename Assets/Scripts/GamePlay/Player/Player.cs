@@ -112,8 +112,16 @@ public class Player : MonoBehaviour
     // 상호작용1 : J / Button South
     public void InteractPrimary()
     {
-        if (target == null) return;
+        Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
 
+        //들고 있는 아이템이 있으면 target 없어도 Drop 실행
+        if (heldItem != null)
+        {
+            Drop();
+            return;
+        }
+
+        if (target == null) return;
         target.Interact(this);
     }
 

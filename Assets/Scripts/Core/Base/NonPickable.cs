@@ -26,43 +26,59 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
     public virtual bool TryPlaceItem(Pickable item)
     {
         if (heldItem != null || item == null) return false;
-
         heldItem = item;
         Debug.Log($"{this.name} helditem {heldItem.ToString()}");
-
         Transform t = item.GetTransform();
         t.SetParent(holdPoint);
         t.localPosition = Vector3.zero;
         t.localRotation = Quaternion.identity;
 
-        // �ݶ��̴� ���� (Pickup���� ���� ��)
+        // 콜라이더 복구
         Collider col = t.GetComponent<Collider>();
-        if (col != null) col.enabled = true;
-        Debug.Log("TryPlaceItem ȣ��");
+        if (col != null) col.enabled = true;  
+
+        // Rigidbody 복구
+        Rigidbody rb = t.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
+        Debug.Log("TryPlaceItem 호출");
         return true;
     }
 
     // ����Ŀ�� ���� �ִ� ������ -> Player�� ���
     public virtual IInteractable TakeItem(Player player)
     {
-        Debug.Log("����Ŀ�� ����ũ������ ȣ���");
+        Debug.Log("논픽커블 테이크아이템 호출됨");
         if (heldItem == null)
         {
-            Debug.Log("����Ŀ�� ����ũ������ > �������� null ���ϵ�");
+            Debug.Log("논픽커블 테이크아이템 > 헬드아이템 null 반환됨");
             return null;
         }
 
         IInteractable item = heldItem;
         heldItem = null;
 
-        //item.GetTransform().SetParent(null);
         item.GetTransform().SetParent(player.holdPoint);
         item.GetTransform().localPosition = Vector3.zero;
         item.GetTransform().localRotation = Quaternion.identity;
 
-        // �ݶ��̴� ���� (TryPlaceItem���� ���� ��)
+        // 콜라이더 끄기
         Collider col = item.GetTransform().GetComponent<Collider>();
         if (col != null) col.enabled = false;
+
+        // Rigidbody 끄기
+        Rigidbody rb = item.GetTransform().GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
 
         return item;
     }
