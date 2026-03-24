@@ -38,6 +38,18 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
         Collider col = t.GetComponent<Collider>();
         if (col != null) col.enabled = true;
 
+        //Rigidbody 복구 추가
+        /*TryPlaceItem()을 보면 콜라이더는 복구하는데 Rigidbody 복구가 없음
+         -> NonPickable 위에 올릴 때는 물리가 꺼진 채로 있어도 되지만, 나중에 그 아이템을 다시 집었다가
+        바닥에 드랍할 때 Rigidbody가 여전히 isKinematic = true, FreezeAll 상태라서 중력이 안먹음.*/
+        Rigidbody rb = t.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
         return true;
     }
 

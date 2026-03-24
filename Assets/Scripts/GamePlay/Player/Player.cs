@@ -202,11 +202,12 @@ public class Player : MonoBehaviour
 
         if (heldItem == null) return;
 
-        //타겟이 NonPickable이고 아이템을 받을 수 있으면 그 위에 올림
+        //NonPickable 위에 올리기 시도
         if (target != null)
         {
             NonPickable nonPickable = (target as MonoBehaviour)?.GetComponent<NonPickable>();
-            if (nonPickable != null && nonPickable.CanPlace(heldItem as Pickable) && nonPickable.TryPlaceItem(heldItem as Pickable))
+            if (nonPickable != null && nonPickable.CanPlace(heldItem as Pickable)
+                && nonPickable.TryPlaceItem(heldItem as Pickable))
             {
                 heldItem = null;
                 return;
@@ -214,13 +215,31 @@ public class Player : MonoBehaviour
 
         }
 
+        // NonPickable이 없거나 올릴 수 없으면 바닥에 드랍
+        Debug.Log("바닥 드랍 진입");
         Transform itemTransform = heldItem.GetTransform();
         itemTransform.SetParent(null);
+        Debug.Log($"rb: {itemTransform.GetComponent<Rigidbody>()}");  // rb가 null인지 확인
+
+        Rigidbody rb = itemTransform.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;     //constraints 해제추가. Pickup에서 reezeAll로 잠갔으니 Drop할 때 풀어줌
+            Debug.Log("물리 켜짐");
+        }
+
+        /* Pickup에서 col.enabled = false로 껐으니 Drop할 때 콜라이더도 다시 켜줘야함
+             NonPickable.TryPlaceItem()에는 이미 col.enabled = true가 있는데, 바닥 드랍 케이스에는 없어서 추가*/
+        Collider col = itemTransform.GetComponent<Collider>();
+        if (col != null)
+        {
+            col.enabled = true;
+        }
 
         heldItem = null;
-
-        // 올릴 곳 없으면 드랍 취소
-        Debug.Log("내려놓을 곳 없음. 드랍 취소");
+        Debug.Log("바닥에 드랍");
 
         /*내려놓을 NonPickable이 주변에 없거나 NonPickable != null 라면 helditem을 player 하위에서 분리하고
         helditem=null + 물리 on -> 중력에 의해 그냥 바닥에 떨어지도록*/
