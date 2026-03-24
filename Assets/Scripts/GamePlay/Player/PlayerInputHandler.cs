@@ -96,7 +96,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsCorrectDevice(context)) return;          // 플레이어 컴포넌트의 inputType과 다른 입력은 받지 않음
         Vector2 input = context.ReadValue<Vector2>();
-        Debug.Log($"{this.name} OnMove 인풋 호출됨");
         controller.ControlMove(input);
     }
 
@@ -104,8 +103,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnInteractPrimary(InputAction.CallbackContext context)
     {
         if (!IsCorrectDevice(context)) return;
-
-        Debug.Log($"{this.name} 상호작용1 인풋 호출됨");
 
         if (context.started)
         {

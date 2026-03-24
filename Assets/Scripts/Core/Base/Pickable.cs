@@ -28,7 +28,6 @@ public abstract class Pickable : MonoBehaviour, IInteractable
     // 상호작용1: "집기 / 놓기" 공통 처리 | J / Button South
     public virtual void Interact(Player player)
     {
-        Debug.Log($"{this.name} Pickable 상호작용 호출됨");
         if (player.heldItem == null)
         {
             player.Pickup();
@@ -42,11 +41,12 @@ public abstract class Pickable : MonoBehaviour, IInteractable
     // 픽커블 -> Player가 들기
     public virtual bool TryPickUp(Player player)
     {
+        Debug.Log("트라이픽업 호출");
         // NonPickable에서 떨어뜨리기
         NonPickable parentSlot = GetComponentInParent<NonPickable>();
         if (parentSlot != null)
         {
-            parentSlot.TakeItem();
+            parentSlot.TakeItem(player);
         }
 
         // 위치 이동
