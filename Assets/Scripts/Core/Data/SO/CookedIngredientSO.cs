@@ -1,0 +1,15 @@
+using System;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "CookedIngredientSO", menuName = "DataSO/CookedIngredientSO")]
+public class CookedIngredientSO : ScriptableObject
+{
+    public int id;
+    public string cookedIngredientName;
+    public string nameEng;
+    public int[] ingredientIds;
+
+    public CookwareType cookwareType;
+    public Sprite icon;
+    public GameObject model;
+}
