@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CookedIngredientSO", menuName = "DataSO/CookedIngredientSO")]
+[CreateAssetMenu(fileName = "CookedIngredientSO", menuName = "SO/DataSO/CookedIngredientSO")]
 public class CookedIngredientSO : ScriptableObject
 {
     public int id;

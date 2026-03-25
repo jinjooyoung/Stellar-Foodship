@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DishSO", menuName = "DataSO/DishSO")]
+[CreateAssetMenu(fileName = "DishSO", menuName = "SO/DataSO/DishSO")]
 public class DishSO : ScriptableObject
 {
     public int id;
