@@ -3,6 +3,9 @@ using UnityEngine.InputSystem.XR;
 
 public abstract class Pickable : MonoBehaviour, IInteractable
 {
+    // 재료든 조리도구(도구오브젝트 자체에 ID가 있는건 아니지만 도구에 들어있는 조리된 1차 조합물에 ID가 있으니)든 요리든 ID 있어서 선언함
+    public abstract int ID { get; }
+
     // 생성될 때 플레이어와 충돌 판정 안 하도록 세팅
     void Awake()
     {
@@ -35,6 +38,13 @@ public abstract class Pickable : MonoBehaviour, IInteractable
         {
             player.Drop();
         }
+    }
+
+    // 상호작용2: 던지기 | K / Button West
+    public virtual void InteractSecondary(Player player)
+    {
+        // 던지기 구현 후 자식 클래스에서는 오버라이드로 기능 추가. 던지기 필요하면 InteractSecondary.Base로 호출
+        Debug.Log("던지기 실행!");
     }
 
     // 픽커블 -> Player가 들기
@@ -83,11 +93,6 @@ public abstract class Pickable : MonoBehaviour, IInteractable
 
         timer.StartTimer(duration);*/
     }
-
-    //==================================개별 기능======================================
-
-    // 상호작용2: 자식마다 다르게 | K / Button West
-    public abstract void InteractSecondary(Player player);
 
     //=================================데이터 전달======================================
 
