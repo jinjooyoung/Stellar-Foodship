@@ -12,4 +12,7 @@ public class IngredientData
     [NonSerialized]
     public string iconPath;
     public string modelPath;
+    public string cutModelPath;
+    public string cookingModelPath;
+    public string onDishModelPath;
 }

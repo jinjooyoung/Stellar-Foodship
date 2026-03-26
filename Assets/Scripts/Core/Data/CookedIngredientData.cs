@@ -7,7 +7,12 @@ public class CookedIngredientData
     public int id;
     public string cookedIngredientName;
     public string nameEng;
-    public int[] ingredientIds;
+
+    public int ingredientOne;
+    public int ingredientTwo;
+    public int ingredientThree;
+    public int ingredientFour;
+
     public string cookwareTypeString;
 
     [NonSerialized]

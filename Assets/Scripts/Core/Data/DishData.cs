@@ -1,12 +1,18 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public class DishData
 {
     public int id;
     public string dishName;
     public string nameEng;
-    public int[] ingredientIds;
+
+    public int ingredientOne;
+    public int ingredientTwo;
+    public int ingredientThree;
+    public int ingredientFour;
+
     public int score;
     public string cookwareTypeString;
 
