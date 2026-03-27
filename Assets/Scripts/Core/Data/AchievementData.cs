@@ -5,7 +5,8 @@ using UnityEngine;
 public class AchievementData
 {
     public int id;
-    public string nameKr;
+    public string achievementName;
+    public string nameEng;
     public string description;
     public int goal;
     public string achievementTypeString;

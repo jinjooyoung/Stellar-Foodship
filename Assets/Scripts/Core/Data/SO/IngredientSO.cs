@@ -10,5 +10,8 @@ public class IngredientSO : ScriptableObject
     public bool isCutable;
 
     public Sprite icon;
-    public GameObject model;
+    public GameObject basicModel;
+    public GameObject cutModel;
+    public GameObject cookingModel;
+    public GameObject onDishModel;
 }

@@ -17,7 +17,6 @@ public class CookedIngredientData
 
     [NonSerialized]
     public CookwareType cookwareType;
-    public string iconPath;
     public string modelPath;
 
     // 문자열을 열거형으로 변환하는 메서드
