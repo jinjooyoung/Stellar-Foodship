@@ -30,17 +30,18 @@ public abstract class Pickable : MonoBehaviour, IInteractable
     public virtual void Interact(Player player)
     {
         Debug.Log($"{this.name} Pickable 상호작용 호출됨");
-        if (player.heldItem == null)
+
+        if (player.heldItem != null) return;
+
+        if (TryPickUp(player))
         {
-            player.Pickup();
-        }
-        else
-        {
-            player.Drop();
+            player.heldItem = this;
         }
     }
+        /*들고 있을 때는 Pickable.Interact 호출 안 됨. 
+    }     (Player.InteractPrimary에서 처리)*/
 
-    // 상호작용2: 던지기 | K / Button West
+        // 상호작용2: 던지기 | K / Button West
     public virtual void InteractSecondary(Player player)
     {
         // 던지기 구현 후 자식 클래스에서는 오버라이드로 기능 추가. 던지기 필요하면 InteractSecondary.Base로 호출

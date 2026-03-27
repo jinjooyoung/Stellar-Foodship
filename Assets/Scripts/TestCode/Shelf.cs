@@ -16,12 +16,15 @@ public class Shelf : NonPickable
         if (player.heldItem != null)
         {
             // 플레이어가 뭔가 들고 있으면 → 선반 위에 내려놓기
-            player.Drop();
+            if (TryPlaceItem(player.heldItem as Pickable))
+            {
+                player.heldItem = null;
+            }
         }
         else if (heldItem != null)
         {
             // 플레이어가 비어있고 선반 위에 아이템 있으면 → 집기
-            player.Pickup();
+            player.heldItem = TakeItem(player);
         }
     }
 

@@ -113,15 +113,16 @@ public class Player : MonoBehaviour
     public void InteractPrimary()
     {
         Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
-        if (target == null)
+
+        // 들고 있는 아이템이 있으면 Drop
+        if (heldItem != null)
         {
-            if (heldItem != null)
-            {
-                heldItem.Interact(this);
-            }
+            Drop();
             return;
         }
 
+        // 들고 있는 아이템이 없으면 target과 상호작용
+        if (target == null) return;
         target.Interact(this);
     }
 
@@ -194,24 +195,9 @@ public class Player : MonoBehaviour
     public void Pickup()
     {
         if (heldItem != null) return;
+        if (target == null) return;
 
-        if (target is Pickable pickable)
-        {
-            Debug.Log("플레이어 픽업 타겟이 픽커블");
-            if (pickable.TryPickUp(this))
-            {
-                heldItem = pickable;
-            }
-        }
-        else if (target != null)
-        {
-            Debug.Log("플레이어 픽업 타겟이 논픽커블");
-            NonPickable nonPickable = target as NonPickable;
-            if (nonPickable != null)
-            {
-                heldItem = nonPickable.TakeItem(this);
-            }
-        }
+        target.Interact(this);  //Nonpickable이든 Pickable이든 Interact에 맡김
     }
 
     // 아이템 내려놓기
@@ -221,33 +207,31 @@ public class Player : MonoBehaviour
 
         if (heldItem == null) return;
 
-        //NonPickable 위에 올리기 시도
+        // target이 NonPickable일 때만 올리기 시도
         if (target != null)
         {
-            Debug.Log("Drop 호출 타겟 Null 아님");
             NonPickable nonPickable = (target as MonoBehaviour)?.GetComponent<NonPickable>();
-            if (nonPickable != null && nonPickable.CanPlace(heldItem as Pickable)
-                && nonPickable.TryPlaceItem(heldItem as Pickable))
+            if (nonPickable != null)
             {
-                heldItem = null;
-                return;
+                nonPickable.Interact(this);
+                if (heldItem == null) return;   //드랍 성공했으면 끝
+
             }
-
         }
-
-        // NonPickable이 없거나 올릴 수 없으면 바닥에 드랍
-        Debug.Log("바닥 드랍 진입");
+        
+        // NonPickable이 없거나 드랍 실패 -> 바닥 드랍
         Transform itemTransform = heldItem.GetTransform();
         itemTransform.SetParent(null);
-        Debug.Log($"rb: {itemTransform.GetComponent<Rigidbody>()}");  // rb가 null인지 확인
 
         Rigidbody rb = itemTransform.GetComponent<Rigidbody>();
+        Debug.Log($"rb null? {rb == null}");
         if (rb != null)
         {
+            Debug.Log($"isKinematic before: {rb.isKinematic}, useGravity brfore : {rb.useGravity}");
             rb.useGravity = true;
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.None;     //constraints 해제추가. Pickup에서 reezeAll로 잠갔으니 Drop할 때 풀어줌
-            Debug.Log("물리 켜짐");
+            Debug.Log($"isKinematic after: {rb.isKinematic}, useGravity after : {rb.useGravity}");
         }
 
         /* Pickup에서 col.enabled = false로 껐으니 Drop할 때 콜라이더도 다시 켜줘야함
@@ -287,3 +271,6 @@ public class Player : MonoBehaviour
         return transform.position;
     }
 }
+
+
+    
