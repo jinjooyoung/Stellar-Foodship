@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         if (interactionFinder == null) return;
 
         target = interactionFinder.FindClosestInteractable();
-        Debug.Log($"타겟 오브젝트 : {target}");
+       // Debug.Log($"타겟 오브젝트 : {target}");
     }
 
     //============================컨트롤러 호출(입력)============================
@@ -131,6 +131,14 @@ public class Player : MonoBehaviour
     {
         Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
         if (target == null) return;
+
+        // target이 Nonpickable이면 NonPickable의 InteractSecondary 호출
+        NonPickable nonPickable = (target as MonoBehaviour)?.GetComponent<NonPickable>();
+        if (nonPickable != null)
+        {
+            nonPickable.InteractSecondary(this);
+            return;
+        }
 
         target.InteractSecondary(this);
     }
