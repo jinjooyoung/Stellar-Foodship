@@ -8,10 +8,10 @@ public class DishData
     public string dishName;
     public string nameEng;
 
-    public int ingredientOne;
-    public int ingredientTwo;
-    public int ingredientThree;
-    public int ingredientFour;
+    public int? ingredientOne;
+    public int? ingredientTwo;
+    public int? ingredientThree;
+    public int? ingredientFour;
 
     public int score;
     public string cookwareTypeString;

@@ -8,10 +8,10 @@ public class CookedIngredientData
     public string cookedIngredientName;
     public string nameEng;
 
-    public int ingredientOne;
-    public int ingredientTwo;
-    public int ingredientThree;
-    public int ingredientFour;
+    public int? ingredientOne;
+    public int? ingredientTwo;
+    public int? ingredientThree;
+    public int? ingredientFour;
 
     public string cookwareTypeString;
 
