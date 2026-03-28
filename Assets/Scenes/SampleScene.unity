@@ -836,6 +836,8 @@ MonoBehaviour:
   onTimerEnd:
     m_PersistentCalls:
       m_Calls: []
+    m_CallsDirty: 1
+  isRunning: 0
 --- !u!4 &1041251268
 Transform:
   m_ObjectHideFlags: 0
