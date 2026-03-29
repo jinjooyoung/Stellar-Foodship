@@ -21,7 +21,14 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning($"{this.name} 컨트롤 비활성화 상태");
             return;
         }
-        player.SetMoveInput(input);
+        else if (player.state == PlayerState.IsAiming)
+        {
+            player.Aiming(input);
+        }
+        else
+        {
+            player.SetMoveInput(input);
+        }
     }
 
     // 상호작용1 : J / Button South
@@ -33,8 +40,14 @@ public class PlayerController : MonoBehaviour
     // 상호작용2 : K / Button West
     public void ControlInteractSecondary()
     {
-        Debug.Log($"{this.name} 상호작용2 컨트롤 호출됨");
-        player.InteractSecondary();
+        Debug.Log($"{this.name} 상호작용2 컨트롤 입력 시작됨");
+        player.StartInteractSecondary();
+    }
+
+    public void ControlInteractSecondaryEnd()
+    {
+        Debug.Log($"{this.name} 상호작용2 컨트롤 입력 종료됨");
+        player.EndSecondaryAction();
     }
 
     // 대쉬 : Space / Button East

@@ -1849,6 +1849,7 @@ GameObject:
   - component: {fileID: 2085669658}
   - component: {fileID: 2085669657}
   - component: {fileID: 2085669656}
+  - component: {fileID: 2085669661}
   - component: {fileID: 2085669655}
   m_Layer: 7
   m_Name: CuttingBoard
@@ -1891,6 +1892,7 @@ MonoBehaviour:
   holdPoint: {fileID: 400236961}
   cutDistance: 2.5
   cookingTimer: {fileID: 2085669655}
+  timer: {fileID: 2085669661}
 --- !u!65 &2085669657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1985,6 +1987,18 @@ Transform:
   - {fileID: 400236961}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2085669661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085669654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c493f65abc9838a43a2434a7d2d2f798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
 --- !u!1 &2146762242
 GameObject:
   m_ObjectHideFlags: 0

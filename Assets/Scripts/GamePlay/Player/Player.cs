@@ -4,7 +4,7 @@ public enum PlayerState
 {
     Uncontrollable,     // 조작 불가
     Controllable,       // 조작 가능
-    Interacting         // 상호작용 중
+    IsAiming            // 던지기 에임 중
 }
 
 public class Player : MonoBehaviour
@@ -79,7 +79,15 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (state == PlayerState.IsAiming)
+        {
+            playerRigidbody.linearVelocity = Vector3.zero;
+            return;
+        }
+        else if (state == PlayerState.Controllable)
+        {
+            Move();
+        }
     }
 
     // 탐색
@@ -96,6 +104,9 @@ public class Player : MonoBehaviour
     // 이동 : WASD / Left Stick
     public void SetMoveInput(Vector2 input)
     {
+        if (state == PlayerState.IsAiming || state == PlayerState.Uncontrollable)
+            return;
+
         Vector3 dir = new Vector3(input.x, 0, input.y);
 
         if (dir.sqrMagnitude > 0.001f)
@@ -106,6 +117,19 @@ public class Player : MonoBehaviour
         else
         {
             targetMoveDirection = Vector3.zero;
+        }
+    }
+
+    // 던지기 에이밍 : WASD / Left Stick
+    public void Aiming(Vector2 input)
+    {
+        Vector3 dir = new Vector3(input.x, 0, input.y);
+
+        if (dir.sqrMagnitude > 0.001f)
+        {
+            lastInputDirection = dir.normalized;
+
+            currentMoveDirection = lastInputDirection;
         }
     }
 
@@ -127,20 +151,44 @@ public class Player : MonoBehaviour
     }
 
     // 상호작용2 : K / Button West
-    public void InteractSecondary()
+    public void StartInteractSecondary()
     {
+        // 아이템을 들고있다면
+        if (heldItem != null)
+        {
+            // 던지기 에임 시작
+            // 나중에 플레이어에 Aimming 함수 작성 후 Aimming 호출
+            state = PlayerState.IsAiming;
+
+            playerRigidbody.linearVelocity = Vector3.zero;
+            currentMoveDirection = Vector3.zero;
+            targetMoveDirection = Vector3.zero;
+        }
+
         Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
         if (target == null) return;
 
-        // target이 Nonpickable이면 NonPickable의 InteractSecondary 호출
+        // 굳이 타겟이 픽커블인지 논픽커블인지 구분할 필요 없을 것 같아서 주석.
+        // 필요없는거 확실하면 그때가서 삭제하는걸로
+        /*// target이 Nonpickable이면 NonPickable의 InteractSecondary 호출
         NonPickable nonPickable = (target as MonoBehaviour)?.GetComponent<NonPickable>();
         if (nonPickable != null)
         {
             nonPickable.InteractSecondary(this);
             return;
-        }
+        }*/
 
         target.InteractSecondary(this);
+    }
+
+    public void EndSecondaryAction()
+    {
+        if (state != PlayerState.IsAiming || state == PlayerState.Uncontrollable) return;
+
+        // 던지기
+        Throw();
+
+        state = PlayerState.Controllable;
     }
 
     // 대쉬 : Space / Button East
@@ -187,7 +235,7 @@ public class Player : MonoBehaviour
     // 회전 보간
     void Rotate()
     {
-        if (currentMoveDirection == Vector3.zero) return;
+        if (lastInputDirection == Vector3.zero) return;
 
         Quaternion targetRotation = Quaternion.LookRotation(lastInputDirection);
         playerRigidbody.rotation = Quaternion.Slerp(
@@ -260,15 +308,11 @@ public class Player : MonoBehaviour
     // 던지기
     public void Throw()
     {
-        if (heldItem == null) return;
-
-        Transform itemTransform = heldItem.GetTransform();
-        itemTransform.SetParent(null);
-
-        // Throw 시스템 만들어야할듯 물리로 던지기 싫음!!
-        Debug.Log("Throw 실행");
-
-        heldItem = null;
+        Debug.Log("플레이어 Throw 호출");
+        if (heldItem != null)
+        {
+            heldItem.InteractSecondary(this);
+        }
     }
 
     //=========================================================================

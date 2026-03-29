@@ -83,18 +83,6 @@ public abstract class Pickable : MonoBehaviour, IInteractable
         return true;
     }
 
-    // 타이머 시작 재료, 조리 도구에는 타이머 O / 접시에는 타이머 X
-    public virtual void StartProcess(float duration)
-    {
-        /*if (timer == null)
-        {
-            Debug.LogWarning($"{name} has no Timer!");
-            return;
-        }
-
-        timer.StartTimer(duration);*/
-    }
-
     //=================================데이터 전달======================================
 
     public Transform GetTransform()

@@ -121,6 +121,10 @@ public class PlayerInputHandler : MonoBehaviour
         {
             controller.ControlInteractSecondary();
         }
+        else if (context.canceled)
+        {
+            controller.ControlInteractSecondaryEnd();
+        }
     }
 
     // ´ë½¬ : Space / Button East
