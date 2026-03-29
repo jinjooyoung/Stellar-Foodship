@@ -1,3 +1,4 @@
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public enum PlayerState
@@ -128,7 +129,6 @@ public class Player : MonoBehaviour
         if (dir.sqrMagnitude > 0.001f)
         {
             lastInputDirection = dir.normalized;
-
             currentMoveDirection = lastInputDirection;
         }
     }
@@ -235,7 +235,19 @@ public class Player : MonoBehaviour
     // 회전 보간
     void Rotate()
     {
-        if (lastInputDirection == Vector3.zero) return;
+        Vector3 lookDir;
+        if (state == PlayerState.IsAiming)
+        {
+            // 에이밍 중 -> 즉각 반응
+            lookDir = lastInputDirection;
+        }
+        else
+        {
+            // 평소 -> 부드러운 회전 유지
+            lookDir = currentMoveDirection;
+        }
+
+        if (lookDir == Vector3.zero) return;
 
         Quaternion targetRotation = Quaternion.LookRotation(lastInputDirection);
         playerRigidbody.rotation = Quaternion.Slerp(
