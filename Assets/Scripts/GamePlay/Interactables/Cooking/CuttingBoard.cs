@@ -7,8 +7,7 @@ public class CuttingBoard : NonPickable
     [Header("도마 설정")]
     public float cutDistance = 2.5f;
     public CookingTimer cookingTimer;
-
-    public override bool CanPlace(Pickable item) => item is Ingredient;
+    public Timer timer;
 
     void Awake()
     {
@@ -27,10 +26,14 @@ public class CuttingBoard : NonPickable
             {
                 player.heldItem = null;
                 cookingTimer?.StartCooking();
+
+                SubscribeEvents();
             }
         }
         else if (heldItem != null)
         {
+            UnsubscribeEvents();
+
             cookingTimer?.StopCooking();
             player.heldItem = TakeItem(player);
         }
@@ -62,6 +65,27 @@ public class CuttingBoard : NonPickable
         {
             ingredient.isCut = true;
             Debug.Log($"{ingredient.name} 자르기 완료! 모델 변경 예정");
+        }
+    }
+
+    // 썰기 끝난 뒤 호출할 함수 모아서 이벤트 구독
+    // 도마에 아이템 놓을 때 구독함
+    void SubscribeEvents()
+    {
+        // 일단 재료만 구독
+        if (heldItem is Ingredient ingredient)
+        {
+            timer.OnCompleted += ingredient.OnCutComplete;
+        }
+    }
+
+    // 타이머 이벤트 해제 함수
+    // 도마에서 아이템 들 때 해제함
+    void UnsubscribeEvents()
+    {
+        if (heldItem is Ingredient ingredient)
+        {
+            timer.OnCompleted -= ingredient.OnCutComplete;
         }
     }
 }

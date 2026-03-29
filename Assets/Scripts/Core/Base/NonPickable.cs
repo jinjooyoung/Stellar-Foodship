@@ -12,8 +12,6 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
 
     //==================================공통 기능======================================
 
-    public virtual bool CanPlace(Pickable item) => false;
-
     public virtual bool TryPlaceItem(Pickable item)
     {
         if (heldItem != null || item == null) return false;
