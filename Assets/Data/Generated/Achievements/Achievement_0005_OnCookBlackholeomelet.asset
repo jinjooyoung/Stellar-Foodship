@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35fdd22945f880f4c955ad2c04bfa8ac, type: 3}
+  m_Name: Item_0005 + OnCookBlackholeomelet
+  m_EditorClassIdentifier: Assembly-CSharp::AchievementSO
+  id: 5
+  achievementName: "\uBE14\uB799\uD640 \uC624\uBBC8\uB81B \uC694\uB9AC"
+  nameEng: OnCookBlackholeomelet
+  description: "\uBE14\uB799\uD640 \uC624\uBBC8\uB81B \uC694\uB9AC\uB97C \uC644\uC131\uD558\uC138\uC694."
+  goal: 1
+  achievementType: 1
+  icon: {fileID: 0}

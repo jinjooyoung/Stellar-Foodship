@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64b97ed091801c498c51a200eabe7ef, type: 3}
+  m_Name: DishDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::DishDatabaseSO
+  dishes:
+  - {fileID: 11400000, guid: 9c5e05c881d82684f85d0ae742f1e8d4, type: 2}
+  - {fileID: 11400000, guid: cee73f8e843f0c04e970425fdf1e077a, type: 2}
+  - {fileID: 11400000, guid: f4c2128b03230174fb1ea8a5f10821bd, type: 2}
+  - {fileID: 11400000, guid: a165cde06a7a6054c83be5b6a5d1c56c, type: 2}
+  - {fileID: 11400000, guid: 5cdb634536503264291ab10ff5e7a979, type: 2}
+  - {fileID: 11400000, guid: c61f393853db9e84dbffb7ece25aca16, type: 2}
+  - {fileID: 11400000, guid: d532a1858dad4584a8303ed8e15bbac2, type: 2}
+  - {fileID: 11400000, guid: d510be3291089fb4194d9626e00892f1, type: 2}
+  - {fileID: 11400000, guid: b2f529d6df7bceb478a48d25cc3489ef, type: 2}
+  - {fileID: 11400000, guid: e9a3ac166167f4f4aa0327147dc51a82, type: 2}

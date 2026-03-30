@@ -16,10 +16,21 @@ public class DataManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            InitializeDatabases();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    void InitializeDatabases()
+    {
+        IngredientDatabase.Initialize();
+        CookedIngredientDatabase.Initialize();
+        DishDatabase.Initialize();
+        AchievementDatabase.Initialize();
+        SoundDatabase.Initialize();
     }
 }

@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307ae1bc097629f45bfa8bd1463d1076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
-  IngredientDatabase: {fileID: 0}
-  CookedIngredientDatabase: {fileID: 0}
-  DishDatabase: {fileID: 0}
-  AchievementDatabase: {fileID: 0}
-  SoundDatabase: {fileID: 0}
+  IngredientDatabase: {fileID: 11400000, guid: 5f23ea7054dc31b4d85c41fdd2dacf67, type: 2}
+  CookedIngredientDatabase: {fileID: 11400000, guid: 12c50d686c47f8248b283cf954c9edfc, type: 2}
+  DishDatabase: {fileID: 11400000, guid: 20fffeca572e94146ad31663b5943778, type: 2}
+  AchievementDatabase: {fileID: 11400000, guid: c64a672ef78e45147ac2eb12fdedb6a4, type: 2}
+  SoundDatabase: {fileID: 11400000, guid: b0800990fc92c4342925bbdba47d7a85, type: 2}
 --- !u!4 &229536656
 Transform:
   m_ObjectHideFlags: 0

@@ -14,5 +14,4 @@ public class IngredientData
     public string modelPath;
     public string cutModelPath;
     public string cookingModelPath;
-    public string onDishModelPath;
 }

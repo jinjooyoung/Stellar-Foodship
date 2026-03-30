@@ -13,5 +13,4 @@ public class IngredientSO : ScriptableObject
     public GameObject basicModel;
     public GameObject cutModel;
     public GameObject cookingModel;
-    public GameObject onDishModel;
 }

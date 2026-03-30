@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc127f1d70b18a4bac17ee00e8db212, type: 3}
+  m_Name: Ingredient_0007 + spaceEgg
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientSO
+  id: 7
+  ingredientName: "\uC6B0\uC8FC\uB2EC\uAC40"
+  nameEng: spaceEgg
+  isCutable: 0
+  icon: {fileID: 0}
+  basicModel: {fileID: 0}
+  cutModel: {fileID: 0}
+  cookingModel: {fileID: 0}

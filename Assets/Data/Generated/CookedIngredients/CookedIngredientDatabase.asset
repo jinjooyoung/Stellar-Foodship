@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128ce2863b051d7419de298f2bb49fe4, type: 3}
+  m_Name: CookedIngredientDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::CookedIngredientDatabaseSO
+  cookedIngredients:
+  - {fileID: 11400000, guid: b048410c018c72341a969f5bae38d057, type: 2}
+  - {fileID: 11400000, guid: b07f89c1c05a82d4b977b21e4013da19, type: 2}
+  - {fileID: 11400000, guid: 0358cd6ee7e88c04f9da3413d21d5016, type: 2}
+  - {fileID: 11400000, guid: 1a21292eaa5f4024daa320bbd3aeab23, type: 2}
+  - {fileID: 11400000, guid: ccf24b2f25743eb4bb54d53ffa72848d, type: 2}
+  - {fileID: 11400000, guid: 2e5cc8015efd3914d9939b5cb583dce4, type: 2}
+  - {fileID: 11400000, guid: 268e4254d43aa294ba2ffd5ce75664aa, type: 2}
+  - {fileID: 11400000, guid: b1d80df557cbf774b873b1ca07a32a34, type: 2}
+  - {fileID: 11400000, guid: 2aa841701bcfcac4392ae6872996892d, type: 2}
+  - {fileID: 11400000, guid: e7d453280af948f46a60838a1d9b4f0c, type: 2}
