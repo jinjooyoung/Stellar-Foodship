@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Ingredient : Pickable
 {
+    public IngredientSO ingredientData;
+
     public int ingredientID;
     public bool isCut = false;
 

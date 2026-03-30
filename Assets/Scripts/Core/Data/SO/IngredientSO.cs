@@ -9,7 +9,7 @@ public class IngredientSO : ScriptableObject
     public string nameEng;
     public bool isCutable;
 
-    public Sprite icon;
+    public Sprite icon;      
     public GameObject basicModel;
     public GameObject cutModel;
     public GameObject cookingModel;
