@@ -4,10 +4,6 @@ using UnityEngine;
 [Serializable]
 public class IngredientData
 {
-
-    public Ingredient data;
-    public IngredientSO ingredientData;
-
     public int id;
     public string ingredientName;
     public string nameEng;
