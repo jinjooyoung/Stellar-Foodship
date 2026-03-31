@@ -321,10 +321,7 @@ public class Player : MonoBehaviour
     public void Throw()
     {
         Debug.Log("플레이어 Throw 호출");
-        if (heldItem != null)
-        {
-            heldItem.InteractSecondary(this);
-        }
+        // 던지기 기능 구현
     }
 
     //=========================================================================

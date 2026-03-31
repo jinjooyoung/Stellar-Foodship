@@ -44,8 +44,7 @@ public abstract class Pickable : MonoBehaviour, IInteractable
         // 상호작용2: 던지기 | K / Button West
     public virtual void InteractSecondary(Player player)
     {
-        // 던지기 구현 후 자식 클래스에서는 오버라이드로 기능 추가. 던지기 필요하면 InteractSecondary.Base로 호출
-        Debug.Log("던지기 실행!");
+        // 픽커블은 상호작용2키 필요 없을 듯 근데 혹시 모르니 일단 냅두고 나중에 확실해지면 인터페이스부터 코드 수정
     }
 
     // 픽커블 -> Player가 들기
