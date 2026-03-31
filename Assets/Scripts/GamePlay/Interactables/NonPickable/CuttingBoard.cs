@@ -56,7 +56,16 @@ public class CuttingBoard : NonPickable
             if (heldItem is Ingredient ingredient)
             {
                 // 타이머 있으면 체크
-                if (timer == null != timer.IsRunning)
+                if (timer != null)
+                {
+                    if (timer.CurrentTime <= 0f)
+                    {
+                        UnsubscribeEvents();
+                        player.heldItem = TakeItem(player);
+                    }
+                }
+
+                /*if (timer == null != timer.IsRunning)
                 {
                     // 손질 중이면 못 집음
                     Debug.Log("손질 중인 재료이므로 들 수 없습니다");
@@ -66,7 +75,7 @@ public class CuttingBoard : NonPickable
                     // 손질 끝났거나 안 했으면 집기 가능
                     UnsubscribeEvents();
                     player.heldItem = TakeItem(player);
-                }
+                }*/
             }
             else
             {
