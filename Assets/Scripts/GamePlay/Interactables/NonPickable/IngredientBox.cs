@@ -80,6 +80,7 @@ public class IngredientBox : MonoBehaviour, IInteractable
             GameObject visualModel = Instantiate(dataSO.basicModel, ingredientObj.transform);
             visualModel.transform.localPosition = Vector3.zero;
             visualModel.transform.localRotation = Quaternion.identity;
+            ingredientComponent.currentModel = visualModel;
         }
 
         return ingredientComponent;

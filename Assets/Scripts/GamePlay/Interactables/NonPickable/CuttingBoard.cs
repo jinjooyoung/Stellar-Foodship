@@ -77,12 +77,28 @@ public class CuttingBoard : NonPickable
         {
             timer.OnCompleted += ingredient.OnCutComplete;
         }
+
+        if (timer == null)
+        {
+            Debug.LogWarning("Timer가 연결되지 않았습니다!");
+            return;
+        }
+        if (heldItem is Ingredient ingredient1)
+        {
+            timer.OnCompleted -= ingredient1.OnCutComplete;
+        }
+
     }
 
     // 타이머 이벤트 해제 함수
     // 도마에서 아이템 들 때 해제함
     void UnsubscribeEvents()
     {
+        if (timer == null) return;
+        {
+            Debug.LogWarning("Timer가 연결되지 않았습니다!");
+            return;
+        }
         if (heldItem is Ingredient ingredient)
         {
             timer.OnCompleted -= ingredient.OnCutComplete;
