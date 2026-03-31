@@ -14,7 +14,7 @@ public class InteractionFinder : MonoBehaviour
 
     private void Awake()
     {
-        targetTransform.position = playerTransform.position + playerTransform.forward * radius;
+        targetTransform.position = playerTransform.position + playerTransform.forward * radius + new Vector3(0,-1f,0);
         interactLayer = (1 << pickableLayer) | (1 << nonPickableLayer);
     }
 

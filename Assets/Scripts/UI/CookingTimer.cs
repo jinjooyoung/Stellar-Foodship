@@ -9,7 +9,7 @@ public class CookingTimer : MonoBehaviour
 
     [Header("¼³Á¤")]
     public TimerType timerType = TimerType.Tool;
-    public float maxTime = 180f; 
+    public float maxTime = 0.5f; 
     private float currentTime;
     private bool isRunning = false;
     private bool isCompleted = false;

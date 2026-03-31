@@ -1,104 +1,157 @@
 using UnityEngine;
 
-//도마 코드 입니다.
-
-public class CuttingBoard : NonPickable   
+public class CuttingBoard : NonPickable
 {
     [Header("도마 설정")]
-    public float cutDistance = 2.5f;
-    public CookingTimer cookingTimer;
+    public float playerDetectDist = 2.5f;   // 거리 감지 범위
+    public float cutTime = 3f;              // 썰기 소요 시간
     public Timer timer;
+
+    private Player currentInteractingPlayer;    // 현재 썰고 있는 플레이어
 
     void Awake()
     {
-        if (cookingTimer != null)
+        if (timer == null)
         {
-            cookingTimer.onTimerFinished.AddListener(OnCutFinished);
+            Debug.LogWarning("도마 오브젝트에 타이머가 존재하지 않습니다!");
+            return;
+        }
+        timer.OnCompleted += OnCutFinished;
+    }
+
+    //====================================Update====================================
+
+    void Update()
+    {
+        // 썰고 있는 플레이어 없으면 패스
+        if (currentInteractingPlayer == null) return;
+
+        float dist = Vector3.Distance(currentInteractingPlayer.GetPosition(), transform.position);
+
+        // 거리 멀어지면 타이머 정지
+        if (dist > playerDetectDist)
+        {
+            timer.Stop();
+            currentInteractingPlayer = null;
         }
     }
 
-    // 상호작용1 : 들고 있으면 도마 위에 올리기, 비어있으면 집기
+    //====================================Interact====================================
+
+    // 상호작용1: 들고 있으면 도마 위에 올리기, 비어있으면 집기
     public override void Interact(Player player)
     {
         if (player.heldItem != null)
         {
+            // 들고 있으면 도마 위에 내려놓기
             if (TryPlaceItem(player.heldItem as Pickable))
             {
                 player.heldItem = null;
-                cookingTimer?.StartCooking();
-
                 SubscribeEvents();
             }
         }
         else if (heldItem != null)
         {
-            UnsubscribeEvents();
-
-            cookingTimer?.StopCooking();
-            player.heldItem = TakeItem(player);
+            // 도마 위에 아이템 있으면 집기
+            if (heldItem is Ingredient ingredient)
+            {
+                // 타이머 있으면 체크
+                if (timer == null != timer.IsRunning)
+                {
+                    // 손질 중이면 못 집음
+                    Debug.Log("손질 중인 재료이므로 들 수 없습니다");
+                }
+                else
+                {
+                    // 손질 끝났거나 안 했으면 집기 가능
+                    UnsubscribeEvents();
+                    player.heldItem = TakeItem(player);
+                }
+            }
+            else
+            {
+                // 재료가 아니면 그냥 집기
+                UnsubscribeEvents();
+                player.heldItem = TakeItem(player);
+            }
         }
     }
 
-    // 상호작용2: 플레이어 거리 체크해서 타이머 제어
+    // 상호작용2: 썰기 시작
     public override void InteractSecondary(Player player)
     {
-        if (cookingTimer == null || heldItem == null) return;
-
-        float dist = Vector3.Distance(player.GetPosition(), transform.position);
-
-        if (dist > cutDistance)
+        // 도마 위에 재료가 없거나 재료가 아니면
+        if (!(heldItem is Ingredient ingredient))
         {
-            cookingTimer.StopCooking();
-            Debug.Log("플레이어가 너무 멀어서 타이머 정지");
+            Debug.Log("도마 위 오브젝트가 재료가 아닙니다.");
+            return;
+        }
+
+        // 이미 썰린 재료면
+        if (ingredient.isCut)
+        {
+            Debug.Log("이미 썰린 재료입니다.");
+            return;
+        }
+
+        // 타이머 없으면
+        if (timer == null)
+        {
+            Debug.LogWarning("도마 오브젝트에 타이머가 존재하지 않습니다!");
+            return;
+        }
+
+        // 이미 손질 중이면
+        if (timer.IsRunning)
+        {
+            Debug.Log("재료가 이미 손질 중입니다.");
+            return;
+        }
+
+        // 상호작용 중인 플레이어 할당
+        currentInteractingPlayer = player;
+
+        // 남은 시간 0보다 크면 재개, 0이면 새로 시작
+        if (timer.CurrentTime > 0f)
+        {
+            timer.Resume();
         }
         else
         {
-            cookingTimer.StartCooking();
-            Debug.Log("플레이어가 가까워서 타이머 재개");
+            timer.StartTimer(cutTime);
         }
     }
 
-    // 타이머 완료 시 호출
+    //====================================이벤트====================================
+
+    // 썰기 완료 시 호출
     void OnCutFinished()
     {
         if (heldItem is Ingredient ingredient)
         {
-            ingredient.isCut = true;
-            Debug.Log($"{ingredient.name} 자르기 완료! 모델 변경 예정");
+            ingredient.OnCutComplete();
         }
+        currentInteractingPlayer = null;
     }
 
-    // 썰기 끝난 뒤 호출할 함수 모아서 이벤트 구독
-    // 도마에 아이템 놓을 때 구독함
+    // 도마에 아이템 올릴 때 이벤트 구독
     void SubscribeEvents()
     {
-        // 일단 재료만 구독
-        if (heldItem is Ingredient ingredient)
-        {
-            timer.OnCompleted += ingredient.OnCutComplete;
-        }
-
         if (timer == null)
         {
             Debug.LogWarning("Timer가 연결되지 않았습니다!");
             return;
         }
-        if (heldItem is Ingredient ingredient1)
+        if (heldItem is Ingredient ingredient)
         {
-            timer.OnCompleted -= ingredient1.OnCutComplete;
+            timer.OnCompleted += ingredient.OnCutComplete;
         }
-
     }
 
-    // 타이머 이벤트 해제 함수
-    // 도마에서 아이템 들 때 해제함
+    // 도마에서 아이템 들 때 이벤트 해제
     void UnsubscribeEvents()
     {
         if (timer == null) return;
-        {
-            Debug.LogWarning("Timer가 연결되지 않았습니다!");
-            return;
-        }
         if (heldItem is Ingredient ingredient)
         {
             timer.OnCompleted -= ingredient.OnCutComplete;
