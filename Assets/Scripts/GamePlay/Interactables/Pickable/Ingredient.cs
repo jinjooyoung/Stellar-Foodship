@@ -12,7 +12,7 @@ public class Ingredient : Pickable
     public void OnCutComplete()
     {
         isCut = true;
-        Debug.Log("타이머 종료됨 재료 썰림 이벤트 호출됨");
+        
 
         //currentModel 파괴
         if (currentModel != null)

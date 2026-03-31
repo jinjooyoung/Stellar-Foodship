@@ -918,7 +918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1041251268}
-  - component: {fileID: 1041251267}
+  - component: {fileID: 1041251269}
   m_Layer: 0
   m_Name: StageTimer
   m_TagString: Untagged
@@ -926,18 +926,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1041251267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041251266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dd9b25e569d81d4688cc3dac45e001f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cooking
 --- !u!4 &1041251268
 Transform:
   m_ObjectHideFlags: 0
@@ -953,6 +941,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1041251269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041251266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add2352a77528be49b0b81e54464ea33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CookingTimer
+  timerType: 1
+  maxTime: 0.5
+  timerText: {fileID: 0}
+  progressBar: {fileID: 0}
+  onTimerFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1179743156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1816,6 +1823,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4412116507772538811, guid: 3493728b92e259a4b80dfe2c1442c155, type: 3}
+      propertyPath: isCut
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 832225991726120334, guid: 3493728b92e259a4b80dfe2c1442c155, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -2203,6 +2214,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   timerSlider: {fileID: 1649309662}
+--- !u!1 &2119812678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2119812679}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2119812679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119812678}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2933027249436568283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2211,6 +2253,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1764318670042160674, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4093342842338775115, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 20
@@ -2347,6 +2393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_1
       objectReference: {fileID: 0}
+    - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
+      propertyPath: playerRigidbody
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2373,3 +2423,4 @@ SceneRoots:
   - {fileID: 2085669660}
   - {fileID: 1841630099}
   - {fileID: 2047268368}
+  - {fileID: 2119812679}
