@@ -18,22 +18,10 @@ public class IngredientBox : NonPickable
 
     public override void Interact(Player player)
     {
-        Debug.Log("재료상자 상호작용1 호출됨");
-
         // 플레이어가 아이템 들고 있는 경우
         if (player.heldItem != null)
         {
-            Debug.Log("플레이어 들고 있는 아이템 있음");
-
-            /*// 재료상자 위에 이미 아이템 있으면 아무것도 안함 (또는 실패 처리)
-            if (heldItem != null)
-            {
-                Debug.Log("재료상자 위에 이미 아이템 있음 → 놓기 불가");
-                return;
-            }*/
-
-            // 재료상자 위에 아이템 없으면 올려두기
-            Debug.Log("재료상자 위에 아이템 올려둠");
+            // 상자 위에 올려두거나 바닥에 내려둠
             if (TryPlaceItem(player.heldItem))
             {
                 player.heldItem = null;
@@ -43,18 +31,14 @@ public class IngredientBox : NonPickable
         }
 
         // 플레이어가 아무것도 안 들고 있는 경우
-        Debug.Log("플레이어 들고 있는 아이템 없음");
-
-        // 재료상자 위에 아이템 있으면 집기
         if (heldItem != null)
         {
-            Debug.Log("재료상자 위 아이템 집기");
+            // 재료상자 위에 아이템 있으면 집기
             player.heldItem = TakeItem(player);
         }
         else
         {
             // 없으면 새 재료 생성해서 지급
-            Debug.Log("재료 생성해서 지급");
             TakeOutIngredient(player);
         }
     }
