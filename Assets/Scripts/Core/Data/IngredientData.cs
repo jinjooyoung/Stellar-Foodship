@@ -8,6 +8,7 @@ public class IngredientData
     public string ingredientName;
     public string nameEng;
     public bool isCutable;
+    public bool isRawPlatable;
 
     [NonSerialized]
     public string iconPath;

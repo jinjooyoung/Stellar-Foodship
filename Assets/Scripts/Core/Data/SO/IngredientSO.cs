@@ -8,6 +8,7 @@ public class IngredientSO : ScriptableObject
     public string ingredientName;
     public string nameEng;
     public bool isCutable;
+    public bool isRawPlatable;
 
     public Sprite icon;      
     public GameObject basicModel;

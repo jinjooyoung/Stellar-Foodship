@@ -16,6 +16,7 @@ MonoBehaviour:
   ingredientName: "\uAE00\uB85C\uC6B0 \uBC84\uC12F"
   nameEng: glowMushroom
   isCutable: 1
+  isRawPlatable: 0
   icon: {fileID: 0}
   basicModel: {fileID: 1297454601176523056, guid: 37999f2577f972249910e677735c02b6, type: 3}
   cutModel: {fileID: 0}

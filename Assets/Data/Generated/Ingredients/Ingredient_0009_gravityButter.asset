@@ -16,6 +16,7 @@ MonoBehaviour:
   ingredientName: "\uC911\uB825\uBC84\uD130"
   nameEng: gravityButter
   isCutable: 1
+  isRawPlatable: 1
   icon: {fileID: 0}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}

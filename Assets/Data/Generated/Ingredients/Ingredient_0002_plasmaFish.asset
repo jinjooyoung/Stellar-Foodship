@@ -16,6 +16,7 @@ MonoBehaviour:
   ingredientName: "\uD50C\uB77C\uC988\uB9C8 \uC0DD\uC120"
   nameEng: plasmaFish
   isCutable: 1
+  isRawPlatable: 0
   icon: {fileID: 0}
   basicModel: {fileID: 8203622035638806019, guid: 7fbd25df50d18e843ad73bf810800e9e, type: 3}
   cutModel: {fileID: 0}

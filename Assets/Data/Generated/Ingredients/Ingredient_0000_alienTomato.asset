@@ -16,6 +16,7 @@ MonoBehaviour:
   ingredientName: "\uC678\uACC4 \uD1A0\uB9C8\uD1A0"
   nameEng: alienTomato
   isCutable: 1
+  isRawPlatable: 1
   icon: {fileID: 0}
   basicModel: {fileID: 3399818865334015190, guid: 2ee745592aea2574b9ac942c88e3df40, type: 3}
   cutModel: {fileID: 5600011051585156638, guid: 2f8a2b6852e2694439b02e41f5301d8c, type: 3}

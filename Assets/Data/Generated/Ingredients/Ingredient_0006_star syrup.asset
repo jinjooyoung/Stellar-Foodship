@@ -16,6 +16,7 @@ MonoBehaviour:
   ingredientName: "\uBCC4 \uC2DC\uB7FD"
   nameEng: star syrup
   isCutable: 0
+  isRawPlatable: 1
   icon: {fileID: 0}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}

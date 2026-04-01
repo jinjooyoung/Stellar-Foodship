@@ -16,6 +16,7 @@ MonoBehaviour:
   ingredientName: "\uC6A9\uC554 \uC18C\uC2A4"
   nameEng: lavaSauce
   isCutable: 0
+  isRawPlatable: 1
   icon: {fileID: 0}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}

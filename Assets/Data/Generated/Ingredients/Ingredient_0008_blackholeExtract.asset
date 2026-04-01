@@ -16,6 +16,7 @@ MonoBehaviour:
   ingredientName: "\uBE14\uB799\uD640 \uCD94\uCD9C\uBB3C"
   nameEng: blackholeExtract
   isCutable: 0
+  isRawPlatable: 0
   icon: {fileID: 0}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}

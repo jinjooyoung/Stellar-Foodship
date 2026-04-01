@@ -139,6 +139,7 @@ public class JsonToScriptableConverter : EditorWindow
                 ingredientSO.ingredientName = ingredientData.ingredientName;
                 ingredientSO.nameEng = ingredientData.nameEng;
                 ingredientSO.isCutable = ingredientData.isCutable;
+                ingredientSO.isRawPlatable = ingredientData.isRawPlatable;
 
                 //아이콘 로드 (경로가 있는 경우)
                 if (!string.IsNullOrEmpty(ingredientData.iconPath))                       //아이콘 경로가 있는지 확인한다. 

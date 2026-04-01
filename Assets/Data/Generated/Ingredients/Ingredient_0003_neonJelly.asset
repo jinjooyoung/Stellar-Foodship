@@ -16,6 +16,7 @@ MonoBehaviour:
   ingredientName: "\uB124\uC628 \uD574\uD30C\uB9AC"
   nameEng: neonJelly
   isCutable: 1
+  isRawPlatable: 1
   icon: {fileID: 0}
   basicModel: {fileID: 3683028061234011040, guid: 9d23a0ba97ddfe94bb50bf68240a5a16, type: 3}
   cutModel: {fileID: 0}
