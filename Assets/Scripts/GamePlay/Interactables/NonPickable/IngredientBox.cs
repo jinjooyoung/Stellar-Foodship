@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class IngredientBox : NonPickable
 {
@@ -7,89 +8,57 @@ public class IngredientBox : NonPickable
     [SerializeField] private IngredientDatabaseSO database;
     [SerializeField] private GameObject ingredientBasePrefab;
 
-    [Header("아이템 배치 설정")]
-    [SerializeField] private Transform itemSlot; 
-    private Ingredient placedItem; 
-
-    private void Awake()
+    private void Start()
     {
         if (DataManager.instance != null)
         {
-            database = DataManager.instance.IngredientDatabase;
+            database = DataManager.instance.ingredientDatabase;
         }
     }
 
-    
     public override void Interact(Player player)
     {
-        
-        if (player.heldItem == null)
+        Debug.Log("재료상자 상호작용1 호출됨");
+
+        // 플레이어가 아이템 들고 있는 경우
+        if (player.heldItem != null)
         {
-            
-            if (placedItem != null)
+            Debug.Log("플레이어 들고 있는 아이템 있음");
+
+            /*// 재료상자 위에 이미 아이템 있으면 아무것도 안함 (또는 실패 처리)
+            if (heldItem != null)
             {
-                PickUpPlacedItem(player);
-            }
-            
-            else
+                Debug.Log("재료상자 위에 이미 아이템 있음 → 놓기 불가");
+                return;
+            }*/
+
+            // 재료상자 위에 아이템 없으면 올려두기
+            Debug.Log("재료상자 위에 아이템 올려둠");
+            if (TryPlaceItem(player.heldItem))
             {
-                TakeOutIngredient(player);
+                player.heldItem = null;
             }
+
+            return;
         }
-       
-        else
+
+        // 플레이어가 아무것도 안 들고 있는 경우
+        Debug.Log("플레이어 들고 있는 아이템 없음");
+
+        // 재료상자 위에 아이템 있으면 집기
+        if (heldItem != null)
         {
-           
-            if (placedItem != null)
-            {
-                player.Drop(); 
-            }
-           
-            else
-            {
-                TryPlaceItem(player);
-            }
-        }
-    }
-
-    
-    private void PickUpPlacedItem(Player player)
-    {
-        if (placedItem.TryPickUp(player))
-        {
-            player.heldItem = placedItem;
-            placedItem = null; // 선반 비우기
-            Debug.Log("선반 위의 아이템을 집었습니다.");
-        }
-    }
-
-    private void TryPlaceItem(Player player)
-    {
-        // 선반에 놓을 수 있는 타입(Ingredient)인지 확인
-        if (player.heldItem is Ingredient itemToPlace)
-        {
-            
-            itemToPlace.transform.SetParent(itemSlot != null ? itemSlot : transform);
-            itemToPlace.transform.localPosition = Vector3.zero;
-            itemToPlace.transform.localRotation = Quaternion.identity;
-
-            if (itemToPlace.TryGetComponent<Rigidbody>(out Rigidbody rb))
-            {
-                rb.isKinematic = true;
-            }
-
-            placedItem = itemToPlace;
-            player.heldItem = null; 
-
-            Debug.Log("아이템을 선반에 놓았다.");
+            Debug.Log("재료상자 위 아이템 집기");
+            player.heldItem = TakeItem(player);
         }
         else
         {
-            Debug.LogWarning("재료 아이템만 놓을 수 있다.");
+            // 없으면 새 재료 생성해서 지급
+            Debug.Log("재료 생성해서 지급");
+            TakeOutIngredient(player);
         }
     }
 
-  
     private void TakeOutIngredient(Player player)
     {
         Ingredient resultComponent = CreateIngredient();
@@ -107,7 +76,6 @@ public class IngredientBox : NonPickable
             }
         }
     }
-
    
     private Ingredient CreateIngredient()
     {

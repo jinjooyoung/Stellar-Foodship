@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public Transform holdPoint;
 
     [Header("상호작용 객체")]
-    public IInteractable heldItem;          // 들고 있는 아이템
+    public Pickable heldItem;          // 들고 있는 아이템
     public IInteractable target;            // 현재 타겟
 
     [Header("이동 변수")]

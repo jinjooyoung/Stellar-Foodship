@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class NonPickable : MonoBehaviour, IInteractable
 {
-    public IInteractable heldItem;
+    public Pickable heldItem;
     public Transform holdPoint;
 
     /*void Awake()
@@ -40,7 +40,7 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
         return true;
     }
 
-    public virtual IInteractable TakeItem(Player player)
+    public virtual Pickable TakeItem(Player player)
     {
         Debug.Log("논픽커블 테이크아이템 호출됨");
         if (heldItem == null)
@@ -49,7 +49,7 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
             return null;
         }
 
-        IInteractable item = heldItem;
+        Pickable item = heldItem;
         heldItem = null;
 
         item.GetTransform().SetParent(player.holdPoint);

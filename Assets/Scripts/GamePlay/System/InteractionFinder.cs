@@ -33,8 +33,11 @@ public class InteractionFinder : MonoBehaviour
                 continue;
             
             // 들고 있는 아이템 제외
-            if (interactable == player.heldItem)
-                continue;
+            if (interactable is Pickable pickable)
+            {
+                if (pickable == player.heldItem)
+                    continue;
+            }
 
             float dist = (hit.transform.position - targetTransform.position).sqrMagnitude;
 

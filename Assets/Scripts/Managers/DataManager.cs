@@ -4,11 +4,11 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
 
-    public IngredientDatabaseSO IngredientDatabase;
-    public CookedIngredientDatabaseSO CookedIngredientDatabase;
-    public DishDatabaseSO DishDatabase;
-    public AchievementDatabaseSO AchievementDatabase;
-    public SoundDatabaseSO SoundDatabase;
+    public IngredientDatabaseSO ingredientDatabase;
+    public CookedIngredientDatabaseSO cookedIngredientDatabase;
+    public DishDatabaseSO dishDatabase;
+    public AchievementDatabaseSO achievementDatabase;
+    public SoundDatabaseSO soundDatabase;
 
     private void Awake()
     {
@@ -27,10 +27,10 @@ public class DataManager : MonoBehaviour
 
     void InitializeDatabases()
     {
-        IngredientDatabase.Initialize();
-        CookedIngredientDatabase.Initialize();
-        DishDatabase.Initialize();
-        AchievementDatabase.Initialize();
-        SoundDatabase.Initialize();
+        ingredientDatabase.Initialize();
+        cookedIngredientDatabase.Initialize();
+        dishDatabase.Initialize();
+        achievementDatabase.Initialize();
+        soundDatabase.Initialize();
     }
 }

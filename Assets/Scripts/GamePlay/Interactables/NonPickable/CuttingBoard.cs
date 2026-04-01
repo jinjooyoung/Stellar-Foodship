@@ -44,7 +44,7 @@ public class CuttingBoard : NonPickable
         if (player.heldItem != null)
         {
             // 들고 있으면 도마 위에 내려놓기
-            if (TryPlaceItem(player.heldItem as Pickable))
+            if (TryPlaceItem(player.heldItem))
             {
                 player.heldItem = null;
                 SubscribeEvents();

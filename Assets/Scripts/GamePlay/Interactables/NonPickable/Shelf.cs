@@ -14,7 +14,7 @@ public class Shelf : NonPickable
         if (player.heldItem != null)
         {
             // 플레이어가 뭔가 들고 있으면 → 선반 위에 내려놓기
-            if (TryPlaceItem(player.heldItem as Pickable))
+            if (TryPlaceItem(player.heldItem))
             {
                 player.heldItem = null;
             }
