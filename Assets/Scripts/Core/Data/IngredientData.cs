@@ -10,7 +10,6 @@ public class IngredientData
     public bool isCutable;
     public bool isRawPlatable;
 
-    [NonSerialized]
     public string iconPath;
     public string modelPath;
     public string cutModelPath;

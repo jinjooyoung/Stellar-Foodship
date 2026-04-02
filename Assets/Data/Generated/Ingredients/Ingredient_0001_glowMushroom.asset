@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbc127f1d70b18a4bac17ee00e8db212, type: 3}
-  m_Name: Ingredient_0001 + glowMushroom
+  m_Name: Ingredient_0001_glowMushroom
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSO
   id: 1
   ingredientName: "\uAE00\uB85C\uC6B0 \uBC84\uC12F"
   nameEng: glowMushroom
   isCutable: 1
   isRawPlatable: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bae4d701fdd07984f9c82311fe73c609, type: 3}
   basicModel: {fileID: 1297454601176523056, guid: 37999f2577f972249910e677735c02b6, type: 3}
-  cutModel: {fileID: 0}
-  cookingModel: {fileID: 0}
+  cutModel: {fileID: 6737497297937285254, guid: 3e83604e90ca7924c89426f2d2e3f1dd, type: 3}
+  cookingModel: {fileID: 8719891882188185262, guid: 711b6617618a2f64d8deace23c9aebc8, type: 3}
