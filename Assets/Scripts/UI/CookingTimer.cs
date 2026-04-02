@@ -51,20 +51,20 @@ public class CookingTimer : MonoBehaviour
     }
 
 
-    // 재료를 넣었을 때 호출
+   
     public void StartCooking()
     {
         if (isCompleted) return;
         isRunning = true;
     }
 
-    // 재료를 뺐을 때 호출 (멈춤)
+    
     public void StopCooking()
     {
         isRunning = false;
     }
 
-    // 초기화 (음식을 접시에 담았을 때 등)
+   
     public void ResetTimer()
     {
         currentTime = maxTime;
@@ -77,7 +77,7 @@ public class CookingTimer : MonoBehaviour
 
     void UpdateUI()
     {
-        // 1. 텍스트 업데이트 (00:00 형식)
+        
         if (timerText != null)
         {
             int minutes = Mathf.FloorToInt(currentTime / 60);
@@ -85,10 +85,10 @@ public class CookingTimer : MonoBehaviour
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
 
-        // 2. 게이지 업데이트 (0~1 사이 값)
+       
         if (progressBar != null)
         {
-            // 남은 시간에 비례해서 게이지가 깎임 (혹은 1 - (cur/max) 로 하면 차오름)
+            
             progressBar.fillAmount = currentTime / maxTime;
         }
     }
