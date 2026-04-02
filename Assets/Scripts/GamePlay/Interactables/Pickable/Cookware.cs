@@ -1,12 +1,14 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
 public class Cookware : Pickable
 {
- 
     [Header("Cooking Settings")]
     public int resultId; 
+    public CookwareType cookwareType;
     public int?[] currentIngredientIds = new int?[4];
+    public Timer timer;
     public CookingIconUI cookingIconUI;
     public GameObject visualObject;
    
@@ -88,6 +90,28 @@ public class Cookware : Pickable
         player.heldItem = null;
     }
 
+    public StationType GetRequiredStation()
+    {
+        return cookwareType switch
+        {
+            CookwareType.Pan => StationType.FirePit,
+            CookwareType.Pot => StationType.FirePit,
+            CookwareType.Steamer => StationType.FirePit,
+            CookwareType.MixerCup => StationType.Blender,
+            CookwareType.FryerBasket => StationType.Fryer,
+            _ => throw new Exception("Unknown CookwareType")
+        };
+    }
+
+    public bool HasAnyValue(int?[] arr)
+    {
+        for(int i = 0;i < arr.Length; i++)
+        {
+            if (arr[i].HasValue)
+                return true;
+        }
+        return false;
+    }
 
     public override void InteractSecondary(Player player)
     {
