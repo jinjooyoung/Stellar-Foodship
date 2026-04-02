@@ -6,16 +6,26 @@ public class Cookware : Pickable
  
     [Header("Cooking Settings")]
     public int resultId; 
-    public int?[] currentIngredientIds = new int?[4]; 
-
+    public int?[] currentIngredientIds = new int?[4];
+    public CookingIconUI cookingIconUI;
+    public GameObject visualObject;
    
     public override int ID => resultId;
 
+    private void Awake()
+    {
+        visualObject.SetActive(false);
+    }
 
-    private void Update()
+    private void Start()
+    {
+        cookingIconUI.UpdateUI(currentIngredientIds);
+    }
+
+    /*private void Update()
     {
         Debug.Log($"{currentIngredientIds[0]},{currentIngredientIds[1]},{currentIngredientIds[2]},{currentIngredientIds[3]}");
-    }
+    }*/
 
     public override void Interact(Player player)
     {
@@ -71,8 +81,9 @@ public class Cookware : Pickable
                 break;
             }
         }
+        visualObject.SetActive(true);
+        cookingIconUI.UpdateUI(currentIngredientIds);
 
-        
         Destroy(ingredient.gameObject);
         player.heldItem = null;
     }
