@@ -6,7 +6,6 @@ using System.IO;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.Mesh;
 
 public enum ConversionType
 {
@@ -151,8 +150,12 @@ public class JsonToScriptableConverter : EditorWindow
                         Debug.LogWarning($"재료 {ingredientData.nameEng} 의 아이콘을 찾을 수 없습니다. : {ingredientData.iconPath}");
                     }
                 }
+                else
+                {
+                    Debug.Log($"재료 {ingredientData.nameEng} 의 아이콘의 경로를 찾을 수 없습니다.");
+                }
 
-                ingredientSO.basicModel = LoadPrefab(ingredientData.modelPath);
+                    ingredientSO.basicModel = LoadPrefab(ingredientData.modelPath);
                 ingredientSO.cutModel = LoadPrefab(ingredientData.cutModelPath);
                 ingredientSO.cookingModel = LoadPrefab(ingredientData.cookingModelPath);
 
@@ -161,7 +164,7 @@ public class JsonToScriptableConverter : EditorWindow
                 AssetDatabase.CreateAsset(ingredientSO, assetPath);
 
                 //이셋 이름 지정
-                ingredientSO.name = $"Ingredient_{ingredientData.id.ToString("D4")} + {ingredientData.nameEng}";
+                ingredientSO.name = $"Ingredient_{ingredientData.id.ToString("D4")}_{ingredientData.nameEng}";
                 createdIngredients.Add(ingredientSO);
 
                 EditorUtility.SetDirty(ingredientSO);
@@ -244,7 +247,7 @@ public class JsonToScriptableConverter : EditorWindow
                 AssetDatabase.CreateAsset(cookedIngredientSO, assetPath);
 
                 //이셋 이름 지정
-                cookedIngredientSO.name = $"CookedIngredient_{cookedIngredientData.id.ToString("D4")} + {cookedIngredientData.nameEng}";
+                cookedIngredientSO.name = $"CookedIngredient_{cookedIngredientData.id.ToString("D4")}_{cookedIngredientData.nameEng}";
                 createdCookedIngredients.Add(cookedIngredientSO);
 
                 EditorUtility.SetDirty(cookedIngredientSO);
@@ -340,7 +343,7 @@ public class JsonToScriptableConverter : EditorWindow
                 AssetDatabase.CreateAsset(dishSO, assetPath);
 
                 //이셋 이름 지정
-                dishSO.name = $"Dish_{dishData.id.ToString("D4")} + {dishData.nameEng}";
+                dishSO.name = $"Dish_{dishData.id.ToString("D4")}_{dishData.nameEng}";
                 dishes.Add(dishSO);
 
                 EditorUtility.SetDirty(dishSO);
@@ -425,7 +428,7 @@ public class JsonToScriptableConverter : EditorWindow
                 AssetDatabase.CreateAsset(achievementSO, assetPath);
 
                 //이셋 이름 지정
-                achievementSO.name = $"Item_{achievementData.id.ToString("D4")} + {achievementData.nameEng}";
+                achievementSO.name = $"Item_{achievementData.id.ToString("D4")}_{achievementData.nameEng}";
                 createdAchievements.Add(achievementSO);
 
                 EditorUtility.SetDirty(achievementSO);

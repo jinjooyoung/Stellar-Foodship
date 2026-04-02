@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbc127f1d70b18a4bac17ee00e8db212, type: 3}
-  m_Name: Ingredient_0007 + spaceEgg
+  m_Name: Ingredient_0007_spaceEgg
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSO
   id: 7
   ingredientName: "\uC6B0\uC8FC\uB2EC\uAC40"
   nameEng: spaceEgg
   isCutable: 0
   isRawPlatable: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 07b2d17f729996348825966a1d679929, type: 3}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}
   cookingModel: {fileID: 0}

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbc127f1d70b18a4bac17ee00e8db212, type: 3}
-  m_Name: Ingredient_0003 + neonJelly
+  m_Name: Ingredient_0003_neonJelly
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSO
   id: 3
   ingredientName: "\uB124\uC628 \uD574\uD30C\uB9AC"
   nameEng: neonJelly
   isCutable: 1
   isRawPlatable: 1
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fac027aa85a3b134da1a4a0d0750fcf7, type: 3}
   basicModel: {fileID: 3683028061234011040, guid: 9d23a0ba97ddfe94bb50bf68240a5a16, type: 3}
   cutModel: {fileID: 0}
   cookingModel: {fileID: 0}
