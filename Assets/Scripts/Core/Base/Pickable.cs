@@ -29,7 +29,7 @@ public abstract class Pickable : MonoBehaviour, IInteractable
     // 상호작용1: "집기 / 놓기" 공통 처리 | J / Button South
     public virtual void Interact(Player player)
     {
-        Debug.Log($"{this.name} Pickable 상호작용 호출됨");
+        // Debug.Log($"{this.name} Pickable 상호작용 호출됨");
 
         if (player.heldItem != null) return;
 

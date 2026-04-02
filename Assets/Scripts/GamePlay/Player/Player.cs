@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (heldItem  != null) Debug.Log($"플레이어 heldItem : {heldItem.ToString()}");
+        if (target != null) Debug.Log($"플레이어 target : {target.ToString()}");
 
         targetUpdateTimer += Time.deltaTime;
 
@@ -136,7 +137,17 @@ public class Player : MonoBehaviour
     // 상호작용1 : J / Button South
     public void InteractPrimary()
     {
-        Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
+        //Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
+
+        // 타겟이 조리도구면 재료를 들고있을때 인터랙트 실행
+        if (target is Cookware cookware)
+        {
+            if (heldItem is Ingredient ingredient)
+            {
+                target.Interact(this);
+                return;
+            }
+        }
 
         // 들고 있는 아이템이 있으면 Drop
         if (heldItem != null)
