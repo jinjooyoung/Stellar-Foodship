@@ -10,13 +10,16 @@ public class Cookware : Pickable
     public int?[] currentIngredientIds = new int?[4];
     public Timer timer;
     public CookingIconUI cookingIconUI;
+    public bool isComplete;
     public GameObject visualObject;
+    public GameObject checkImage;
    
     public override int ID => resultId;
 
     private void Awake()
     {
         visualObject.SetActive(false);
+        checkImage.SetActive(false);
     }
 
     private void Start()
@@ -111,6 +114,13 @@ public class Cookware : Pickable
                 return true;
         }
         return false;
+    }
+
+    public void OnCookingComplete()
+    {
+        isComplete = true;
+
+        checkImage.SetActive(true);
     }
 
     public override void InteractSecondary(Player player)
