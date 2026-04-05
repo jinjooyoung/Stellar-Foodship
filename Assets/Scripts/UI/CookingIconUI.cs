@@ -8,6 +8,8 @@ public class CookingIconUI : MonoBehaviour
 
     public void UpdateUI(int?[] currentIds)
     {
+        if (DataManager.instance == null) return;
+
         var ingredientDB = DataManager.instance.ingredientDatabase;
         var cookedDB = DataManager.instance.cookedIngredientDatabase;
 

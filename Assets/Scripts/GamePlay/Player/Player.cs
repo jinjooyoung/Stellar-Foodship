@@ -61,20 +61,48 @@ public class Player : MonoBehaviour
         playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
+    /*void Update()
+{
+    if (heldItem  != null) Debug.Log($"플레이어 heldItem : {heldItem.ToString()}");
+    if (target != null) Debug.Log($"플레이어 target : {target.ToString()}");
+
+    targetUpdateTimer += Time.deltaTime;
+
+    if (targetUpdateTimer >= targetUpdateInterval)
+    {
+        targetUpdateTimer = 0f;
+
+        UpdateTarget();
+    }
+
+    SmoothMoveDirection();
+    Rotate();
+}*/
+    // => 로그에 너무 많이 떠서 한번만 출력하도록 바꿔놨습니다. 
+    // 주석 처리 한게 원본 Update코드입니다.
+
+    private object lastHeldItem = null;
+    private object lastTarget = null;
+
     void Update()
     {
-        if (heldItem  != null) Debug.Log($"플레이어 heldItem : {heldItem.ToString()}");
-        if (target != null) Debug.Log($"플레이어 target : {target.ToString()}");
+        if (heldItem != lastHeldItem)
+        {
+            Debug.Log($"플레이어 heldItem : {heldItem?.ToString()}");
+            lastHeldItem = heldItem;
+        }
+        if (target != lastTarget)
+        {
+            Debug.Log($"플레이어 target : {target?.ToString()}");
+            lastTarget = target;
+        }
 
         targetUpdateTimer += Time.deltaTime;
-
         if (targetUpdateTimer >= targetUpdateInterval)
         {
             targetUpdateTimer = 0f;
-
             UpdateTarget();
         }
-
         SmoothMoveDirection();
         Rotate();
     }
@@ -137,12 +165,20 @@ public class Player : MonoBehaviour
     // 상호작용1 : J / Button South
     public void InteractPrimary()
     {
-        //Debug.Log($"{this.name} 플레이어 상호작용1 호출됨");
+        // 타겟이 접시면 뭔가 들고있을 때 접시에 넣기
+        if (target is Dish dish)
+        {
+            if (heldItem != null)
+            {
+                target.Interact(this);
+                return;
+            }
+        }
 
-        // 타겟이 조리도구면 재료를 들고있을때 인터랙트 실행
+        // 타겟이 조리도구면 재료를 들고있을 때 재료 넣기
         if (target is Cookware cookware)
         {
-            if (heldItem is Ingredient ingredient)
+            if (heldItem is Ingredient)
             {
                 target.Interact(this);
                 return;

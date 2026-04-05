@@ -13,6 +13,7 @@ public class Cookware : Pickable
     public bool isComplete;
     public GameObject visualObject;
     public GameObject checkImage;
+    public bool isBurnt = false;
    
     public override int ID => resultId;
 
@@ -121,6 +122,19 @@ public class Cookware : Pickable
         isComplete = true;
 
         checkImage.SetActive(true);
+    }
+
+    public void ClearIds()
+    {
+        for (int i = 0; i < currentIngredientIds.Length; i++)
+        {
+            currentIngredientIds[i] = null;
+        }
+        isComplete = false;
+        isBurnt = false;
+        checkImage.SetActive(false);
+        visualObject.SetActive(false);
+        cookingIconUI.UpdateUI(currentIngredientIds);
     }
 
     public override void InteractSecondary(Player player)

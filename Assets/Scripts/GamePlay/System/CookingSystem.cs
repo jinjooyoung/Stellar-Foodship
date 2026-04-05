@@ -54,8 +54,10 @@ public static class CookingSystem
     }
 
     // 1차 조리품 ID 반환 (없으면 100 반환)
-    public static int GetCookedIngredientId(int?[] inputIds, CookwareType inputType)
+    public static int GetCookedIngredientId(int?[] inputIds, CookwareType inputType, bool isBurnt)
     {
+        // 탄 음식이면 바로 100 반환
+        if (isBurnt) return 100;
         CookedIngredientDatabaseSO db = DataManager.instance.cookedIngredientDatabase;
 
         int[] input = FilterNull(inputIds);
