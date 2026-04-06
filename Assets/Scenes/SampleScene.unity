@@ -2188,6 +2188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   timerSlider: {fileID: 863160031}
+  sliderStartZero: 1
 --- !u!1 &1603684605
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,6 +2921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   timerSlider: {fileID: 95496764}
+  sliderStartZero: 1
 --- !u!1001 &2933027249436568283
 PrefabInstance:
   m_ObjectHideFlags: 0

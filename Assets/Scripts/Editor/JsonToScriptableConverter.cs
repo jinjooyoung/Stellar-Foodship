@@ -155,7 +155,7 @@ public class JsonToScriptableConverter : EditorWindow
                     Debug.Log($"재료 {ingredientData.nameEng} 의 아이콘의 경로를 찾을 수 없습니다.");
                 }
 
-                    ingredientSO.basicModel = LoadPrefab(ingredientData.modelPath);
+                ingredientSO.basicModel = LoadPrefab(ingredientData.modelPath);
                 ingredientSO.cutModel = LoadPrefab(ingredientData.cutModelPath);
                 ingredientSO.cookingModel = LoadPrefab(ingredientData.cookingModelPath);
 
@@ -238,6 +238,21 @@ public class JsonToScriptableConverter : EditorWindow
                 else
                 {
                     Debug.LogWarning($"아이템 {cookedIngredientData.cookedIngredientName}의 유효하지 않은 타입 : {cookedIngredientData.cookwareTypeString}");
+                }
+
+                //아이콘 로드 (경로가 있는 경우)
+                if (!string.IsNullOrEmpty(cookedIngredientData.iconPath))                       //아이콘 경로가 있는지 확인한다. 
+                {
+                    cookedIngredientSO.icon = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Resources/{cookedIngredientData.iconPath}.png");
+
+                    if (cookedIngredientSO.icon == null)
+                    {
+                        Debug.LogWarning($"1차 조리품 {cookedIngredientData.nameEng} 의 아이콘을 찾을 수 없습니다. : {cookedIngredientData.iconPath}");
+                    }
+                }
+                else
+                {
+                    Debug.Log($"1차 조리품 {cookedIngredientData.nameEng} 의 아이콘의 경로를 찾을 수 없습니다.");
                 }
 
                 cookedIngredientSO.model = LoadPrefab(cookedIngredientData.modelPath);

@@ -17,6 +17,7 @@ public class Timer : MonoBehaviour
 
     public GameObject timerSlider;
     UnityEngine.UI.Slider slider;
+    public bool sliderStartZero;
 
     void Awake()
     {
@@ -34,7 +35,16 @@ public class Timer : MonoBehaviour
     {
         MaxTime = time;
         slider.maxValue = 1f;
-        slider.value = 0f;
+
+        if (sliderStartZero)
+        {
+            slider.value = 0f;
+        }
+        else
+        {
+            slider.value = 1f;
+        }
+
         CurrentTime = time;
         IsRunning = true;
         timerSlider.SetActive(true);
@@ -72,7 +82,15 @@ public class Timer : MonoBehaviour
         if (!IsRunning) return;
 
         CurrentTime -= deltaTime;
-        slider.value = 1 - Normalized;
+
+        if (sliderStartZero)
+        {
+            slider.value = 1 - Normalized;
+        }
+        else
+        {
+            slider.value = Normalized;
+        }
 
         if (CurrentTime <= 0f)
         {
