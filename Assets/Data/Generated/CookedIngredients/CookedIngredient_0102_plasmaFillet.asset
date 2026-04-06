@@ -16,4 +16,5 @@ MonoBehaviour:
   cookedIngredientName: "\uC6B0\uC8FC \uD544\uB808"
   nameEng: plasmaFillet
   cookwareType: 2
+  icon: {fileID: 21300000, guid: fccabf0d1bf4f7f439502dc9f232804f, type: 3}
   model: {fileID: 0}

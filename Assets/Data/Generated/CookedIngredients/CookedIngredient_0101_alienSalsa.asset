@@ -16,4 +16,5 @@ MonoBehaviour:
   cookedIngredientName: "\uC678\uACC4 \uC0B4\uC0AC"
   nameEng: alienSalsa
   cookwareType: 0
+  icon: {fileID: 21300000, guid: c2c3b681569b6f944b78f562f986c423, type: 3}
   model: {fileID: 0}

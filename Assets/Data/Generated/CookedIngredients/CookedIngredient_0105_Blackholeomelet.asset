@@ -16,4 +16,5 @@ MonoBehaviour:
   cookedIngredientName: "\uBE14\uB799\uD640 \uC9C0\uB2E8"
   nameEng: Blackholeomelet
   cookwareType: 0
+  icon: {fileID: 21300000, guid: a09dbff8e7defa44a81917e4fd27f44a, type: 3}
   model: {fileID: 0}

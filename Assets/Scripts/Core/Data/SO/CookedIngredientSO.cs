@@ -10,6 +10,7 @@ public class CookedIngredientSO : ScriptableObject
     public int?[] ingredientIds;
 
     public CookwareType cookwareType;
+    public Sprite cookTypeIcon;
     public Sprite icon;
     public GameObject model;
 }

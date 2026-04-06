@@ -17,6 +17,7 @@ public class CookedIngredientData
 
     [NonSerialized]
     public CookwareType cookwareType;
+    public string cookTypeIconPath;
     public string iconPath;
     public string modelPath;
 

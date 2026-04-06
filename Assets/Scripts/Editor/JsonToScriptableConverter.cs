@@ -255,6 +255,21 @@ public class JsonToScriptableConverter : EditorWindow
                     Debug.Log($"1차 조리품 {cookedIngredientData.nameEng} 의 아이콘의 경로를 찾을 수 없습니다.");
                 }
 
+                // 조리 방법 아이콘 로드 (경로가 있는 경우)
+                if (!string.IsNullOrEmpty(cookedIngredientData.cookTypeIconPath))                       //아이콘 경로가 있는지 확인한다. 
+                {
+                    cookedIngredientSO.cookTypeIcon = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Resources/{cookedIngredientData.cookTypeIconPath}.png");
+
+                    if (cookedIngredientSO.cookTypeIcon == null)
+                    {
+                        Debug.LogWarning($"1차 조리품 {cookedIngredientData.nameEng} 의 조리 아이콘을 찾을 수 없습니다. : {cookedIngredientData.cookTypeIconPath}");
+                    }
+                }
+                else
+                {
+                    Debug.Log($"1차 조리품 {cookedIngredientData.nameEng} 의 아이콘의 경로를 찾을 수 없습니다.");
+                }
+
                 cookedIngredientSO.model = LoadPrefab(cookedIngredientData.modelPath);
 
                 //스크립터블 오브젝트 저장 - ID를 4자리 숫자로 포맷팅

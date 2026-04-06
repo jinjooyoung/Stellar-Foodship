@@ -16,4 +16,5 @@ MonoBehaviour:
   cookedIngredientName: "\uBCC4\uBE5B \uD06C\uB9BC \uBCA0\uC774\uC2A4"
   nameEng: starCreamRisotto
   cookwareType: 2
+  icon: {fileID: 21300000, guid: d90d732549c57be4b83c19def085696d, type: 3}
   model: {fileID: 0}

@@ -16,4 +16,5 @@ MonoBehaviour:
   cookedIngredientName: "\uC131\uC6B4 \uBC25"
   nameEng: cosmicRiceBowl
   cookwareType: 0
+  icon: {fileID: 21300000, guid: 98ca3886cfd22844cb9f1baf0845468e, type: 3}
   model: {fileID: 0}

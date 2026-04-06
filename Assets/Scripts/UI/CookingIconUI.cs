@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CookingIconUI : MonoBehaviour
 {
-    public Image[] slots; // 최대 16칸 (접시는 16개까지 될수도)
+    public Image[] slots; // 최대 4칸
 
     public void UpdateUI(int?[] currentIds)
     {
