@@ -1,0 +1,55 @@
+using UnityEngine;
+
+public class DishSubmissionCounter : NonPickable
+{
+    [Header("참조")]
+    
+    [SerializeField] private OrderManager orderManager;
+
+  
+    
+   
+    public override void Interact(Player player)
+    {
+   
+        if (player.heldItem == null)
+        {
+            return;
+        }
+
+        
+        Dish dish = player.heldItem as Dish;
+
+        
+        if (dish == null)
+        {
+            return;
+        }
+
+      
+        int resultId = CookingSystem.GetDishId(dish.currentIngredientIds, CookwareType.Plate);
+
+      
+        bool success = orderManager.TrySubmitDish(resultId);
+
+       
+        if (success)
+        {
+            Debug.Log("주문 성공");
+        }
+        else
+        {
+            Debug.Log("주문 실패했습니다");
+        }
+
+       
+        Destroy(dish.gameObject);
+        player.heldItem = null;
+    }
+
+   
+    public override void InteractSecondary(Player player)
+    {
+       
+    }
+}
