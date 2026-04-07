@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class OrderUI : MonoBehaviour
     public IngredientSlotUI[] slots;    // 1차 조리품, 재료, 조리 방법이 다 포함 된 레시피 UI 구성품 클래스
 
     public Order order;
+
+
 
     public void Init(int dishId, Order order)
     {
@@ -37,5 +40,10 @@ public class OrderUI : MonoBehaviour
         {
             slots[i].gameObject.SetActive(false);
         }
+    }
+
+    internal void Init(object dishId, Order order)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -13,4 +13,5 @@ public class DishSO : ScriptableObject
     public CookwareType cookwareType;
     public Sprite icon;
     public GameObject model;
+    internal int dishId;
 }
