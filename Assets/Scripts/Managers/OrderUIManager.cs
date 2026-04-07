@@ -9,7 +9,7 @@ public class OrderUIManager : MonoBehaviour
     [Header("[∑±≈∏¿”]")]
     [SerializeField] private List<OrderUI> orderUIs = new List<OrderUI>();
 
-    public void CreateOrderUI(Order order, DishSO dish, LevelManager manager)
+    public void CreateOrderUI(Order order, DishSO dish, OrderManager manager)
     {
         GameObject obj = Instantiate(orderUIPrefab, uiParent);
         OrderUI ui = obj.GetComponent<OrderUI>();
