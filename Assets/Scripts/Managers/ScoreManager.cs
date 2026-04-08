@@ -4,10 +4,10 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [Header("현재 점수")]
-    int score;
+    public int score;
 
     [Header("콤보 점수")]
-    int[] comboScore = { 10, 15, 20, 25, 30 };
+    public int[] comboScore = { 10, 15, 20, 25, 30 };
 
     void Awake()
     {
