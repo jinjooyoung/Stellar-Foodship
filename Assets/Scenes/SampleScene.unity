@@ -158,9 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c8e4e989d2d744ba062ee3121b91ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  orderSpawnInterval: 30
+  orderSpawnInterval: 5
   maxOrderCount: 5
-  minOrderId: 200
+  minOrderId: 201
   maxOrderId: 209
   penaltyScore: -50
   stageTimeLimit: 180
@@ -181,6 +181,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 927742671}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &182156603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1396573853441556630, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
+  m_PrefabInstance: {fileID: 1257792241}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &191137766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1396573853441556630, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
+  m_PrefabInstance: {fileID: 350177442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &236504089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 236504090}
+  - component: {fileID: 236504093}
+  - component: {fileID: 236504092}
+  - component: {fileID: 236504091}
+  m_Layer: 5
+  m_Name: CheckImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &236504090
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236504089}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1007556528}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 80, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &236504091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236504089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198f6fc3f47a2e949808aa18edfea3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FollowWorldUI
+  target: {fileID: 1671772551}
+  offset: {x: 0, y: -1.5, z: 0}
+  cam: {fileID: 330585545}
+--- !u!114 &236504092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236504089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 055c806e504a67b4089081ae74e2e779, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &236504093
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236504089}
+  m_CullTransparentMesh: 1
 --- !u!4 &240750185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3586568086221559016, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
@@ -344,7 +445,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1396573853441556630, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_Name
-      value: TimerUI
+      value: PanTimer
       objectReference: {fileID: 0}
     - target: {fileID: 1593282533614086147, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_AnchorMax.y
@@ -380,7 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5314108219225732288, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5314108219225732288, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -430,6 +531,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7316730136792880110, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 7316730136792880110, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1671772551}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -810,6 +919,7 @@ RectTransform:
   - {fileID: 350177443}
   - {fileID: 1257792242}
   - {fileID: 1872422319}
+  - {fileID: 236504090}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -910,7 +1020,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1396573853441556630, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_Name
-      value: TimerUI (1)
+      value: CuttingBoardTimer
       objectReference: {fileID: 0}
     - target: {fileID: 1593282533614086147, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_AnchorMax.y
@@ -946,7 +1056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5314108219225732288, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5314108219225732288, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -996,6 +1106,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7316730136792880110, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 7316730136792880110, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 2085669660}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1270,6 +1388,11 @@ Transform:
   - {fileID: 619087927}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1671772551 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 458766637009599619, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+  m_PrefabInstance: {fileID: 4731682981556113985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1681933483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,6 +1770,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 472711402622093270, guid: e60a15dd09d5a0e4891aa97446b4a905, type: 3}
   m_PrefabInstance: {fileID: 1872422318}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1872422320 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2622614982005712745, guid: e60a15dd09d5a0e4891aa97446b4a905, type: 3}
+  m_PrefabInstance: {fileID: 1872422318}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f81f69ddf7aa4884f3f17ba59d36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CookingIconUI
 --- !u!1001 &1962098657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2100,6 +2234,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2233947879861502250, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+      propertyPath: timerSlider
+      value: 
+      objectReference: {fileID: 191137766}
+    - target: {fileID: 2910524415127432076, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+      propertyPath: checkImage
+      value: 
+      objectReference: {fileID: 236504089}
+    - target: {fileID: 2910524415127432076, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+      propertyPath: cookingIconUI
+      value: 
+      objectReference: {fileID: 1872422320}
     - target: {fileID: 4030610156619329893, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
       propertyPath: m_Name
       value: Pan
@@ -2279,6 +2425,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CuttingBoard
       objectReference: {fileID: 0}
+    - target: {fileID: 4685058061382514030, guid: 663eaaec9205f8642a23c8e0b043dc4f, type: 3}
+      propertyPath: timerSlider
+      value: 
+      objectReference: {fileID: 182156603}
     - target: {fileID: 5752092531625803395, guid: 663eaaec9205f8642a23c8e0b043dc4f, type: 3}
       propertyPath: heldItem
       value: 

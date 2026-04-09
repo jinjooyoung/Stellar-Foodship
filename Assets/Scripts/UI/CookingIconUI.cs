@@ -33,16 +33,8 @@ public class CookingIconUI : MonoBehaviour
             else // 1차 조리품
             {
                 var cooked = cookedDB.GetCookedIngredientById(id);
-                if (cooked == null)
-                    continue;
-
-                // 내부 레시피 펼치기
-                foreach (int recipeId in cooked.ingredientIds)
-                {
-                    var ingredient = ingredientDB.GetIngredientById(recipeId);
-                    if (ingredient != null)
-                        sprites.Add(ingredient.icon);
-                }
+                if (cooked != null)
+                    sprites.Add(cooked.icon);
             }
         }
 
