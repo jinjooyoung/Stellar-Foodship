@@ -46,7 +46,7 @@ public class OrderManager : MonoBehaviour
         // 데이터매니저에서 요리SO 가져오기
         DishSO dish = DataManager.instance.dishDatabase.GetDishById(id);
         if (dish == null) return;
-        if (dish.ingredientIds == null) return;
+        //if (dish.ingredientIds == null) return;
 
         // 제한 시간 계산
         float timeLimit = CalculateTimeLimit(dish.ingredientIds);
