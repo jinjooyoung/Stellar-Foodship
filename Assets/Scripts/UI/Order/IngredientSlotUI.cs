@@ -32,7 +32,7 @@ public class IngredientSlotUI : MonoBehaviour
             cookedIcon.sprite = data.icon;
             cookedIcon.gameObject.SetActive(true);
 
-            SetIngredients(data.ingredientIds);
+            //SetIngredients(data.ingredientIds);
 
             cookTypeIcon.sprite = data.cookTypeIcon;
             cookTypeIcon.gameObject.SetActive(true);

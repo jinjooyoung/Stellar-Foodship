@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Unity.Plastic.Newtonsoft.Json;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,18 +13,6 @@ public enum ConversionType
     CookedIngredients,
     Dishes,
     Achievements
-}
-
-[Serializable]
-public class DialogRowData
-{
-    public int? id;     //int?는 Nullable<int>의 축약형. null값도 가질 수 있는 정수형
-    public string characterName;
-    public string text;
-    public int? nextId;
-    public string portraitPath;
-    public string choiceText;
-    public int? choiceNextId;
 }
 
 public class JsonToScriptableConverter : EditorWindow
@@ -221,14 +209,10 @@ public class JsonToScriptableConverter : EditorWindow
                 cookedIngredientSO.cookedIngredientName = cookedIngredientData.cookedIngredientName;
                 cookedIngredientSO.nameEng = cookedIngredientData.nameEng;
 
-                int?[] ingredientIds = new int?[4];
-
-                ingredientIds[0] = cookedIngredientData.ingredientOne;
-                ingredientIds[1] = cookedIngredientData.ingredientTwo;
-                ingredientIds[2] = cookedIngredientData.ingredientThree;
-                ingredientIds[3] = cookedIngredientData.ingredientFour;
-
-                cookedIngredientSO.ingredientIds = ingredientIds;
+                cookedIngredientSO.ingredientIds.Add(cookedIngredientData.ingredientOne);
+                cookedIngredientSO.ingredientIds.Add(cookedIngredientData.ingredientTwo);
+                cookedIngredientSO.ingredientIds.Add(cookedIngredientData.ingredientThree);
+                cookedIngredientSO.ingredientIds.Add(cookedIngredientData.ingredientFour);
 
                 //열거형 변환
                 if (System.Enum.TryParse(cookedIngredientData.cookwareTypeString, out CookwareType parsedType))
@@ -334,38 +318,10 @@ public class JsonToScriptableConverter : EditorWindow
                 dishSO.dishName = dishData.dishName;
                 dishSO.nameEng = dishData.nameEng;
 
-                if(dishData.ingredientOne == null)
-                {
-                    dishSO.ingredientIds.Add(-1);
-                }
-                else 
-                {          
-                    dishSO.ingredientIds.Add(dishData.ingredientOne.Value);
-                }
-                if (dishData.ingredientTwo == null)
-                {
-                    dishSO.ingredientIds.Add(-1);
-                }
-                else
-                {
-                    dishSO.ingredientIds.Add(dishData.ingredientTwo.Value);
-                }
-                if (dishData.ingredientThree == null)
-                {
-                    dishSO.ingredientIds.Add(-1);
-                }
-                else
-                {
-                    dishSO.ingredientIds.Add(dishData.ingredientThree.Value);
-                }
-                if (dishData.ingredientFour == null)
-                {
-                    dishSO.ingredientIds.Add(-1);
-                }
-                else
-                {
-                    dishSO.ingredientIds.Add(dishData.ingredientFour.Value);
-                }
+                dishSO.ingredientIds.Add(dishData.ingredientOne);
+                dishSO.ingredientIds.Add(dishData.ingredientTwo);
+                dishSO.ingredientIds.Add(dishData.ingredientThree);
+                dishSO.ingredientIds.Add(dishData.ingredientFour);
 
                 dishSO.score = dishData.score;
 

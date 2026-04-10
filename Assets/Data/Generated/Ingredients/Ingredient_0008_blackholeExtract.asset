@@ -17,7 +17,7 @@ MonoBehaviour:
   nameEng: blackholeExtract
   isCutable: 0
   isRawPlatable: 0
-  icon: {fileID: 21300000, guid: feecdefc778459f46b82ce5e0fa7eb66, type: 3}
+  icon: {fileID: 21300000, guid: 16109ccaa8e980c4da13c7ce62e5d8aa, type: 3}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}
   cookingModel: {fileID: 0}

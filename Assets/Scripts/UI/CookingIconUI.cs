@@ -6,7 +6,7 @@ public class CookingIconUI : MonoBehaviour
 {
     public Image[] slots; // 최대 4칸
 
-    public void UpdateUI(int?[] currentIds)
+    public void UpdateUI(List<int> currentIds)
     {
         if (DataManager.instance == null) return;
 
@@ -16,12 +16,12 @@ public class CookingIconUI : MonoBehaviour
         List<Sprite> sprites = new List<Sprite>();
 
         // 데이터 펼치기
-        for (int i = 0; i < currentIds.Length; i++)
+        for (int i = 0; i < currentIds.Count; i++)
         {
-            if (!currentIds[i].HasValue)
+            if (currentIds[i] < 0)
                 continue;
 
-            int id = currentIds[i].Value;
+            int id = currentIds[i];
 
             // 재료
             if (id < 100)

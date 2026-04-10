@@ -8,10 +8,10 @@ public class DishData
     public string dishName;
     public string nameEng;
 
-    public int? ingredientOne;
-    public int? ingredientTwo;
-    public int? ingredientThree;
-    public int? ingredientFour;
+    public int ingredientOne;
+    public int ingredientTwo;
+    public int ingredientThree;
+    public int ingredientFour;
 
     public int score;
     public string cookwareTypeString;
@@ -21,7 +21,7 @@ public class DishData
     public string iconPath;
     public string modelPath;
 
-    // ë¬¸ìì—´ì„ ì—´ê±°í˜•ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” ë©”ì„œë“œ
+    // ¹®ÀÚ¿­À» ¿­°ÅÇüÀ¸·Î º¯È¯ÇÏ´Â ¸Ş¼­µå
     public void InitalizeEnums()
     {
         if (Enum.TryParse(cookwareTypeString, out CookwareType parsedType))
@@ -30,7 +30,7 @@ public class DishData
         }
         else
         {
-            Debug.LogError($"ì•„ì´í…œ '{cookwareType}'ì— ìœ íš¨í•˜ì§€ ì•Šì€ ì•„ì´í…œ íƒ€ì… : {cookwareTypeString}");
+            Debug.LogError($"¾ÆÀÌÅÛ '{cookwareType}'¿¡ À¯È¿ÇÏÁö ¾ÊÀº ¾ÆÀÌÅÛ Å¸ÀÔ : {cookwareTypeString}");
         }
     }
 }

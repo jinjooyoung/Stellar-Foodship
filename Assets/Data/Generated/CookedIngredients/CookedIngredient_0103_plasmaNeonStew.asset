@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fdee23e5a660e64896814b613398e6b, type: 3}
-  m_Name: CookedIngredient_0103 + plasmaNeonStew
+  m_Name: CookedIngredient_0103_plasmaNeonStew
   m_EditorClassIdentifier: Assembly-CSharp::CookedIngredientSO
   id: 103
   cookedIngredientName: "\uD50C\uB77C\uC988\uB9C8 \uB124\uC628 \uC18C\uC2A4"
   nameEng: plasmaNeonStew
+  ingredientIds: ffffffff000000000200000003000000
   cookwareType: 1
+  cookTypeIcon: {fileID: 21300000, guid: 8831672aff4be0b4b865e329eef2780d, type: 3}
   icon: {fileID: 21300000, guid: 3b334ed9a1c02d747bf06086597feea3, type: 3}
   model: {fileID: 0}

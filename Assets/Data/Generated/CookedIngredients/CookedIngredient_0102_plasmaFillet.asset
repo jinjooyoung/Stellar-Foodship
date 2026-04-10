@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fdee23e5a660e64896814b613398e6b, type: 3}
-  m_Name: CookedIngredient_0102 + plasmaFillet
+  m_Name: CookedIngredient_0102_plasmaFillet
   m_EditorClassIdentifier: Assembly-CSharp::CookedIngredientSO
   id: 102
   cookedIngredientName: "\uC6B0\uC8FC \uD544\uB808"
   nameEng: plasmaFillet
+  ingredientIds: ffffffffffffffffffffffff02000000
   cookwareType: 2
+  cookTypeIcon: {fileID: 21300000, guid: 6abd7746e839de94d96b651a49b0c4a6, type: 3}
   icon: {fileID: 21300000, guid: fccabf0d1bf4f7f439502dc9f232804f, type: 3}
   model: {fileID: 0}

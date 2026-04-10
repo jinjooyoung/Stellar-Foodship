@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class Cookware : Pickable
     [Header("Cooking Settings")]
     public int resultId; 
     public CookwareType cookwareType;
-    public int?[] currentIngredientIds = new int?[4];
+    public List<int> currentIngredientIds = new List<int>();
     public Timer timer;
     public CookingIconUI cookingIconUI;
     public bool isComplete;
@@ -73,15 +74,15 @@ public class Cookware : Pickable
     private void AddIngredient(Player player, Ingredient ingredient)
     {
         
-        if (!currentIngredientIds.Any(id => id == null))
+        if (!currentIngredientIds.Any(id => id == -1))
         {
             Debug.Log("조리 도구가 이미 가득 찼습니다");
             return;
         }
 
-        for (int i = 0; i < currentIngredientIds.Length; i++)
+        for (int i = 0; i < currentIngredientIds.Count; i++)
         {
-            if (currentIngredientIds[i] == null)
+            if (currentIngredientIds[i] == -1)
             {
                 currentIngredientIds[i] = ingredient.ingredientID;
                 break;
@@ -107,11 +108,11 @@ public class Cookware : Pickable
         };
     }
 
-    public bool HasAnyValue(int?[] arr)
+    public bool HasAnyValue(List<int> list)
     {
-        for(int i = 0;i < arr.Length; i++)
+        for(int i = 0; i < list.Count; i++)
         {
-            if (arr[i].HasValue)
+            if (list[i] >= 0)
                 return true;
         }
         return false;
@@ -126,9 +127,9 @@ public class Cookware : Pickable
 
     public void ClearIds()
     {
-        for (int i = 0; i < currentIngredientIds.Length; i++)
+        for (int i = 0; i < currentIngredientIds.Count; i++)
         {
-            currentIngredientIds[i] = null;
+            currentIngredientIds[i] = -1;
         }
         isComplete = false;
         isBurnt = false;

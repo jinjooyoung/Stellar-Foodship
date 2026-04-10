@@ -17,7 +17,7 @@ MonoBehaviour:
   nameEng: lavaSauce
   isCutable: 0
   isRawPlatable: 1
-  icon: {fileID: 21300000, guid: 6d5cf51701ef8f840a7f01212972aedc, type: 3}
+  icon: {fileID: 21300000, guid: 605cac3322cd6c94889eebfe95a7b531, type: 3}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}
   cookingModel: {fileID: 0}

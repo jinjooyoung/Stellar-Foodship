@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fdee23e5a660e64896814b613398e6b, type: 3}
-  m_Name: CookedIngredient_0106 + starCreamRisotto
+  m_Name: CookedIngredient_0106_starCreamRisotto
   m_EditorClassIdentifier: Assembly-CSharp::CookedIngredientSO
   id: 106
   cookedIngredientName: "\uBCC4\uBE5B \uD06C\uB9BC \uBCA0\uC774\uC2A4"
   nameEng: starCreamRisotto
+  ingredientIds: ffffffffffffffff0600000009000000
   cookwareType: 2
+  cookTypeIcon: {fileID: 21300000, guid: 6abd7746e839de94d96b651a49b0c4a6, type: 3}
   icon: {fileID: 21300000, guid: d90d732549c57be4b83c19def085696d, type: 3}
   model: {fileID: 0}

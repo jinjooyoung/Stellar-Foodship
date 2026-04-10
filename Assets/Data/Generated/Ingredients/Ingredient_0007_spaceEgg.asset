@@ -17,7 +17,7 @@ MonoBehaviour:
   nameEng: spaceEgg
   isCutable: 0
   isRawPlatable: 0
-  icon: {fileID: 21300000, guid: 07b2d17f729996348825966a1d679929, type: 3}
+  icon: {fileID: 21300000, guid: e1a30379d6ef9bc4b8d07eeeec5ee0ac, type: 3}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}
   cookingModel: {fileID: 0}

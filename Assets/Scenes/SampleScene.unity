@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
   ingredientDatabase: {fileID: 11400000, guid: 5f23ea7054dc31b4d85c41fdd2dacf67, type: 2}
-  cookedIngredientDatabase: {fileID: 11400000, guid: 12c50d686c47f8248b283cf954c9edfc, type: 2}
+  cookedIngredientDatabase: {fileID: 11400000, guid: 1cb96b76a1ddab14db6417311d3c5077, type: 2}
   dishDatabase: {fileID: 11400000, guid: f33a519af49494d4aafb3b91118a3662, type: 2}
   achievementDatabase: {fileID: 11400000, guid: c64a672ef78e45147ac2eb12fdedb6a4, type: 2}
   soundDatabase: {fileID: 11400000, guid: b0800990fc92c4342925bbdba47d7a85, type: 2}

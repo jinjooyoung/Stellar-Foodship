@@ -17,7 +17,7 @@ MonoBehaviour:
   nameEng: neonJelly
   isCutable: 1
   isRawPlatable: 1
-  icon: {fileID: 21300000, guid: fac027aa85a3b134da1a4a0d0750fcf7, type: 3}
+  icon: {fileID: 21300000, guid: ac87849d9b523144db72170dd1a834e5, type: 3}
   basicModel: {fileID: 3683028061234011040, guid: 9d23a0ba97ddfe94bb50bf68240a5a16, type: 3}
   cutModel: {fileID: 0}
   cookingModel: {fileID: 0}

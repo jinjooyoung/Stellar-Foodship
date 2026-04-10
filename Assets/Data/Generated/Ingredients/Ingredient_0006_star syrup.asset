@@ -17,7 +17,7 @@ MonoBehaviour:
   nameEng: star syrup
   isCutable: 0
   isRawPlatable: 1
-  icon: {fileID: 21300000, guid: 8f13fcd0400cbd0439eeb2c41929bf34, type: 3}
+  icon: {fileID: 21300000, guid: a72f4f1b1876d544a8160c26720faf71, type: 3}
   basicModel: {fileID: 0}
   cutModel: {fileID: 0}
   cookingModel: {fileID: 0}

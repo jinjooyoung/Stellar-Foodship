@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fdee23e5a660e64896814b613398e6b, type: 3}
-  m_Name: CookedIngredient_0107 + lavaBlackholeSteam
+  m_Name: CookedIngredient_0107_lavaBlackholeSteam
   m_EditorClassIdentifier: Assembly-CSharp::CookedIngredientSO
   id: 107
   cookedIngredientName: "\uC6A9\uC554 \uBE14\uB799\uD640 \uC18C\uC2A4"
   nameEng: lavaBlackholeSteam
+  ingredientIds: ffffffffffffffff0500000008000000
   cookwareType: 2
+  cookTypeIcon: {fileID: 21300000, guid: 6abd7746e839de94d96b651a49b0c4a6, type: 3}
   icon: {fileID: 21300000, guid: b940621984c9b324a952b5685913d9c1, type: 3}
   model: {fileID: 0}

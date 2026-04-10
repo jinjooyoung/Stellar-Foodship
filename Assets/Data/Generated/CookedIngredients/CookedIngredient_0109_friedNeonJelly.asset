@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fdee23e5a660e64896814b613398e6b, type: 3}
-  m_Name: CookedIngredient_0109 + friedNeonJelly
+  m_Name: CookedIngredient_0109_friedNeonJelly
   m_EditorClassIdentifier: Assembly-CSharp::CookedIngredientSO
   id: 109
   cookedIngredientName: "\uB124\uC628 \uD574\uD30C\uB9AC\uD280\uAE40"
   nameEng: friedNeonJelly
+  ingredientIds: ffffffffffffffff0300000009000000
   cookwareType: 0
+  cookTypeIcon: {fileID: 21300000, guid: c06127200d0603544a6285d2a590812d, type: 3}
   icon: {fileID: 21300000, guid: 78784cf7c12d8eb45a24eb5201b657a6, type: 3}
   model: {fileID: 0}

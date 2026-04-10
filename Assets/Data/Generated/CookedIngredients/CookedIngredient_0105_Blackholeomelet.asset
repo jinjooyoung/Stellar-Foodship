@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fdee23e5a660e64896814b613398e6b, type: 3}
-  m_Name: CookedIngredient_0105 + Blackholeomelet
+  m_Name: CookedIngredient_0105_Blackholeomelet
   m_EditorClassIdentifier: Assembly-CSharp::CookedIngredientSO
   id: 105
   cookedIngredientName: "\uBE14\uB799\uD640 \uC9C0\uB2E8"
   nameEng: Blackholeomelet
+  ingredientIds: ffffffffffffffff0700000008000000
   cookwareType: 0
+  cookTypeIcon: {fileID: 21300000, guid: c06127200d0603544a6285d2a590812d, type: 3}
   icon: {fileID: 21300000, guid: a09dbff8e7defa44a81917e4fd27f44a, type: 3}
   model: {fileID: 0}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Dish : Pickable
 
     [Header("Dish Settings")]
     public int resultId;                                // 완성품 id
-    [SerializeField] public int?[] currentIngredientIds = new int?[4];  // 갖고있는 재료, 1차 조리품 id 배열
+    public List<int> currentIngredientIds = new List<int>();
     public CookingIconUI cookingIconUI;
 
     public override int ID => resultId;
@@ -108,7 +109,7 @@ public class Dish : Pickable
         Debug.Log("AddIngredientDish 호출됨");
 
         // 접시가 이미 가득 찼으면
-        if (!currentIngredientIds.Any(x => x == null))
+        if (currentIngredientIds.Count >= 4)
         {
             Debug.Log("접시가 이미 가득 차서 넣을 수 없습니다!");
             return;
@@ -117,15 +118,7 @@ public class Dish : Pickable
         Debug.Log("빈 자리 있음");
 
         // 빈 자리에 재료 id 넣기
-        for (int i = 0; i < currentIngredientIds.Length; i++)
-        {
-            if (currentIngredientIds[i] == null)
-            {
-                currentIngredientIds[i] = heldItem.ID;
-                Debug.Log($"ID {heldItem.ID} 넣음");
-                break;
-            }
-        }
+        currentIngredientIds.Add(heldItem.ID);
 
         // UI 업데이트
         Debug.Log("UI 업데이트");

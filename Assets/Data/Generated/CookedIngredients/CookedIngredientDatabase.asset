@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: CookedIngredientDatabase
   m_EditorClassIdentifier: Assembly-CSharp::CookedIngredientDatabaseSO
   cookedIngredients:
-  - {fileID: 11400000, guid: b048410c018c72341a969f5bae38d057, type: 2}
-  - {fileID: 11400000, guid: b07f89c1c05a82d4b977b21e4013da19, type: 2}
-  - {fileID: 11400000, guid: 0358cd6ee7e88c04f9da3413d21d5016, type: 2}
-  - {fileID: 11400000, guid: 1a21292eaa5f4024daa320bbd3aeab23, type: 2}
-  - {fileID: 11400000, guid: ccf24b2f25743eb4bb54d53ffa72848d, type: 2}
-  - {fileID: 11400000, guid: 2e5cc8015efd3914d9939b5cb583dce4, type: 2}
-  - {fileID: 11400000, guid: 268e4254d43aa294ba2ffd5ce75664aa, type: 2}
-  - {fileID: 11400000, guid: b1d80df557cbf774b873b1ca07a32a34, type: 2}
-  - {fileID: 11400000, guid: 2aa841701bcfcac4392ae6872996892d, type: 2}
-  - {fileID: 11400000, guid: e7d453280af948f46a60838a1d9b4f0c, type: 2}
+  - {fileID: 11400000, guid: 60e2b9a56bf9b14478b639aaac79e209, type: 2}
+  - {fileID: 11400000, guid: 9ae1c416a7327ea48afb3fe1d1ceaa5e, type: 2}
+  - {fileID: 11400000, guid: 5fcb3b00b8f4f474fabd467eadef2062, type: 2}
+  - {fileID: 11400000, guid: 1e3d0a2113a227843a7c5e1e250c386c, type: 2}
+  - {fileID: 11400000, guid: 6591851f24b05b147953dfce2e1fc9b8, type: 2}
+  - {fileID: 11400000, guid: 681d14f6a8df2db4289e954ae0ef4c72, type: 2}
+  - {fileID: 11400000, guid: 6540fcb127bfe074ba27c6d5a8171279, type: 2}
+  - {fileID: 11400000, guid: 588ca7d8850a49f4b93e022c54f18911, type: 2}
+  - {fileID: 11400000, guid: 523bb4727b8505048be7bb5ee9aa2894, type: 2}
+  - {fileID: 11400000, guid: 0a0b01819e2b8914c89de113ee4a7392, type: 2}
