@@ -6,19 +6,24 @@ public class OrderUIManager : MonoBehaviour
     [Header("[참조]")]
     [SerializeField] private GameObject orderUIPrefab;
     [SerializeField] private Transform uiParent;
+    public OrderManager manager;
     [Header("[런타임]")]
     [SerializeField] private List<OrderUI> orderUIs = new List<OrderUI>();
 
-    public void CreateOrderUI(Order order, DishSO dish, OrderManager manager)
+    public void CreateOrderUI(Order order, DishSO dish)
     {
+        // 생성
         GameObject obj = Instantiate(orderUIPrefab, uiParent);
+
+        // 위치 보정
+        obj.transform.localPosition = Vector3.zero;
+
         OrderUI ui = obj.GetComponent<OrderUI>();
         if (ui != null)
         {
-            ui.Init(dish.id, order);
+            ui.Init(dish.id, order, manager);
             orderUIs.Add(ui);
             ui.timer.StartTimer(order.timeLimit);
-            ui.timer.OnCompleted += () => { manager.FailOrder(order); };
         }
     }
 

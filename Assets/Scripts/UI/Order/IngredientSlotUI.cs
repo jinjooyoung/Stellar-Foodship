@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// UI 구조 바꿔서 이제는 필요없는 스크립트인데 혹시 모르니 일단 냅둠
 public class IngredientSlotUI : MonoBehaviour
 {
     [Header("UI 오브젝트")]

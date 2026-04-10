@@ -196,7 +196,7 @@ MonoBehaviour:
   orderSpawnInterval: 5
   maxOrderCount: 5
   minOrderId: 201
-  maxOrderId: 209
+  maxOrderId: 201
   penaltyScore: -50
   stageTimeLimit: 180
   ingreTime: 30
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
   ingredientDatabase: {fileID: 11400000, guid: 5f23ea7054dc31b4d85c41fdd2dacf67, type: 2}
   cookedIngredientDatabase: {fileID: 11400000, guid: 12c50d686c47f8248b283cf954c9edfc, type: 2}
-  dishDatabase: {fileID: 11400000, guid: 20fffeca572e94146ad31663b5943778, type: 2}
+  dishDatabase: {fileID: 11400000, guid: f33a519af49494d4aafb3b91118a3662, type: 2}
   achievementDatabase: {fileID: 11400000, guid: c64a672ef78e45147ac2eb12fdedb6a4, type: 2}
   soundDatabase: {fileID: 11400000, guid: b0800990fc92c4342925bbdba47d7a85, type: 2}
 --- !u!4 &1681933485
@@ -1526,8 +1526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e5e234f8e096043a4f6659ed366cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrderUIManager
-  orderUIPrefab: {fileID: 0}
-  uiParent: {fileID: 0}
+  orderUIPrefab: {fileID: 8464748212342352664, guid: d4c88391887cce245952227255e8bf75, type: 3}
+  uiParent: {fileID: 125116524}
+  manager: {fileID: 1325330658}
   orderUIs: []
 --- !u!4 &1771054205
 Transform:
@@ -1624,6 +1625,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1007556528}
     m_Modifications:
+    - target: {fileID: 276953852170922004, guid: e60a15dd09d5a0e4891aa97446b4a905, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 276953852170922004, guid: e60a15dd09d5a0e4891aa97446b4a905, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1671772551}
     - target: {fileID: 472711402622093270, guid: e60a15dd09d5a0e4891aa97446b4a905, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1706,7 +1715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1434013893622286303, guid: e60a15dd09d5a0e4891aa97446b4a905, type: 3}
       propertyPath: m_Name
-      value: LayoutGroup
+      value: PanGroup
       objectReference: {fileID: 0}
     - target: {fileID: 1434013893622286303, guid: e60a15dd09d5a0e4891aa97446b4a905, type: 3}
       propertyPath: m_IsActive

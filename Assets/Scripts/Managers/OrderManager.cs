@@ -72,7 +72,7 @@ public class OrderManager : MonoBehaviour
         orders.Add(order);
 
         // UI 생성
-        uiManager.CreateOrderUI(order, dish, this);
+        uiManager.CreateOrderUI(order, dish);
     }
 
     //====================================주문 완료====================================
