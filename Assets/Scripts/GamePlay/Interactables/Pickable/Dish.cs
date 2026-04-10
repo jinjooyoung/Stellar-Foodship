@@ -11,6 +11,11 @@ public class Dish : Pickable
 
     public override int ID => resultId;
 
+    private void Start()
+    {
+        cookingIconUI.UpdateUI(currentIngredientIds);
+    }
+
     //====================================Interact====================================
 
     public override void Interact(Player player)
