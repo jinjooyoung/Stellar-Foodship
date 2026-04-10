@@ -62,7 +62,7 @@ public class Dish : Pickable
                 Debug.Log("조리도구 케이스 진입");
 
                 // 조리도구가 비어있으면
-                if (!cookware.HasAnyValue(cookware.currentIngredientIds))
+                if (cookware.currentIngredientIds.Count == 0)
                 {
                     Debug.Log("조리도구가 비어있습니다.");
                     return;
@@ -117,7 +117,7 @@ public class Dish : Pickable
 
         Debug.Log("빈 자리 있음");
 
-        // 빈 자리에 재료 id 넣기
+        // 재료 id 넣기
         currentIngredientIds.Add(heldItem.ID);
 
         // UI 업데이트

@@ -74,20 +74,13 @@ public class Cookware : Pickable
     private void AddIngredient(Player player, Ingredient ingredient)
     {
         
-        if (!currentIngredientIds.Any(id => id == -1))
+        if (currentIngredientIds.Count >= 4)
         {
             Debug.Log("조리 도구가 이미 가득 찼습니다");
             return;
         }
+        currentIngredientIds.Add(ingredient.ID);
 
-        for (int i = 0; i < currentIngredientIds.Count; i++)
-        {
-            if (currentIngredientIds[i] == -1)
-            {
-                currentIngredientIds[i] = ingredient.ingredientID;
-                break;
-            }
-        }
         visualObject.SetActive(true);
         cookingIconUI.UpdateUI(currentIngredientIds);
 
@@ -108,16 +101,6 @@ public class Cookware : Pickable
         };
     }
 
-    public bool HasAnyValue(List<int> list)
-    {
-        for(int i = 0; i < list.Count; i++)
-        {
-            if (list[i] >= 0)
-                return true;
-        }
-        return false;
-    }
-
     public void OnCookingComplete()
     {
         isComplete = true;
@@ -127,10 +110,7 @@ public class Cookware : Pickable
 
     public void ClearIds()
     {
-        for (int i = 0; i < currentIngredientIds.Count; i++)
-        {
-            currentIngredientIds[i] = -1;
-        }
+        currentIngredientIds.Clear();
         isComplete = false;
         isBurnt = false;
         checkImage.SetActive(false);

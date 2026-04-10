@@ -46,24 +46,12 @@ public class OrderManager : MonoBehaviour
         // 데이터매니저에서 요리SO 가져오기
         DishSO dish = DataManager.instance.dishDatabase.GetDishById(id);
         if (dish == null) return;
-        if (dish.ingredientIds == null) return;
+        if (dish.ingredientIds == null || dish.ingredientIds.Count == 0) return;
 
-        int?[] ingredientIds = new int?[dish.ingredientIds.Count];
-
-        for (int i = 0; i < dish.ingredientIds.Count; i++)
-        {
-            if(dish.ingredientIds[i] != -1)
-            {
-                ingredientIds[i] = dish.ingredientIds[i];
-            }
-            else
-            {
-                ingredientIds[i] = null;
-            }            
-        }
+        List<int> recipe = dish.ingredientIds;
 
         // 제한 시간 계산
-        float timeLimit = CalculateTimeLimit(ingredientIds);
+        float timeLimit = CalculateTimeLimit(recipe);
 
         // 주문 생성
         Order order = new Order();
@@ -151,13 +139,13 @@ public class OrderManager : MonoBehaviour
         return min;
     }
 
-    float CalculateTimeLimit(int?[] input)
+    float CalculateTimeLimit(List<int> list)
     {
         float time = 0f;
 
-        foreach (var id in input)
+        foreach (var id in list)
         {
-            if (!id.HasValue) continue;
+            if (id < 0) continue;
 
             if (id < 100)
             {
