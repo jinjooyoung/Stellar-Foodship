@@ -84,7 +84,20 @@ public static class CookingSystem
 
         foreach (var data in db.dishes)
         {
-            int[] recipe = FilterNull(data.ingredientIds);
+            int?[] ingredientIds = new int?[4];
+            for (int i = 0; i < data.ingredientIds.Count; i++)
+            {
+                if (data.ingredientIds[i] == -1)
+                {
+                    ingredientIds[i] = null;
+                }
+                else
+                {
+                    ingredientIds[i] = data.ingredientIds[i];
+                }
+            }
+
+            int[] recipe = FilterNull(ingredientIds);
 
             if (IsMatch(input, recipe, inputType, data.cookwareType))
             {

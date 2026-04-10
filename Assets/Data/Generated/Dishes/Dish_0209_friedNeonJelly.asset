@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 209
   dishName: "\uB124\uC628 \uD574\uD30C\uB9AC\uD280\uAE40"
   nameEng: friedNeonJelly
+  ingredientIds: ffffffffffffffffffffffff6d000000
   score: 30
   cookwareType: 5
   icon: {fileID: 0}

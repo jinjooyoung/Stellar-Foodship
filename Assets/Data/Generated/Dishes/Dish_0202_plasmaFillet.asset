@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 202
   dishName: "\uC6B0\uC8FC \uD544\uB808"
   nameEng: plasmaFillet
+  ingredientIds: ffffffffffffffffffffffff66000000
   score: 20
   cookwareType: 5
   icon: {fileID: 0}

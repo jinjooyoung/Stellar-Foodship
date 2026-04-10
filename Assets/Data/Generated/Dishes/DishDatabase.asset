@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: DishDatabase
   m_EditorClassIdentifier: Assembly-CSharp::DishDatabaseSO
   dishes:
-  - {fileID: 11400000, guid: 9c5e05c881d82684f85d0ae742f1e8d4, type: 2}
-  - {fileID: 11400000, guid: cee73f8e843f0c04e970425fdf1e077a, type: 2}
-  - {fileID: 11400000, guid: f4c2128b03230174fb1ea8a5f10821bd, type: 2}
-  - {fileID: 11400000, guid: a165cde06a7a6054c83be5b6a5d1c56c, type: 2}
-  - {fileID: 11400000, guid: 5cdb634536503264291ab10ff5e7a979, type: 2}
-  - {fileID: 11400000, guid: c61f393853db9e84dbffb7ece25aca16, type: 2}
-  - {fileID: 11400000, guid: d532a1858dad4584a8303ed8e15bbac2, type: 2}
-  - {fileID: 11400000, guid: d510be3291089fb4194d9626e00892f1, type: 2}
-  - {fileID: 11400000, guid: b2f529d6df7bceb478a48d25cc3489ef, type: 2}
-  - {fileID: 11400000, guid: e9a3ac166167f4f4aa0327147dc51a82, type: 2}
+  - {fileID: 11400000, guid: 6310fde432f138c489532a88553d8495, type: 2}
+  - {fileID: 11400000, guid: dad532dd15542a940a19c1cbcddab797, type: 2}
+  - {fileID: 11400000, guid: b67d3e1c57c64bd4e87b8ffe45ea1c67, type: 2}
+  - {fileID: 11400000, guid: 0f24a349f17ab864ba77ef0149a02845, type: 2}
+  - {fileID: 11400000, guid: deec8038c979348409a3800e1fc4c7fe, type: 2}
+  - {fileID: 11400000, guid: c5246526f716f014bbf8bd5e22991856, type: 2}
+  - {fileID: 11400000, guid: 3796ea1f4118d3f4d88c329e85613cd5, type: 2}
+  - {fileID: 11400000, guid: cf9b069e458e02442af28e1c0049d1ad, type: 2}
+  - {fileID: 11400000, guid: 794744a3525e2e443b3b8c9d27711d6b, type: 2}
+  - {fileID: 11400000, guid: 6e8cc09fdda71ea4daaa0d212eb901f2, type: 2}

@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 208
   dishName: "\uCF54\uC2A4\uBBF9 \uB36E\uBC25"
   nameEng: cosmicRiceBowl
+  ingredientIds: ffffffff65000000660000006c000000
   score: 100
   cookwareType: 5
   icon: {fileID: 0}

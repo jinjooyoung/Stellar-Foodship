@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class DishSO : ScriptableObject
     public int id;
     public string dishName;
     public string nameEng;
-    public int?[] ingredientIds;
+    public List<int> ingredientIds = new List<int>();
     public int score;
 
     public CookwareType cookwareType;

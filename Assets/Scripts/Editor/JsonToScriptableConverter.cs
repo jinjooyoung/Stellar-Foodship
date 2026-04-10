@@ -334,14 +334,38 @@ public class JsonToScriptableConverter : EditorWindow
                 dishSO.dishName = dishData.dishName;
                 dishSO.nameEng = dishData.nameEng;
 
-                int?[] ingredientIds = new int?[4];
-
-                ingredientIds[0] = dishData.ingredientOne;
-                ingredientIds[1] = dishData.ingredientTwo;
-                ingredientIds[2] = dishData.ingredientThree;
-                ingredientIds[3] = dishData.ingredientFour;
-
-                dishSO.ingredientIds = ingredientIds;
+                if(dishData.ingredientOne == null)
+                {
+                    dishSO.ingredientIds.Add(-1);
+                }
+                else 
+                {          
+                    dishSO.ingredientIds.Add(dishData.ingredientOne.Value);
+                }
+                if (dishData.ingredientTwo == null)
+                {
+                    dishSO.ingredientIds.Add(-1);
+                }
+                else
+                {
+                    dishSO.ingredientIds.Add(dishData.ingredientTwo.Value);
+                }
+                if (dishData.ingredientThree == null)
+                {
+                    dishSO.ingredientIds.Add(-1);
+                }
+                else
+                {
+                    dishSO.ingredientIds.Add(dishData.ingredientThree.Value);
+                }
+                if (dishData.ingredientFour == null)
+                {
+                    dishSO.ingredientIds.Add(-1);
+                }
+                else
+                {
+                    dishSO.ingredientIds.Add(dishData.ingredientFour.Value);
+                }
 
                 dishSO.score = dishData.score;
 

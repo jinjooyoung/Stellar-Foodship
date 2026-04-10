@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 203
   dishName: "\uD50C\uB77C\uC988\uB9C8 \uB124\uC628 \uC2A4\uD29C"
   nameEng: plasmaNeonStew
+  ingredientIds: ffffffffffffffffffffffff67000000
   score: 80
   cookwareType: 5
   icon: {fileID: 0}

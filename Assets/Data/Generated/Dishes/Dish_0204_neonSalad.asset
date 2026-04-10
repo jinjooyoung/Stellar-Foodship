@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 204
   dishName: "\uB124\uC628 \uC0D0\uB7EC\uB4DC"
   nameEng: neonSalad
+  ingredientIds: ffffffffffffffffffffffff68000000
   score: 80
   cookwareType: 5
   icon: {fileID: 0}

@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 201
   dishName: "\uC678\uACC4 \uC0B4\uC0AC"
   nameEng: alienSalsa
+  ingredientIds: ffffffffffffffffffffffff65000000
   score: 30
   cookwareType: 5
   icon: {fileID: 0}
