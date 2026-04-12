@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class InteractionFinder : MonoBehaviour
 {
@@ -58,7 +57,7 @@ public class InteractionFinder : MonoBehaviour
     }
 
     // 인식 범위, 기준점 인식 기즈모
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         if (playerTransform == null) return;
 
@@ -76,11 +75,11 @@ public class InteractionFinder : MonoBehaviour
         // 색상 설정
         Gizmos.color = hasInteractable ? Color.green : Color.red;
 
-        /*// 반투명 채우기
+        *//*// 반투명 채우기
         Color fillColor = Gizmos.color;
         fillColor.a = 0.2f;
         Gizmos.color = fillColor;
-        Gizmos.DrawSphere(playerTransform.position, radius);*/
+        Gizmos.DrawSphere(playerTransform.position, radius);*//*
 
         // 테두리
         Gizmos.color = hasInteractable ? Color.green : Color.red;
@@ -95,5 +94,5 @@ public class InteractionFinder : MonoBehaviour
             // 방향선 (선택사항, 있으면 더 좋음)
             Gizmos.DrawLine(playerTransform.position, targetTransform.position);
         }
-    }
+    }*/
 }

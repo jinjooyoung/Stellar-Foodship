@@ -137,13 +137,12 @@ public class Dish : Pickable
         {
             // 재료면 오브젝트 파괴
             Destroy(pickable.gameObject);
+            player.heldItem = null;
         }
         else if (pickable is Cookware cookware)
         {
             // 조리도구면 배열 초기화
             cookware.ClearIds();
         }
-
-        player.heldItem = null;
     }
 }

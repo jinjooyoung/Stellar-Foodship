@@ -110,6 +110,7 @@ public class Cookware : Pickable
 
     public void ClearIds()
     {
+        resultId = -1;
         currentIngredientIds.Clear();
         isComplete = false;
         isBurnt = false;

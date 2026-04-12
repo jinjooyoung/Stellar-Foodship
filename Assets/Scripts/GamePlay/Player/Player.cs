@@ -1,4 +1,3 @@
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public enum PlayerState
@@ -81,12 +80,12 @@ public class Player : MonoBehaviour
     // => 로그에 너무 많이 떠서 한번만 출력하도록 바꿔놨습니다. 
     // 주석 처리 한게 원본 Update코드입니다.
 
-    private object lastHeldItem = null;
-    private object lastTarget = null;
+    /*private object lastHeldItem = null;
+    private object lastTarget = null;*/
 
     void Update()
     {
-        if (heldItem != lastHeldItem)
+        /*if (heldItem != lastHeldItem)
         {
             Debug.Log($"플레이어 heldItem : {heldItem?.ToString()}");
             lastHeldItem = heldItem;
@@ -95,7 +94,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log($"플레이어 target : {target?.ToString()}");
             lastTarget = target;
-        }
+        }*/
 
         targetUpdateTimer += Time.deltaTime;
         if (targetUpdateTimer >= targetUpdateInterval)
