@@ -18,6 +18,9 @@ public class LevelManager : MonoBehaviour
     public float ingreTime = 30f;           // 재료 1개당 추가 시간
     public float cookedIngreTime = 60f;     // 1차 조리품 1개당 추가 시간
 
+    [Header("접시 설정")]
+    public int maxDishCount = 5;            // 맵에 존재할 수 있는 최대 접시 수
+
     void Awake()
     {
         if (Instance == null) Instance = this;
