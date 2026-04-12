@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411187086414618526}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.017, y: 1.07, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   stationType: 0
   cookTime: 5
   currentCookware: {fileID: 0}
+  _canPlace: 1
 --- !u!1 &3640842145771860781
 GameObject:
   m_ObjectHideFlags: 0

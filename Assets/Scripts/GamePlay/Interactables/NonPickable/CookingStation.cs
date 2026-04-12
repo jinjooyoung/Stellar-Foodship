@@ -7,6 +7,9 @@ public class CookingStation : NonPickable
     public float cookTime = 5f;
     public Cookware currentCookware;
 
+    public bool _canPlace;
+    public override bool canPlace => _canPlace;
+
     private void Awake()
     {
         currentCookware = null;

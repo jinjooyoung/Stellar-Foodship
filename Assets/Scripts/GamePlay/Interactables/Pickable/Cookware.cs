@@ -63,7 +63,8 @@ public class Cookware : Pickable
         Debug.Log($"조리도구 넣기 가능 여부 : {canAdd.ToString()}");
         if (canAdd)
         {
-            AddIngredient(player, ingredient);
+            AddIngredient(ingredient);
+            player.heldItem = null;
         }
         else
         {
@@ -71,7 +72,7 @@ public class Cookware : Pickable
         }
     }
 
-    private void AddIngredient(Player player, Ingredient ingredient)
+    public void AddIngredient(Ingredient ingredient)
     {
         
         if (currentIngredientIds.Count >= 4)
@@ -85,7 +86,6 @@ public class Cookware : Pickable
         cookingIconUI.UpdateUI(currentIngredientIds);
 
         Destroy(ingredient.gameObject);
-        player.heldItem = null;
     }
 
     public StationType GetRequiredStation()

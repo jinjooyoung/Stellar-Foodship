@@ -367,7 +367,13 @@ public class Player : MonoBehaviour
     public void Throw()
     {
         Debug.Log("플레이어 Throw 호출");
-        // 던지기 기능 구현
+
+        if (heldItem == null) return;
+
+        Pickable item = heldItem;
+        heldItem = null;
+
+        item.OnThrown(lastInputDirection, throwForce);
     }
 
     //=========================================================================

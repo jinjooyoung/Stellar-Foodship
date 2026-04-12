@@ -3,12 +3,14 @@ using UnityEngine;
 public class DishSubmissionCounter : NonPickable
 {
     [Header("참조")]
-    
     [SerializeField] private OrderManager orderManager;
 
-  
-    
-   
+    public bool _canPlace;
+    public override bool canPlace => _canPlace;
+
+
+
+
     public override void Interact(Player player)
     {
    
@@ -28,11 +30,9 @@ public class DishSubmissionCounter : NonPickable
 
       
         int resultId = CookingSystem.GetDishId(dish.currentIngredientIds, CookwareType.Plate);
-
       
-        bool success = orderManager.TrySubmitDish(resultId);
+        bool success = ClearSubmitDish(resultId);
 
-       
         if (success)
         {
             Debug.Log("주문 성공");
@@ -45,6 +45,11 @@ public class DishSubmissionCounter : NonPickable
         Destroy(dish.cookingIconUI.gameObject);
         Destroy(dish.gameObject);
         player.heldItem = null;
+    }
+
+    public bool ClearSubmitDish(int id)
+    {
+        return orderManager.TrySubmitDish(id);
     }
 
    

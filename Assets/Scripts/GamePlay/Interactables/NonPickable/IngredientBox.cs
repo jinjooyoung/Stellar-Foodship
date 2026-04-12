@@ -8,6 +8,9 @@ public class IngredientBox : NonPickable
     [SerializeField] private IngredientDatabaseSO database;
     [SerializeField] private GameObject ingredientBasePrefab;
 
+    public bool _canPlace;
+    public override bool canPlace => _canPlace;
+
     private void Start()
     {
         if (DataManager.instance != null)

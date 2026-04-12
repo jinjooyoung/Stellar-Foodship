@@ -4,6 +4,7 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
 {
     public Pickable heldItem;
     public Transform holdPoint;
+    public abstract bool canPlace { get; }
 
     /*void Awake()
     {

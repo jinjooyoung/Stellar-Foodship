@@ -9,6 +9,9 @@ public class CuttingBoard : NonPickable
 
     private Player currentInteractingPlayer;    // 현재 썰고 있는 플레이어
 
+    public bool _canPlace;
+    public override bool canPlace => _canPlace;
+
     void Awake()
     {
         if (timer == null)
