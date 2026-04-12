@@ -1,10 +1,12 @@
 using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     [Header("현재 점수")]
     public int score;
+    public TextMeshProUGUI scoreText;
 
     [Header("콤보 점수")]
     public int[] comboScore = { 10, 15, 20, 25, 30 };
@@ -12,11 +14,13 @@ public class ScoreManager : MonoBehaviour
     void Awake()
     {
         score = 0;
+        scoreText.text = score.ToString();
     }
 
     public void AddScore(int score)
     {
         this.score += score;
+        scoreText.text = this.score.ToString();
     }
 
     public int GetComboBonus(int combo)

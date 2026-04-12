@@ -574,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c493f65abc9838a43a2434a7d2d2f798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
+  useSlider: 1
   timerSlider: {fileID: 8051245798001978163}
   sliderStartZero: 0
 --- !u!1 &9190653210437646244

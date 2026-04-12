@@ -15,14 +15,19 @@ public class Timer : MonoBehaviour
     // 외부에서 등록 및 해제만 가능. Invoke 불가능
     public event Action OnCompleted;
 
+    public bool useSlider = true;
+
     public GameObject timerSlider;
     UnityEngine.UI.Slider slider;
     public bool sliderStartZero;
 
     void Awake()
     {
-        timerSlider.SetActive(false);
-        slider = timerSlider.GetComponent<UnityEngine.UI.Slider>();
+        if (useSlider)
+        {
+            timerSlider.SetActive(false);
+            slider = timerSlider.GetComponent<UnityEngine.UI.Slider>();
+        }
     }
 
     void Update()
@@ -34,20 +39,25 @@ public class Timer : MonoBehaviour
     public void StartTimer(float time)
     {
         MaxTime = time;
-        slider.maxValue = 1f;
-
-        if (sliderStartZero)
-        {
-            slider.value = 0f;
-        }
-        else
-        {
-            slider.value = 1f;
-        }
 
         CurrentTime = time;
         IsRunning = true;
-        timerSlider.SetActive(true);
+
+        if (useSlider)
+        {
+            slider.maxValue = 1f;
+
+            if (sliderStartZero)
+            {
+                slider.value = 0f;
+            }
+            else
+            {
+                slider.value = 1f;
+            }
+
+            timerSlider.SetActive(true);
+        }
     }
 
     // 타이머 정지
@@ -83,21 +93,28 @@ public class Timer : MonoBehaviour
 
         CurrentTime -= deltaTime;
 
-        if (sliderStartZero)
+        if (useSlider)
         {
-            slider.value = 1 - Normalized;
-        }
-        else
-        {
-            slider.value = Normalized;
+            if (sliderStartZero)
+            {
+                slider.value = 1 - Normalized;
+            }
+            else
+            {
+                slider.value = Normalized;
+            }
         }
 
         if (CurrentTime <= 0f)
         {
             CurrentTime = 0f;
             IsRunning = false;
-            timerSlider.SetActive(false);
             OnCompleted?.Invoke();
+
+            if (useSlider)
+            {
+                timerSlider.SetActive(false);
+            }
         }
     }
 }
