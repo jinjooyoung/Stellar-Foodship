@@ -42,7 +42,7 @@ public class DishSubmissionCounter : NonPickable
             Debug.Log("주문 실패했습니다");
         }
 
-       
+        Destroy(dish.cookingIconUI.gameObject);
         Destroy(dish.gameObject);
         player.heldItem = null;
     }
