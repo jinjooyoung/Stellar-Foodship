@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Bson;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public enum PlayerState
@@ -43,7 +45,10 @@ public class Player : MonoBehaviour
     private Vector3 currentMoveDirection;   // 실제 이동 방향 (보간됨)
     private Vector3 lastInputDirection;     // 마지막 이동 방향
 
-    private bool isDashing;
+    [Header("대쉬")]
+    public Vector3 dashDirection;
+    public float dashRemainingDistance;
+    public bool isDashing;
 
     void Awake()
     {
@@ -113,7 +118,12 @@ public class Player : MonoBehaviour
             playerRigidbody.linearVelocity = Vector3.zero;
             return;
         }
-        else if (state == PlayerState.Controllable)
+        if(isDashing)
+        {
+            HandleDash();
+            return;
+        }
+        if (state == PlayerState.Controllable)
         {
             Move();
         }
@@ -240,9 +250,47 @@ public class Player : MonoBehaviour
     // 대쉬 : Space / Button East
     public void Dash()
     {
-        if (isDashing) return;
+        if (isDashing == true) return;
+        if (state != PlayerState.Controllable) return;
 
-        Debug.Log("Dash 실행");
+        Vector3 dashDir;
+
+        if (currentMoveDirection != Vector3.zero)
+            dashDir = currentMoveDirection;
+        else
+            dashDir = lastInputDirection;
+
+        if (dashDir == Vector3.zero)
+            dashDir = transform.forward;
+
+        isDashing = true;
+        dashDirection = dashDir.normalized; // 계산된 방향을 멤버 변수에 저장
+        dashRemainingDistance = dashDistance; // 대시할 전체 거리 충전
+
+        playerRigidbody.linearVelocity = Vector3.zero;
+    }
+
+    public void HandleDash()
+    {
+        if (!isDashing) return;
+
+        float moveStep = dashSpeed * Time.fixedDeltaTime;
+
+        if (moveStep > dashRemainingDistance)
+        {
+            moveStep = dashRemainingDistance;
+        }
+
+        Vector3 moveVector = dashDirection * moveStep;
+        playerRigidbody.MovePosition(playerRigidbody.position + moveVector);
+
+        dashRemainingDistance = dashRemainingDistance - moveStep;
+
+        if (dashRemainingDistance <= 0)
+        {
+            isDashing = false;
+            playerRigidbody.linearVelocity = Vector3.zero; // 대시 종료 시 딱 멈춤
+        }
     }
 
     //====================================이동====================================
@@ -383,6 +431,7 @@ public class Player : MonoBehaviour
     {
         return transform.position;
     }
+
 }
 
 
