@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5314108219225732288}
   - component: {fileID: 4473514585495881140}
+  - component: {fileID: 1770114121049104009}
   m_Layer: 5
   m_Name: TimerUI
   m_TagString: Untagged
@@ -89,6 +90,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1770114121049104009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396573853441556630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b9ad9afaffabf42aeb88de577a6083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FollowWorldUI
+  uiTargetTransform: {fileID: 0}
+  uiWorldCamera: {fileID: 0}
+  uiOffset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &2085076283518368681
 GameObject:
   m_ObjectHideFlags: 0

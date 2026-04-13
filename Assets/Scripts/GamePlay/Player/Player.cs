@@ -43,7 +43,12 @@ public class Player : MonoBehaviour
     private Vector3 currentMoveDirection;   // 실제 이동 방향 (보간됨)
     private Vector3 lastInputDirection;     // 마지막 이동 방향
 
-    private bool isDashing;
+    [Header("대쉬")]
+    public Vector3 dashDirection;
+    public float dashRemainingDistance;
+    private bool isDashing; 
+    public float characterRadius = 0.5f;
+    public LayerMask dashObstacleLayer;
 
     void Awake()
     {
@@ -113,7 +118,12 @@ public class Player : MonoBehaviour
             playerRigidbody.linearVelocity = Vector3.zero;
             return;
         }
-        else if (state == PlayerState.Controllable)
+        if(isDashing)
+        {
+            HandleDash();
+            return;
+        }
+        if (state == PlayerState.Controllable)
         {
             Move();
         }
@@ -241,8 +251,54 @@ public class Player : MonoBehaviour
     public void Dash()
     {
         if (isDashing) return;
+        if (state != PlayerState.Controllable) return;
 
-        Debug.Log("Dash 실행");
+        Vector3 dashDir;
+
+        if (currentMoveDirection != Vector3.zero)
+            dashDir = currentMoveDirection;
+        else
+            dashDir = lastInputDirection;
+
+        if (dashDir == Vector3.zero)
+            dashDir = transform.forward;
+
+        dashDirection = dashDir.normalized;
+
+        float maxDistance = dashDistance;
+        RaycastHit hit;
+
+        if (Physics.SphereCast(transform.position + Vector3.up, characterRadius, dashDirection, out hit, dashDistance, dashObstacleLayer))
+        {
+            maxDistance = Mathf.Max(0, hit.distance - 0.1f);
+        }
+
+        isDashing = true;
+        dashRemainingDistance = maxDistance;
+        playerRigidbody.linearVelocity = Vector3.zero;
+    }
+
+    public void HandleDash()
+    {
+        if (!isDashing) return;
+
+        float moveStep = dashSpeed * Time.fixedDeltaTime;
+
+        if (moveStep > dashRemainingDistance)
+        {
+            moveStep = dashRemainingDistance;
+        }
+
+        Vector3 moveVector = dashDirection * moveStep;
+        playerRigidbody.MovePosition(playerRigidbody.position + moveVector);
+
+        dashRemainingDistance = dashRemainingDistance - moveStep;
+
+        if (dashRemainingDistance <= 0)
+        {
+            isDashing = false;
+            playerRigidbody.linearVelocity = Vector3.zero; // 대시 종료 시 딱 멈춤
+        }
     }
 
     //====================================이동====================================
@@ -383,6 +439,7 @@ public class Player : MonoBehaviour
     {
         return transform.position;
     }
+
 }
 
 

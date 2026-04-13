@@ -106,7 +106,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3462aefc4780fc46bfb5f3b0e484069, type: 2}
+  - {fileID: 2100000, guid: c440d94507ab9d243b6adfcfcd5dff9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -225,10 +225,16 @@ MonoBehaviour:
   dashSpeed: 10
   dashDistance: 3
   playerRigidbody: {fileID: 0}
-  throwForce: 10
-  inputType: 1
+  throwForce: 5
+  inputType: 0
   targetUpdateInterval: 0.1
   state: 1
+  dashDirection: {x: 0, y: 0, z: 0}
+  dashRemainingDistance: 0
+  characterRadius: 1
+  dashObstacleLayer:
+    serializedVersion: 2
+    m_Bits: 449
 --- !u!114 &8436439106858648293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +328,19 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1143582394769356869}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
@@ -386,7 +404,7 @@ MonoBehaviour:
     m_ActionId: 1f1fa845-fa3d-4bcd-aa21-777d3b843735
     m_ActionName: Player/Drop
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
