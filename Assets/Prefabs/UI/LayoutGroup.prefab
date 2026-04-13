@@ -75,12 +75,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1434013893622286303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 198f6fc3f47a2e949808aa18edfea3c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 01b9ad9afaffabf42aeb88de577a6083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowWorldUI
-  target: {fileID: 0}
-  offset: {x: 0, y: 1.8, z: 0}
-  cam: {fileID: 0}
+  uiTargetTransform: {fileID: 0}
+  uiWorldCamera: {fileID: 0}
+  uiOffset: {x: 0, y: 1.5, z: 0}
 --- !u!114 &2622614982005712745
 MonoBehaviour:
   m_ObjectHideFlags: 0
