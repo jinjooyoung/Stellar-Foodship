@@ -71,8 +71,8 @@ public class DishReturner : NonPickable
         Dish dish = dishObj.GetComponent<Dish>();
 
         // 데이터 연결
-        followWorldUI.target = dishObj.transform;
-        followWorldUI.cam = Camera.main;
+        followWorldUI.uiTargetTransform = dishObj.transform;
+        followWorldUI.uiWorldCamera = Camera.main;
         dish.cookingIconUI = cookingIconUI;
 
         dishCount++;
