@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     private bool isDashing; 
     public float characterRadius = 0.5f;
     public LayerMask dashObstacleLayer;
+    public float lastDashTime; // 마지막 대시 시점 기록  
+    public float dashCooldown = 1f; // 대시 쿨타임 (초)
 
     void Awake()
     {
@@ -248,13 +250,14 @@ public class Player : MonoBehaviour
     }
 
     // 대쉬 : Space / Button East
+
     public void Dash()
     {
         if (isDashing) return;
         if (state != PlayerState.Controllable) return;
+        if (Time.time < lastDashTime + dashCooldown) return;
 
         Vector3 dashDir;
-
         if (currentMoveDirection != Vector3.zero)
             dashDir = currentMoveDirection;
         else
@@ -268,14 +271,22 @@ public class Player : MonoBehaviour
         float maxDistance = dashDistance;
         RaycastHit hit;
 
-        if (Physics.SphereCast(transform.position + Vector3.up, characterRadius, dashDirection, out hit, dashDistance, dashObstacleLayer))
+        // --- BoxCast 설정 ---
+        // 박스의 절반 크기 (Half Extents). 캐릭터 너비가 1m라면 0.5f를 넣습니다.
+        Vector3 boxHalfSize = new Vector3(characterRadius, characterRadius, characterRadius);
+        Vector3 rayStart = transform.position + (Vector3.down * 0.1f);
+
+        // Physics.BoxCast(시작점, 절반크기, 방향, 결과, 회전, 최대거리, 레이어)
+        if (Physics.BoxCast(rayStart, boxHalfSize, dashDirection, out hit, transform.rotation, dashDistance, dashObstacleLayer))
         {
-            maxDistance = Mathf.Max(0, hit.distance - 0.1f);
+            maxDistance = Mathf.Max(0, hit.distance - 0.3f);
         }
 
         isDashing = true;
         dashRemainingDistance = maxDistance;
-        playerRigidbody.linearVelocity = Vector3.zero;
+        lastDashTime = Time.time;
+
+        playerRigidbody.linearVelocity = new Vector3(0, playerRigidbody.linearVelocity.y, 0);
     }
 
     public void HandleDash()
@@ -440,7 +451,47 @@ public class Player : MonoBehaviour
         return transform.position;
     }
 
+    //--------------------------------디버그용 기즈모--------------------------------
+    // --- 스크립트의 멤버 변수 선언부 근처에 추가 ---
+    [Header("Debug/Gizmos")]
+    public bool showDashGizmos = true; // 기즈모를 켤지 끄는 스위치
+    public Color gizmoColor = Color.cyan; // 기즈모 색상
+    public float high;
+
+    // --- 스크립트 하단에 함수 추가 ---}
+    private void OnDrawGizmos()
+    {
+        // 1. 레이가 시작되는 지점 (rayStart와 동일한 로직)
+        // 현재 코드 기준: 지하 10m
+        Vector3 rayStart = transform.position + (Vector3.down * 0.1f);
+
+        // 2. 박스의 크기 설정
+        Vector3 boxHalfSize = new Vector3(characterRadius, characterRadius, characterRadius);
+        Vector3 boxFullSize = boxHalfSize * 2f;
+
+        // --- 기즈모 그리기 ---
+        Gizmos.color = Color.yellow; // 시작점은 노란색
+
+        // 플레이어의 현재 회전값을 반영하여 박스 그리기
+        Matrix4x4 cubeMatrix = Matrix4x4.TRS(rayStart, transform.rotation, Vector3.one);
+        Gizmos.matrix = cubeMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, boxFullSize);
+
+        // --- 경로 그리기 ---
+        Gizmos.matrix = Matrix4x4.identity; // 매트릭스 리셋
+        Gizmos.color = Color.cyan;
+
+        // 대시 방향이 결정되었다면 선으로 표시
+        Vector3 dir = (dashDirection != Vector3.zero) ? dashDirection : transform.forward;
+        Vector3 rayEnd = rayStart + (dir * dashDistance);
+        Gizmos.DrawLine(rayStart, rayEnd);
+
+        // 도착 지점 박스
+        Matrix4x4 endMatrix = Matrix4x4.TRS(rayEnd, transform.rotation, Vector3.one);
+        Gizmos.matrix = endMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, boxFullSize);
+    }
+
 }
 
 
-    
