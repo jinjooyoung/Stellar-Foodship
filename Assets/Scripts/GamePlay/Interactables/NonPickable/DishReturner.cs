@@ -3,8 +3,8 @@ using TMPro;
 
 public class DishReturner : NonPickable
 {
-    
-    public override bool canPlace => false;
+    public bool _canPlace;
+    public override bool canPlace => _canPlace;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject dishPrefab;
@@ -14,28 +14,27 @@ public class DishReturner : NonPickable
     [SerializeField] private TextMeshProUGUI canTakeDishUI;
     [SerializeField] private Transform uiParent;
 
+    
+
     private int dishCount = 0;
 
-    private void Awake()
+    private void Start()
     {
-        // 초기 설정 (레벨 매니저에서 가져올 수도 있음)
-        dishCount = 1;
+        Invoke("SafeInit", 0.1f);
+    }
+
+    private void SafeInit()
+    {
         UpdateUI();
     }
 
-    // 2. 상호작용 1 구현 (오버라이드)
     public override void Interact(Player player)
     {
-        // 플레이어의 손(heldItem)이 비어 있는지 확인
+        Debug.Log("상호작용 버튼이 눌렸습니다!");
+        if (LevelManager.Instance == null) return;
         if (player.heldItem != null) return;
 
         TakeOutDish(player);
-    }
-
-    // 3. 상호작용 2 구현 (오버라이드 - 기능 없음)
-    public override void InteractSecondary(Player player)
-    {
-        // 빈 기능으로 둠
     }
 
     private void TakeOutDish(Player player)
@@ -43,11 +42,9 @@ public class DishReturner : NonPickable
         Dish resultComponent = CreateDish();
         if (resultComponent == null) return;
 
-        // 접시 스크립트의 TryPickUp 호출 (Player를 인자로 전달)
         if (resultComponent.TryPickUp(player))
         {
-            // NonPickable의 heldItem이 아니라 Player의 heldItem을 설정하는 로직
-            player.heldItem = resultComponent as Pickable;
+            player.heldItem = resultComponent;
             UpdateUI();
         }
         else
@@ -61,19 +58,29 @@ public class DishReturner : NonPickable
         if (dishPrefab == null || UIGroupPrefab == null) return null;
         if (LevelManager.Instance.maxDishCount <= dishCount) return null;
 
-        // UI 생성
+        GameObject dishObj = Instantiate(dishPrefab);
+
+        // <--- 여기서 holdPoint 변수를 사용하여 위치를 잡습니다! ---
+        if (holdPoint != null)
+        {
+            dishObj.transform.position = holdPoint.position;
+            dishObj.transform.rotation = holdPoint.rotation;
+        }
+        else
+        {
+            dishObj.transform.position = transform.position + Vector3.up;
+        }
+
         GameObject uiGroupObj = Instantiate(UIGroupPrefab, uiParent);
         FollowWorldUI followWorldUI = uiGroupObj.GetComponent<FollowWorldUI>();
-        CookingIconUI cookingIconUI = uiGroupObj.GetComponent<CookingIconUI>();
-
-        // 접시 생성
-        GameObject dishObj = Instantiate(dishPrefab);
         Dish dish = dishObj.GetComponent<Dish>();
+        dish.cookingIconUI = uiGroupObj.GetComponent<CookingIconUI>();
 
-        // 데이터 연결
-        followWorldUI.uiTargetTransform = dishObj.transform;
-        followWorldUI.uiWorldCamera = Camera.main;
-        dish.cookingIconUI = cookingIconUI;
+        if (followWorldUI != null)
+        {
+            followWorldUI.uiTargetTransform = dishObj.transform;
+            followWorldUI.uiWorldCamera = Camera.main;
+        }
 
         dishCount++;
         return dish;
@@ -81,10 +88,10 @@ public class DishReturner : NonPickable
 
     public void UpdateUI()
     {
+        if (LevelManager.Instance == null) return;
         int count = LevelManager.Instance.maxDishCount - dishCount;
-        if (canTakeDishUI != null)
-        {
-            canTakeDishUI.text = count.ToString();
-        }
+        if (canTakeDishUI != null) canTakeDishUI.text = count.ToString();
     }
+
+    public override void InteractSecondary(Player player) { }
 }
