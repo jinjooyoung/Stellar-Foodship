@@ -2953,8 +2953,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
+      propertyPath: dashDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
+      propertyPath: characterRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: dashDirection.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
+      propertyPath: moveSmoothSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
+      propertyPath: dashObstacleLayer.m_Bits
+      value: 449
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

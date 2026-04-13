@@ -1,5 +1,3 @@
-using Newtonsoft.Json.Bson;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public enum PlayerState
@@ -48,7 +46,9 @@ public class Player : MonoBehaviour
     [Header("대쉬")]
     public Vector3 dashDirection;
     public float dashRemainingDistance;
-    public bool isDashing;
+    private bool isDashing; 
+    public float characterRadius = 0.5f;
+    public LayerMask dashObstacleLayer;
 
     void Awake()
     {
@@ -250,7 +250,7 @@ public class Player : MonoBehaviour
     // 대쉬 : Space / Button East
     public void Dash()
     {
-        if (isDashing == true) return;
+        if (isDashing) return;
         if (state != PlayerState.Controllable) return;
 
         Vector3 dashDir;
@@ -263,10 +263,18 @@ public class Player : MonoBehaviour
         if (dashDir == Vector3.zero)
             dashDir = transform.forward;
 
-        isDashing = true;
-        dashDirection = dashDir.normalized; // 계산된 방향을 멤버 변수에 저장
-        dashRemainingDistance = dashDistance; // 대시할 전체 거리 충전
+        dashDirection = dashDir.normalized;
 
+        float maxDistance = dashDistance;
+        RaycastHit hit;
+
+        if (Physics.SphereCast(transform.position + Vector3.up, characterRadius, dashDirection, out hit, dashDistance, dashObstacleLayer))
+        {
+            maxDistance = Mathf.Max(0, hit.distance - 0.1f);
+        }
+
+        isDashing = true;
+        dashRemainingDistance = maxDistance;
         playerRigidbody.linearVelocity = Vector3.zero;
     }
 
