@@ -50,9 +50,20 @@ public class CookingStation : NonPickable
                             return;
                         }
 
+                        if(cookware.isBurnt)
+                        {
+                            Debug.Log("이미 타버렸습니다.");
+                            return;
+                        }
+                        if(cookware.currentIngredientIds.Count == 0)
+                        {
+                            Debug.Log("재료가 들어있어야 조리가 가능합니다.");
+                            return;
+                        }
+
                         if (cookware.timer.CurrentTime > 0f)
                         {
-                            cookware.timer.Resume();
+                                cookware.timer.Resume();
                         }
                         else
                         {
