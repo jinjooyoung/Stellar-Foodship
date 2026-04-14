@@ -62,7 +62,6 @@ public class Player : MonoBehaviour
         }
 
         playerRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        playerRigidbody.useGravity = false;
         playerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
