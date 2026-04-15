@@ -185,6 +185,12 @@ public class Player : MonoBehaviour
             }
         }
 
+        if(target is TrashCan)
+        {
+            target.Interact(this);
+            return ;
+        }
+
         // 타겟이 조리도구면 재료를 들고있을 때 재료 넣기
         if (target is Cookware cookware)
         {
