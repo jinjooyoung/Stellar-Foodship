@@ -175,42 +175,54 @@ public class Player : MonoBehaviour
     // 상호작용1 : J / Button South
     public void InteractPrimary()
     {
-        // 타겟이 접시면 뭔가 들고있을 때 접시에 넣기
-        if (target is Dish dish)
+        if (target == null)
         {
             if (heldItem != null)
             {
-                target.Interact(this);
-                return;
+                Drop();
             }
-        }
-
-        if(target is TrashCan)
-        {
-            target.Interact(this);
-            return ;
-        }
-
-        // 타겟이 조리도구면 재료를 들고있을 때 재료 넣기
-        if (target is Cookware cookware)
-        {
-            if (heldItem is Ingredient)
-            {
-                target.Interact(this);
-                return;
-            }
-        }
-
-        // 들고 있는 아이템이 있으면 Drop
-        if (heldItem != null)
-        {
-            Drop();
             return;
         }
 
-        // 들고 있는 아이템이 없으면 target과 상호작용
-        if (target == null) return;
-        target.Interact(this);
+        // 먼저 상호작용 시도
+        bool interacted = false;
+
+        // 접시
+        if (target is Dish)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+        // 쓰레기통
+        else if (target is TrashCan)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+        // 조리도구
+        else if (target is Cookware)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+        // 기타 논픽커블도 일단 시도
+        else if (target is NonPickable)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+        // 픽커블
+        else if (target is Pickable)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+
+        // 상호작용 실패 + 들고 있음 -> 드랍
+        /*if (!interacted && heldItem != null)
+        {
+            Drop();
+        }*/
     }
 
     // 상호작용2 : K / Button West
@@ -445,7 +457,7 @@ public class Player : MonoBehaviour
         Pickable item = heldItem;
         heldItem = null;
 
-        item.OnThrown(lastInputDirection, throwForce);
+        item.OnThrown(lastInputDirection, throwForce, this);
     }
 
     //=========================================================================
