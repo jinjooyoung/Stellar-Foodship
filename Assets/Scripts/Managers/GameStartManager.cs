@@ -4,18 +4,25 @@ using System.Collections;
 
 public class GameStartManager : MonoBehaviour
 {
+    [Header("UI 연결")]
     public TextMeshProUGUI countdownText;
-    public Player playerScript; // Player_1이 아니라 Player로 수정!
 
-    // 만약 타이머 스크립트가 따로 있다면 여기에 추가 (예: ScoreManager)
-    // public ScoreManager stageTimer; 
+    [Header("플레이어 설정 (2명 드래그)")]
+    public Player[] players; 
+
+    [Header("타이머 스크립트")]
+    public GameFlowManager gameFlowManager; 
 
     void Start()
     {
-        // 1. 시작하자마자 플레이어를 못 움직이게 설정
-        // 인스펙터에 있는 State를 'Wait' 등으로 바꿔야 합니다.
-        // (Player 스크립트에 정의된 Enum 이름을 확인해야 함)
-        // playerScript.State = PlayerState.Wait; 
+        // 1. 시작하자마자 모든 플레이어 조작 비활성화
+        foreach (Player p in players)
+        {
+            if (p != null) p.enabled = false;
+        }
+
+        // 2. 타이머도 일단 멈춤
+        if (gameFlowManager != null) gameFlowManager.enabled = false;
 
         StartCoroutine(StartSequence());
     }
@@ -32,12 +39,18 @@ public class GameStartManager : MonoBehaviour
 
         countdownText.text = "GO!";
 
-        // 2. [핵심] 기획서 내용대로 상태를 Controllable로 변경!
-        // 인스펙터에 보이는 'State' 변수를 직접 바꿔줍니다.
-        // playerScript.State = Player.PlayerState.Controllable; 
+        
+        foreach (Player p in players)
+        {
+            if (p != null)
+            {
+                p.enabled = true;
+                
+            }
+        }
 
-        // 만약 위 코드가 복잡하다면 단순히 스크립트를 껐다 켜도 됩니다.
-        playerScript.enabled = true;
+        // 4. 스테이지 타이머 시작
+        if (gameFlowManager != null) gameFlowManager.enabled = true;
 
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false);
