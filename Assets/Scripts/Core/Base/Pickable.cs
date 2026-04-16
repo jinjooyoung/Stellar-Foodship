@@ -14,7 +14,11 @@ public abstract class Pickable : MonoBehaviour, IInteractable
     // 상호작용1: "집기 / 놓기" 공통 처리 | J / Button South
     public virtual void Interact(Player player)
     {
-        if (player.heldItem != null) return;
+        if (player.heldItem != null)
+        {
+            TryCombineWithHeld(player);
+            return;
+        }
 
         if (TryPickUp(player))
         {
@@ -57,6 +61,63 @@ public abstract class Pickable : MonoBehaviour, IInteractable
         }
 
         return true;
+    }
+
+    void TryCombineWithHeld(Player player)
+    {
+        Pickable held = player.heldItem;
+
+        // Ingredient → Cookware
+        if (held is Ingredient ing && this is Cookware cook)
+        {
+            bool canAdd = !ing.ingredientData.isCutable || ing.isCut;
+
+            if (canAdd && cook.currentIngredientIds.Count < 4)
+            {
+                cook.AddIngredient(ing);
+                player.heldItem = null;
+                return;
+            }
+        }
+
+        // Ingredient → Dish
+        if (held is Ingredient ing2 && this is Dish dish)
+        {
+            bool canAdd =
+                ing2.ingredientData.isRawPlatable &&
+                (!ing2.ingredientData.isCutable || ing2.isCut);
+
+            if (canAdd && dish.currentIngredientIds.Count < 4)
+            {
+                dish.currentIngredientIds.Add(ing2.ID);
+                dish.cookingIconUI?.UpdateUI(dish.currentIngredientIds);
+
+                Destroy(ing2.gameObject);
+                player.heldItem = null;
+                return;
+            }
+        }
+
+        // Cookware → Dish
+        if (held is Cookware cook2 && this is Dish dish2)
+        {
+            if (!cook2.isComplete || cook2.isBurnt) return;
+            if (dish2.currentIngredientIds.Count >= 4) return;
+            if (cook2.currentIngredientIds.Count == 0) return;
+
+            int resultId = CookingSystem.GetCookedIngredientId(
+                cook2.currentIngredientIds,
+                cook2.cookwareType,
+                cook2.isBurnt
+            );
+
+            dish2.currentIngredientIds.Add(resultId);
+            dish2.cookingIconUI?.UpdateUI(dish2.currentIngredientIds);
+
+            cook2.ClearIds();
+            player.heldItem = null;
+            return;
+        }
     }
 
     public void OnThrown(Vector3 direction, float force, Player thrower)

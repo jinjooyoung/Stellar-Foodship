@@ -16,45 +16,20 @@ public class Dish : Pickable
         cookingIconUI.UpdateUI(currentIngredientIds);
     }
 
-    public override void Interact(Player player)
+    /*public override void Interact(Player player)
     {
-        Debug.Log("Dish Interact È£ÃâµÊ");
-        if (player.heldItem != null)
-        {
-            if (player.heldItem is Ingredient ingredient)
-            {
-                if (!ingredient.ingredientData.isRawPlatable) return;
-                if (ingredient.ingredientData.isCutable && !ingredient.isCut) return;
-
-                AddIngredientDish(player, ingredient);
-            }
-            else if (player.heldItem is Cookware cookware)
-            {
-                if (cookware.currentIngredientIds.Count == 0) return;
-                if (!cookware.isComplete) return;
-
-                int resultId = CookingSystem.GetCookedIngredientId(
-                    cookware.currentIngredientIds,
-                    cookware.cookwareType,
-                    cookware.isBurnt
-                );
-
-                cookware.resultId = resultId;
-                AddIngredientDish(player, cookware);
-            }
-        }
-        else
+        if (player.heldItem == null)
         {
             if (TryPickUp(player))
             {
                 player.heldItem = this;
             }
         }
-    }
+    }*/
 
     public override void InteractSecondary(Player player) { }
 
-    private void AddIngredientDish(Player player, Pickable heldItem)
+    /*private void AddIngredientDish(Player player, Pickable heldItem)
     {
         if (currentIngredientIds.Count >= 4) return;
 
@@ -74,7 +49,7 @@ public class Dish : Pickable
         {
             cookware.ClearIds();
         }
-    }
+    }*/
 
   
     public void ClearDishContents()
