@@ -115,7 +115,26 @@ public abstract class Pickable : MonoBehaviour, IInteractable
             dish2.cookingIconUI?.UpdateUI(dish2.currentIngredientIds);
 
             cook2.ClearIds();
-            player.heldItem = null;
+            return;
+        }
+
+        // Dish ¡æ Cookware
+        if (held is Dish dish3 && this is Cookware cook3)
+        {
+            if (!cook3.isComplete || cook3.isBurnt) return;
+            if (dish3.currentIngredientIds.Count >= 4) return;
+            if (cook3.currentIngredientIds.Count == 0) return;
+
+            int resultId = CookingSystem.GetCookedIngredientId(
+                cook3.currentIngredientIds,
+                cook3.cookwareType,
+                cook3.isBurnt
+            );
+
+            dish3.currentIngredientIds.Add(resultId);
+            dish3.cookingIconUI?.UpdateUI(dish3.currentIngredientIds);
+
+            cook3.ClearIds();
             return;
         }
     }
