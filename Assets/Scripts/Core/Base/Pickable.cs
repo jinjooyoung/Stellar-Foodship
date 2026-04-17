@@ -70,6 +70,8 @@ public abstract class Pickable : MonoBehaviour, IInteractable
         // Ingredient ¡æ Cookware
         if (held is Ingredient ing && this is Cookware cook)
         {
+            if (cook.isComplete || cook.isBurnt) return;
+
             bool canAdd = !ing.ingredientData.isCutable || ing.isCut;
 
             if (canAdd && cook.currentIngredientIds.Count < 4)

@@ -21,6 +21,13 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
 
             if (result != null)
             {
+                if ((heldItem is Cookware || heldItem is Dish) &&
+                    (item is Cookware || item is Dish))
+                {
+                    OnAfterItemPlaced(result);
+                    return false;
+                }
+
                 heldItem = result;
 
                 Transform t = result.transform;
