@@ -58,6 +58,12 @@ public class Player : MonoBehaviour
     private MeshRenderer meshRenderer;
     private CapsuleCollider capsuleCollider;
 
+    [Header("산소 시스템")]
+    public float oxygen = 12f;
+    public float maxOxygen = 12f;
+
+    [HideInInspector] public bool isInOxygenZone = false;
+
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -498,6 +504,18 @@ public class Player : MonoBehaviour
         
         if (capsuleCollider != null) capsuleCollider.enabled = true;
         state = PlayerState.Controllable;
+    }
+
+    //===============================산소 로직=======================================
+    public void ChangeOxygen(float amount)
+    {
+        oxygen += amount;
+        oxygen = Mathf.Clamp(oxygen, 0f, maxOxygen);
+
+        if (oxygen <= 0f)
+        {
+            Die();
+        }
     }
 
     //--------------------------------디버그용 기즈모--------------------------------
