@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
     [Header("산소 시스템")]
     public float oxygen = 12f;
     public float maxOxygen = 12f;
+    public OxygenUI oxygenUI;
 
     [HideInInspector] public bool isInOxygenZone = false;
 
@@ -490,7 +491,9 @@ public class Player : MonoBehaviour
         if (capsuleCollider != null) capsuleCollider.enabled = false;
 
         state = PlayerState.Uncontrollable;
-        
+        oxygenUI.slider.gameObject.SetActive(false);
+
+
         StartCoroutine(Respawn());
     }
 
@@ -504,6 +507,8 @@ public class Player : MonoBehaviour
         
         if (capsuleCollider != null) capsuleCollider.enabled = true;
         state = PlayerState.Controllable;
+        oxygenUI.slider.gameObject.SetActive(true);
+        oxygen = maxOxygen;
     }
 
     //===============================산소 로직=======================================
