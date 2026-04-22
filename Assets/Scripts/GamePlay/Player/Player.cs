@@ -41,8 +41,9 @@ public class Player : MonoBehaviour
     [SerializeField] public PlayerState state;
 
     private Vector3 targetMoveDirection;    // 입력 방향
-    private Vector3 currentMoveDirection;   // 실제 이동 방향 (보간됨)
-    private Vector3 lastInputDirection;     // 마지막 이동 방향
+    public Vector3 currentMoveDirection;   // 실제 이동 방향 (보간됨)
+    public Vector3 lastInputDirection;     // 마지막 이동 방향
+    public Vector2 inputVector;
 
     [Header("대쉬")]
     public Vector3 dashDirection;
@@ -162,6 +163,7 @@ public class Player : MonoBehaviour
     {
         if (state == PlayerState.IsAiming || state == PlayerState.Uncontrollable)
             return;
+        inputVector = input;
 
         Vector3 dir = new Vector3(input.x, 0, input.y);
 
