@@ -203,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a9468dbf8f1bbbd4b8fa146bd55e75a9, type: 2}
     - target: {fileID: 3586568086221559016, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8539999
+      value: -3.61
       objectReference: {fileID: 0}
     - target: {fileID: 3586568086221559016, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3105,7 +3105,7 @@ PrefabInstance:
       objectReference: {fileID: 6787609227317786249, guid: 2ebacb2c9dffcaa4182aa71b24b36a06, type: 3}
     - target: {fileID: 6319914266722764413, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7179999
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 6319914266722764413, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4432,6 +4432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49085efdb6afab4a9aef7694330ded2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
+  mainCanvas: {fileID: 0}
+  volumeCanvas: {fileID: 0}
+  isOpen: 0
 --- !u!4 &857756296
 Transform:
   m_ObjectHideFlags: 0
@@ -7533,7 +7536,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5379384633150936037, guid: 3e86d6c1ef98e334097de5c898a975f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.75
+      value: -4.66
       objectReference: {fileID: 0}
     - target: {fileID: 5379384633150936037, guid: 3e86d6c1ef98e334097de5c898a975f1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8378,7 +8381,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: bae4d701fdd07984f9c82311fe73c609, type: 3}
     - target: {fileID: 3586568086221559016, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7849998
+      value: -2.55
       objectReference: {fileID: 0}
     - target: {fileID: 3586568086221559016, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
       propertyPath: m_LocalPosition.y
