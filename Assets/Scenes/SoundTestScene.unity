@@ -154,14 +154,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
-    mixerGroup: {fileID: 24300002, guid: b76e544468cf3c9409324146089ca9ff, type: 2}
-    source: {fileID: 0}
-  - name: Master
-    clip: {fileID: 8300000, guid: 716858b28e0810f4abbb455dd87f2fe2, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    mixerGroup: {fileID: 24300002, guid: b76e544468cf3c9409324146089ca9ff, type: 2}
+    mixerGroup: {fileID: -5641289595979874044, guid: b76e544468cf3c9409324146089ca9ff, type: 2}
     source: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: b76e544468cf3c9409324146089ca9ff, type: 2}
 --- !u!4 &10806253
