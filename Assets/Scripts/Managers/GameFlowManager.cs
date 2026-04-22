@@ -22,7 +22,6 @@ public class GameFlowManager : MonoBehaviour
     void Start()
     {
         OverCanvas.SetActive(false);
-        timer.StartTimer(LevelManager.Instance.stageTimeLimit);
     }
 
     private void Update()

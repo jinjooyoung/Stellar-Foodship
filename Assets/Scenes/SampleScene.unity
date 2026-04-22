@@ -1943,7 +1943,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1681933485}
   - {fileID: 133330156}
   - {fileID: 710411818}
   - {fileID: 1325330657}
@@ -2642,10 +2641,10 @@ PrefabInstance:
       addedObject: {fileID: 669591745}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6169369549956296789, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
-      insertIndex: 8
+      insertIndex: -1
       addedObject: {fileID: 1723608175}
     - targetCorrespondingSourceObject: {fileID: 6169369549956296789, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
-      insertIndex: 9
+      insertIndex: -1
       addedObject: {fileID: 1723608172}
   m_SourcePrefab: {fileID: 100100000, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
 --- !u!4 &1206929041 stripped
@@ -3438,7 +3437,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 927742671}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1723608171 stripped
 GameObject:
@@ -3895,7 +3894,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6cf06122ec81e2c44b49b26af2b3b420, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3962,7 +3961,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1933179035
@@ -4575,7 +4574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6684912775551598496, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: oxygenUI
@@ -4593,10 +4592,10 @@ PrefabInstance:
       addedObject: {fileID: 221175531}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6169369549956296789, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
-      insertIndex: 8
+      insertIndex: 6
       addedObject: {fileID: 2933027249436568288}
     - targetCorrespondingSourceObject: {fileID: 6169369549956296789, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
-      insertIndex: 9
+      insertIndex: 7
       addedObject: {fileID: 2933027249436568285}
   m_SourcePrefab: {fileID: 100100000, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
 --- !u!114 &2933027249436568284 stripped
@@ -5132,6 +5131,7 @@ SceneRoots:
   - {fileID: 6778647004175105831}
   - {fileID: 1007556528}
   - {fileID: 1383784220}
+  - {fileID: 1681933485}
   - {fileID: 927742671}
   - {fileID: 1670639417}
   - {fileID: 1391949444}

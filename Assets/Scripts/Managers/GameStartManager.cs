@@ -18,11 +18,10 @@ public class GameStartManager : MonoBehaviour
         // 1. 시작하자마자 모든 플레이어 조작 비활성화
         foreach (Player p in players)
         {
-            if (p != null) p.enabled = false;
-        }
+            if (p == null) continue;
 
-        // 2. 타이머도 일단 멈춤
-        if (gameFlowManager != null) gameFlowManager.enabled = false;
+            p.state = PlayerState.Uncontrollable;
+        }
 
         StartCoroutine(StartSequence());
     }
@@ -42,15 +41,13 @@ public class GameStartManager : MonoBehaviour
         
         foreach (Player p in players)
         {
-            if (p != null)
-            {
-                p.enabled = true;
-                
-            }
+            if (p == null) continue;
+
+            p.state = PlayerState.Controllable;
         }
 
         // 4. 스테이지 타이머 시작
-        if (gameFlowManager != null) gameFlowManager.enabled = true;
+        gameFlowManager.timer.StartTimer(LevelManager.Instance.stageTimeLimit);
 
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false);
