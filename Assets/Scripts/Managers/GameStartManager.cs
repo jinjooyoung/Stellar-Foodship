@@ -46,6 +46,7 @@ public class GameStartManager : MonoBehaviour
             p.state = PlayerState.Controllable;
         }
 
+        gameFlowManager.stageStart = true;
         // 4. 스테이지 타이머 시작
         gameFlowManager.timer.StartTimer(LevelManager.Instance.stageTimeLimit);
 

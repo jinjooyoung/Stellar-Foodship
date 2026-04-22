@@ -10,7 +10,8 @@ public class GameFlowManager : MonoBehaviour
     public Timer timer;
     public TextMeshProUGUI timerText;
 
-    [Header("스테이지 종료")] 
+    [Header("스테이지 종료")]
+    public bool stageStart = false;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private Player player1;
     [SerializeField] private Player player2;
@@ -30,6 +31,8 @@ public class GameFlowManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(timer.CurrentTime % 60f);
 
         timerText.text = $"{minutes}:{seconds:D2}";
+
+        if (!stageStart) return;
 
         if (timer.CurrentTime <= 0f)
         {
