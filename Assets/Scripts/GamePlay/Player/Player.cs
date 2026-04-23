@@ -56,8 +56,7 @@ public class Player : MonoBehaviour
 
     [Header("리스폰 / 사망")]
     public GameObject respawnPosition;
-    private MeshRenderer meshRenderer;
-    private CapsuleCollider capsuleCollider;
+    public GameObject DiePosition;
 
     [Header("산소 시스템")]
     public float oxygen = 12f;
@@ -79,8 +78,6 @@ public class Player : MonoBehaviour
         playerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
-        meshRenderer = GetComponent<MeshRenderer>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     /*void Update()
@@ -489,8 +486,7 @@ public class Player : MonoBehaviour
     public void Die()
     {
         Debug.Log("플레이어 사망");
-        if (meshRenderer != null) meshRenderer.enabled = false;
-        if (capsuleCollider != null) capsuleCollider.enabled = false;
+        this.transform.position = DiePosition.transform.position;
 
         state = PlayerState.Uncontrollable;
         oxygenUI.slider.gameObject.SetActive(false);
@@ -505,9 +501,6 @@ public class Player : MonoBehaviour
         Debug.Log("플레이어 부활");
         this.transform.position = respawnPosition.transform.position; 
         
-        if (meshRenderer != null) meshRenderer.enabled = true;
-        
-        if (capsuleCollider != null) capsuleCollider.enabled = true;
         state = PlayerState.Controllable;
         oxygenUI.slider.gameObject.SetActive(true);
         oxygen = maxOxygen;
