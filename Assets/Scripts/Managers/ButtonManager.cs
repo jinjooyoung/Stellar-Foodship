@@ -19,15 +19,15 @@ public class ButtonManager : MonoBehaviour
     // 설정창 열기 (메인 메뉴를 끄고 볼륨창을 켬)
     public void OpenVolumeSettings()
     {
-        if (mainCanvas != null && volumeCanvas != null & !isOpen)
+        if (volumeCanvas != null & !isOpen)
         {
-            mainCanvas.SetActive(false);
             volumeCanvas.SetActive(true);
+            isOpen = true;
         }
-        else if (mainCanvas != null && volumeCanvas != null && isOpen)
+        else if (volumeCanvas != null && isOpen)
         {
-            mainCanvas.SetActive(true);
             volumeCanvas.SetActive(false);
+            isOpen = false;
         }
     }
 
