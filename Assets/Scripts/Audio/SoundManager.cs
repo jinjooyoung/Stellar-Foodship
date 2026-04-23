@@ -68,4 +68,32 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("사운드 : " + name + " 없습니다.");
         }
     }
+
+    // 특정 사운드를 정지시키는 함수
+    public void StopSound(string name)
+    {
+        // 리스트에서 이름이 일치하는 사운드를 찾음
+        Sound s = sounds.Find(sound => sound.name == name);
+
+        if (s != null)
+        {
+            s.source.Stop(); // 찾았다면 해당 오디오 소스를 정지
+        }
+        else
+        {
+            Debug.LogWarning("정지하려는 사운드 : " + name + " 이(가) 리스트에 없습니다.");
+        }
+    }
+
+    // 모든 사운드를 정지시키는 함수
+    public void StopAllSounds()
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.source != null)
+            {
+                s.source.Stop();
+            }
+        }
+    }
 }
