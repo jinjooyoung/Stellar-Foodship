@@ -5515,7 +5515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e5e234f8e096043a4f6659ed366cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrderUIManager
-  orderUIPrefab: {fileID: 8464748212342352664, guid: d4c88391887cce245952227255e8bf75, type: 3}
+  orderUIPrefab: {fileID: 8464748212342352664, guid: d3714f7f396b41e4c8ca578a7d9d1feb, type: 3}
   uiParent: {fileID: 125116524}
   manager: {fileID: 1325330658}
   orderUIs: []
