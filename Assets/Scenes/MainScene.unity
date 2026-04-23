@@ -188,7 +188,7 @@ RectTransform:
   m_Father: {fileID: 1957984522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -400,7 +400,7 @@ RectTransform:
   m_Father: {fileID: 1181634856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -475,7 +475,7 @@ RectTransform:
   m_Father: {fileID: 254615338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -792,7 +792,7 @@ RectTransform:
   m_Father: {fileID: 44090962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1093,7 +1093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &548791642
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1573,7 +1573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: BackGround
-    clip: {fileID: 8300000, guid: 716858b28e0810f4abbb455dd87f2fe2, type: 3}
+    clip: {fileID: 8300000, guid: 9005e148bd1471c4f992e01177fd8d7b, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -1892,7 +1892,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1591605105}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: StartButton
+        m_MethodName: StageButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2156,7 +2156,7 @@ RectTransform:
   m_Father: {fileID: 589091876}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2368,7 +2368,7 @@ RectTransform:
   m_Father: {fileID: 719080675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2456,7 +2456,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304742142}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -2783,8 +2783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49085efdb6afab4a9aef7694330ded2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
-  mainCanvas: {fileID: 0}
-  volumeCanvas: {fileID: 0}
+  mainCanvas: {fileID: 1331737621}
+  volumeCanvas: {fileID: 548791641}
   isOpen: 0
 --- !u!1 &1620891876
 GameObject:
