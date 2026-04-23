@@ -85,8 +85,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.2, z: 1}
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Size: {x: 1, y: 1.2523887, z: 1}
+  m_Center: {x: 0.0057241917, y: 0.12619436, z: 0}
 --- !u!114 &6625086601932255883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   UIGroupPrefab: {fileID: 1434013893622286303, guid: e60a15dd09d5a0e4891aa97446b4a905, type: 3}
   canTakeDishUI: {fileID: 0}
   uiParent: {fileID: 0}
+  dishCount: 0
 --- !u!1001 &6076823897567479510
 PrefabInstance:
   m_ObjectHideFlags: 0
