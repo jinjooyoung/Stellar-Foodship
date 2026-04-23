@@ -107,6 +107,7 @@ public class Timer : MonoBehaviour
 
         if (CurrentTime <= 0f)
         {
+            SoundManager.instance.StopSound("Cooking");
             CurrentTime = 0f;
             IsRunning = false;
             OnCompleted?.Invoke();

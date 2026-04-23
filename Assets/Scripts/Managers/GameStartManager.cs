@@ -23,6 +23,7 @@ public class GameStartManager : MonoBehaviour
             p.state = PlayerState.Uncontrollable;
         }
 
+        SoundManager.instance.PlaySound("BGM");
         StartCoroutine(StartSequence());
     }
 
@@ -49,6 +50,7 @@ public class GameStartManager : MonoBehaviour
         gameFlowManager.stageStart = true;
         // 4. 스테이지 타이머 시작
         gameFlowManager.timer.StartTimer(LevelManager.Instance.stageTimeLimit);
+        SoundManager.instance.PlaySound("Whistle");
 
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false);

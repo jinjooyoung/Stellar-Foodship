@@ -97,8 +97,6 @@ public class OrderUI : MonoBehaviour
     // 아이디 받으면 그 id의 재료 갯수 리턴
     public int GetCountIngre(int id)
     {
-        int count = 0;
-
         if(id > 0 && id < 100)
         {
             return 1;

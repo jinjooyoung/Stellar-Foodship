@@ -47,6 +47,7 @@ public class GameFlowManager : MonoBehaviour
         player2.state = PlayerState.Uncontrollable;
         finalScoreText.text = $"최종 점수: {scoreManager.GetCurrentScore()}점";
         OverCanvas.SetActive(true);
+        SoundManager.instance.PlaySound("Whistle");
 
     }
 }

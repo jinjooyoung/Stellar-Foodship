@@ -62,6 +62,7 @@ public class SoundManager : MonoBehaviour
         if (soundToPlay != null)
         {
             soundToPlay.source.Play();
+            Debug.Log("사운드 : " + name + " 시작");
         }
         else
         {

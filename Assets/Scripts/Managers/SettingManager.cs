@@ -4,6 +4,7 @@ public class SettingManager : MonoBehaviour
 {
     [Header("설정 패널")]
     public GameObject settingCanvas;
+    public GameFlowManager gameFlowManager;
 
     [Header("플레이어")]
     public Player[] players;
@@ -35,6 +36,8 @@ public class SettingManager : MonoBehaviour
 
     public void StartInputPlayer()
     {
+        if (!gameFlowManager.stageStart) return;
+
         foreach (Player p in players)
         {
             p.state = PlayerState.Controllable;
