@@ -2827,6 +2827,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49085efdb6afab4a9aef7694330ded2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
+  mainCanvas: {fileID: 0}
+  volumeCanvas: {fileID: 0}
+  isOpen: 0
 --- !u!4 &857756296
 Transform:
   m_ObjectHideFlags: 0
@@ -2847,6 +2850,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5379384633150936037, guid: 3e86d6c1ef98e334097de5c898a975f1, type: 3}
   m_PrefabInstance: {fileID: 1773412110943018972}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &861961585 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6625086601932255883, guid: 3e86d6c1ef98e334097de5c898a975f1, type: 3}
+  m_PrefabInstance: {fileID: 1773412110943018972}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36683a2fd7bd06b428f5761af080bfd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DishReturner
 --- !u!1 &866302221
 GameObject:
   m_ObjectHideFlags: 0
@@ -7275,6 +7289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DishSubmissionCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 1446117642151131508, guid: f9b723af43afea043a0862477adc0811, type: 3}
+      propertyPath: dishReturner
+      value: 
+      objectReference: {fileID: 861961585}
     - target: {fileID: 1446117642151131508, guid: f9b723af43afea043a0862477adc0811, type: 3}
       propertyPath: orderManager
       value: 

@@ -4,6 +4,7 @@ public class DishSubmissionCounter : NonPickable
 {
     [Header("ÂüÁ¶")]
     [SerializeField] private OrderManager orderManager;
+    public DishReturner dishReturner;
 
     public bool _canPlace;
     public override bool canPlace => _canPlace;
@@ -44,6 +45,8 @@ public class DishSubmissionCounter : NonPickable
 
         Destroy(dish.cookingIconUI.gameObject);
         Destroy(dish.gameObject);
+        dishReturner.dishCount--;
+        dishReturner.UpdateUI();
         player.heldItem = null;
     }
 
