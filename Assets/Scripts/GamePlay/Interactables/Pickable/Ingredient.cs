@@ -11,6 +11,8 @@ public class Ingredient : Pickable
 
     public void OnCutComplete()
     {
+        if (this == null) return;
+
         isCut = true;
         
 

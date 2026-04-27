@@ -169,4 +169,20 @@ public class CuttingBoard : NonPickable
             timer.OnCompleted -= ingredient.OnCutComplete;
         }
     }
+
+    protected override void OnAfterItemPlaced(Pickable item)
+    {
+        if (item is Ingredient ingredient)
+        {
+            SubscribeEvents();
+        }
+    }
+
+    protected override void OnBeforeItemRemoved(Pickable item)
+    {
+        if (item is Ingredient ingredient)
+        {
+            UnsubscribeEvents();
+        }
+    }
 }

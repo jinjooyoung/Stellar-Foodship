@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum PlayerState
@@ -40,8 +41,9 @@ public class Player : MonoBehaviour
     [SerializeField] public PlayerState state;
 
     private Vector3 targetMoveDirection;    // 입력 방향
-    private Vector3 currentMoveDirection;   // 실제 이동 방향 (보간됨)
-    private Vector3 lastInputDirection;     // 마지막 이동 방향
+    public Vector3 currentMoveDirection;   // 실제 이동 방향 (보간됨)
+    public Vector3 lastInputDirection;     // 마지막 이동 방향
+    public Vector2 inputVector;
 
     [Header("대쉬")]
     public Vector3 dashDirection;
@@ -51,6 +53,17 @@ public class Player : MonoBehaviour
     public LayerMask dashObstacleLayer;
     public float lastDashTime; // 마지막 대시 시점 기록  
     public float dashCooldown = 1f; // 대시 쿨타임 (초)
+
+    [Header("리스폰 / 사망")]
+    public GameObject respawnPosition;
+    public GameObject DiePosition;
+
+    [Header("산소 시스템")]
+    public float oxygen = 12f;
+    public float maxOxygen = 12f;
+    public OxygenUI oxygenUI;
+
+    [HideInInspector] public bool isInOxygenZone = false;
 
     void Awake()
     {
@@ -64,6 +77,7 @@ public class Player : MonoBehaviour
         playerRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         playerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         playerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
     }
 
     /*void Update()
@@ -146,6 +160,7 @@ public class Player : MonoBehaviour
     {
         if (state == PlayerState.IsAiming || state == PlayerState.Uncontrollable)
             return;
+        inputVector = input;
 
         Vector3 dir = new Vector3(input.x, 0, input.y);
 
@@ -175,36 +190,54 @@ public class Player : MonoBehaviour
     // 상호작용1 : J / Button South
     public void InteractPrimary()
     {
-        // 타겟이 접시면 뭔가 들고있을 때 접시에 넣기
-        if (target is Dish dish)
+        if (target == null)
         {
             if (heldItem != null)
             {
-                target.Interact(this);
-                return;
+                Drop();
             }
-        }
-
-        // 타겟이 조리도구면 재료를 들고있을 때 재료 넣기
-        if (target is Cookware cookware)
-        {
-            if (heldItem is Ingredient)
-            {
-                target.Interact(this);
-                return;
-            }
-        }
-
-        // 들고 있는 아이템이 있으면 Drop
-        if (heldItem != null)
-        {
-            Drop();
             return;
         }
 
-        // 들고 있는 아이템이 없으면 target과 상호작용
-        if (target == null) return;
-        target.Interact(this);
+        // 먼저 상호작용 시도
+        bool interacted = false;
+
+        // 접시
+        if (target is Dish)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+        // 쓰레기통
+        else if (target is TrashCan)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+        // 조리도구
+        else if (target is Cookware)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+        // 기타 논픽커블도 일단 시도
+        else if (target is NonPickable)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+        // 픽커블
+        else if (target is Pickable)
+        {
+            target.Interact(this);
+            interacted = true;
+        }
+
+        // 상호작용 실패 + 들고 있음 -> 드랍
+        /*if (!interacted && heldItem != null)
+        {
+            Drop();
+        }*/
     }
 
     // 상호작용2 : K / Button West
@@ -439,7 +472,7 @@ public class Player : MonoBehaviour
         Pickable item = heldItem;
         heldItem = null;
 
-        item.OnThrown(lastInputDirection, throwForce);
+        item.OnThrown(lastInputDirection, throwForce, this);
     }
 
     //=========================================================================
@@ -448,6 +481,41 @@ public class Player : MonoBehaviour
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    public void Die()
+    {
+        Debug.Log("플레이어 사망");
+        this.transform.position = DiePosition.transform.position;
+
+        state = PlayerState.Uncontrollable;
+        oxygenUI.slider.gameObject.SetActive(false);
+
+
+        StartCoroutine(Respawn());
+    }
+
+    public IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(5f);
+        Debug.Log("플레이어 부활");
+        this.transform.position = respawnPosition.transform.position; 
+        
+        state = PlayerState.Controllable;
+        oxygenUI.slider.gameObject.SetActive(true);
+        oxygen = maxOxygen;
+    }
+
+    //===============================산소 로직=======================================
+    public void ChangeOxygen(float amount)
+    {
+        oxygen += amount;
+        oxygen = Mathf.Clamp(oxygen, 0f, maxOxygen);
+
+        if (oxygen <= 0f)
+        {
+            Die();
+        }
     }
 
     //--------------------------------디버그용 기즈모--------------------------------

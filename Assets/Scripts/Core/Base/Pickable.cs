@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UIElements;
@@ -8,46 +9,24 @@ public abstract class Pickable : MonoBehaviour, IInteractable
     public abstract int ID { get; }
     private bool isFlying = false;
 
-    // 생성될 때 플레이어와 충돌 판정 안 하도록 세팅
-    void Awake()
-    {
-        Collider myCol = GetComponent<Collider>();
-        if (myCol == null) return;
-
-        // "Player" 태그가 붙은 오브젝트만 검색
-        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-        foreach (var pObj in playerObjects)
-        {
-            Collider pCol = pObj.GetComponent<Collider>();
-            if (pCol != null)
-            {
-                Physics.IgnoreCollision(myCol, pCol);
-            }
-        }
-    }
-
     //==================================공통 기능======================================
 
     // 상호작용1: "집기 / 놓기" 공통 처리 | J / Button South
     public virtual void Interact(Player player)
     {
-        // Debug.Log($"{this.name} Pickable 상호작용 호출됨");
-
-        if (player.heldItem != null) return;
+        if (player.heldItem != null)
+        {
+            TryCombineWithHeld(player);
+            return;
+        }
 
         if (TryPickUp(player))
         {
             player.heldItem = this;
         }
     }
-        /*들고 있을 때는 Pickable.Interact 호출 안 됨. 
-    }     (Player.InteractPrimary에서 처리)*/
 
-        // 상호작용2: 던지기 | K / Button West
-    public virtual void InteractSecondary(Player player)
-    {
-        // 픽커블은 상호작용2키 필요 없을 듯 근데 혹시 모르니 일단 냅두고 나중에 확실해지면 인터페이스부터 코드 수정
-    }
+    public virtual void InteractSecondary(Player player) { }
 
     // 픽커블 -> Player가 들기
     public virtual bool TryPickUp(Player player)
@@ -84,12 +63,89 @@ public abstract class Pickable : MonoBehaviour, IInteractable
         return true;
     }
 
-    public void OnThrown(Vector3 direction, float force)
+    void TryCombineWithHeld(Player player)
+    {
+        Pickable held = player.heldItem;
+
+        // Ingredient → Cookware
+        if (held is Ingredient ing && this is Cookware cook)
+        {
+            if (cook.isComplete || cook.isBurnt) return;
+
+            bool canAdd = !ing.ingredientData.isCutable || ing.isCut;
+
+            if (canAdd && cook.currentIngredientIds.Count < 4)
+            {
+                cook.AddIngredient(ing);
+                player.heldItem = null;
+                return;
+            }
+        }
+
+        // Ingredient → Dish
+        if (held is Ingredient ing2 && this is Dish dish)
+        {
+            bool canAdd =
+                ing2.ingredientData.isRawPlatable &&
+                (!ing2.ingredientData.isCutable || ing2.isCut);
+
+            if (canAdd && dish.currentIngredientIds.Count < 4)
+            {
+                dish.currentIngredientIds.Add(ing2.ID);
+                dish.cookingIconUI?.UpdateUI(dish.currentIngredientIds);
+
+                Destroy(ing2.gameObject);
+                player.heldItem = null;
+                return;
+            }
+        }
+
+        // Cookware → Dish
+        if (held is Cookware cook2 && this is Dish dish2)
+        {
+            if (!cook2.isComplete || cook2.isBurnt) return;
+            if (dish2.currentIngredientIds.Count >= 4) return;
+            if (cook2.currentIngredientIds.Count == 0) return;
+
+            int resultId = CookingSystem.GetCookedIngredientId(
+                cook2.currentIngredientIds,
+                cook2.cookwareType,
+                cook2.isBurnt
+            );
+
+            dish2.currentIngredientIds.Add(resultId);
+            dish2.cookingIconUI?.UpdateUI(dish2.currentIngredientIds);
+
+            cook2.ClearIds();
+            return;
+        }
+
+        // Dish → Cookware
+        if (held is Dish dish3 && this is Cookware cook3)
+        {
+            if (!cook3.isComplete || cook3.isBurnt) return;
+            if (dish3.currentIngredientIds.Count >= 4) return;
+            if (cook3.currentIngredientIds.Count == 0) return;
+
+            int resultId = CookingSystem.GetCookedIngredientId(
+                cook3.currentIngredientIds,
+                cook3.cookwareType,
+                cook3.isBurnt
+            );
+
+            dish3.currentIngredientIds.Add(resultId);
+            dish3.cookingIconUI?.UpdateUI(dish3.currentIngredientIds);
+
+            cook3.ClearIds();
+            return;
+        }
+    }
+
+    public void OnThrown(Vector3 direction, float force, Player thrower)
     {
         isFlying = true;
 
-        Transform t = transform;
-        t.SetParent(null);
+        transform.SetParent(null);
 
         Rigidbody rb = GetComponent<Rigidbody>();
         Collider col = GetComponent<Collider>();
@@ -108,6 +164,14 @@ public abstract class Pickable : MonoBehaviour, IInteractable
         if (col != null)
         {
             col.enabled = true;
+
+            // 던진 플레이어랑 충돌 잠깐 무시
+            Collider playerCol = thrower.GetComponent<Collider>();
+            if (playerCol != null)
+            {
+                Physics.IgnoreCollision(col, playerCol, true);
+                StartCoroutine(ReenableCollision(col, playerCol, 0.3f));
+            }
         }
     }
 
@@ -135,66 +199,11 @@ public abstract class Pickable : MonoBehaviour, IInteractable
         // 2. Pickable 맞음
         if (layer == 6)
         {
-            // 재료를 던졌을때만 픽커블이랑 상호작용함
-            if (this is Ingredient ingredient)
+            Pickable otherPickable = collision.gameObject.GetComponent<Pickable>();
+            if (otherPickable != null)
             {
-                Cookware cookware = collision.gameObject.GetComponent<Cookware>();
-                Dish dish = collision.gameObject.GetComponent<Dish>();
-
-                // 닿은 픽커블이 조리도구인지, 접시인지
-                if (cookware != null)
-                {
-                    bool canAdd = !ingredient.ingredientData.isCutable || ingredient.isCut;
-                    if (canAdd)
-                    {
-                        cookware.AddIngredient(ingredient);
-                        isFlying = false;
-                        return;
-                    }
-                    else
-                    {
-                        Debug.Log("던지기 : 재료가 썰리지 않아 넣을 수 없습니다.");
-                        isFlying = false;
-                        return;
-                    }
-                }
-                else if (dish != null)
-                {
-                    // 생으로 담을 수 없는 재료면 return
-                    if (!ingredient.ingredientData.isRawPlatable)
-                    {
-                        Debug.Log("던지기 : 생으로 담을 수 없는 재료!");
-                        isFlying = false;
-                        return;
-                    }
-
-                    // 썰 수 있는 재료인지 확인
-                    if (ingredient.ingredientData.isCutable)
-                    {
-                        // 썰려있지 않으면 담을 수 없음
-                        if (!ingredient.isCut)
-                        {
-                            Debug.Log("던지기 : 재료가 썰려있지 않아, 담을 수 없습니다.");
-                            isFlying = false;
-                            return;
-                        }
-                    }
-
-                    // 접시가 이미 가득 찼으면
-                    if (dish.currentIngredientIds.Count >= 4)
-                    {
-                        Debug.Log("던지기 : 접시가 이미 가득 차서 넣을 수 없습니다!");
-                        isFlying = false;
-                        return;
-                    }
-
-                    dish.currentIngredientIds.Add(ingredient.ID);
-                    dish.cookingIconUI?.UpdateUI(dish.currentIngredientIds);
-                    Destroy(ingredient.gameObject);
-
-                    isFlying = false;
-                    return;
-                }
+                HandlePickableCollision(otherPickable);
+                return;
             }
         }
 
@@ -204,37 +213,87 @@ public abstract class Pickable : MonoBehaviour, IInteractable
             NonPickable nonPickable = collision.gameObject.GetComponent<NonPickable>();
             if (nonPickable != null)
             {
-                DishSubmissionCounter counter = collision.gameObject.GetComponent<DishSubmissionCounter>();
-                // 맞은게 요리 제출 창구
-                if (counter != null)
-                {
-                    // 던진게 접시
-                    if (this is Dish dish)
-                    {
-                        int resultId = CookingSystem.GetDishId(dish.currentIngredientIds, CookwareType.Plate);
-                        counter.ClearSubmitDish(resultId);
-
-                        Destroy(dish.cookingIconUI.gameObject);
-                        Destroy(dish.gameObject);
-
-                        isFlying = false;
-                        return;
-                    }
-                }
-
-                if (nonPickable.canPlace)
-                {
-                    if (nonPickable.TryPlaceItem(this))
-                    {
-                        isFlying = false;
-                        return;
-                    }
-                }
+                HandleNonPickableCollision(nonPickable);
+                return;
             }
         }
 
         // 3. 바닥 or 기타 → 그냥 떨어짐
         isFlying = false;
+    }
+
+    //=================================충돌 처리========================================
+    void HandlePickableCollision(Pickable other)
+    {
+        // 재료 던졌을 때만 의미 있음
+        if (this is Ingredient ingredient)
+        {
+            // 조리도구
+            if (other is Cookware cookware)
+            {
+                bool canAdd = !ingredient.ingredientData.isCutable || ingredient.isCut;
+
+                if (canAdd)
+                {
+                    cookware.AddIngredient(ingredient);
+                    isFlying = false;
+                    return;
+                }
+            }
+
+            // 접시
+            if (other is Dish dish)
+            {
+                bool canAdd =
+                    ingredient.ingredientData.isRawPlatable &&
+                    (!ingredient.ingredientData.isCutable || ingredient.isCut);
+
+                if (canAdd && dish.currentIngredientIds.Count < 4)
+                {
+                    dish.currentIngredientIds.Add(ingredient.ID);
+                    dish.cookingIconUI?.UpdateUI(dish.currentIngredientIds);
+                    Destroy(ingredient.gameObject);
+                    isFlying = false;
+                    return;
+                }
+            }
+        }
+
+        isFlying = false;
+    }
+
+    void HandleNonPickableCollision(NonPickable nonPickable)
+    {
+        // 제출대
+        DishSubmissionCounter counter = nonPickable.GetComponent<DishSubmissionCounter>();
+        if (counter != null && this is Dish dish)
+        {
+            int resultId = CookingSystem.GetDishId(dish.currentIngredientIds, CookwareType.Plate);
+            counter.ClearSubmitDish(resultId);
+
+            Destroy(dish.gameObject);
+            isFlying = false;
+            return;
+        }
+
+        // 일반 배치
+        if (nonPickable.canPlace)
+        {
+            if (nonPickable.TryPlaceItem(this))
+            {
+                isFlying = false;
+                return;
+            }
+        }
+
+        isFlying = false;
+    }
+
+    // 잠시 충돌 무시하는 코루틴
+    IEnumerator ReenableCollision(Collider a, Collider b, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Physics.IgnoreCollision(a, b, false);
     }
 
     //=================================데이터 전달======================================

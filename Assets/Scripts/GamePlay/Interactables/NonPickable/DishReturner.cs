@@ -16,7 +16,7 @@ public class DishReturner : NonPickable
 
     
 
-    private int dishCount = 0;
+    public int dishCount = 0;
 
     private void Start()
     {

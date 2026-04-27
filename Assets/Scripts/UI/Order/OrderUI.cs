@@ -10,7 +10,7 @@ public class OrderUI : MonoBehaviour
 
     [Header("UI 오브젝트")]
     public Image dishIcon;
-    public Image[] slots;    // 1차 조리품 아이콘
+    public Image[] slots;
 
     public Order order;
 
@@ -21,7 +21,7 @@ public class OrderUI : MonoBehaviour
         DishSO data = DataManager.instance.dishDatabase.GetDishById(dishId);
         dishIcon.sprite = data.icon;
 
-        int slotIndex = 0;
+        int ingreCount = 0;
 
         this.manager = manager;
         timer.OnCompleted += HandleTimerComplete;
@@ -31,18 +31,56 @@ public class OrderUI : MonoBehaviour
         {
             if (id == -1) continue;
 
-            if (slotIndex >= slots.Length) break;
+            if (ingreCount >= slots.Length) break;
 
-            slots[slotIndex].gameObject.SetActive(true);
-            InitIngreImage(id, slotIndex);
+            ingreCount += GetCountIngre(id);
+        }
 
-            slotIndex++;
+        for(int i = 0; i < ingreCount; i++)
+        {
+            slots[i].gameObject.SetActive(true);
         }
 
         // 재료 id의 수만큼 재료 ui 이미지를 켬 나머지는 끔
-        for (int i = slotIndex; i < slots.Length; i++)
+        for (int i = ingreCount; i < slots.Length; i++)
         {
             slots[i].gameObject.SetActive(false);
+        }
+
+        SetImage();
+    }
+
+    public void SetImage()
+    {
+        int slotIndex = 0;
+
+        foreach(int id in order.dish.ingredientIds)
+        {
+            if(id == -1) continue;
+
+            if(id < 100)
+            {
+                slots[slotIndex].sprite = DataManager.instance.ingredientDatabase.GetIngredientById(id).icon;
+                slotIndex++;
+            }
+            else
+            {
+                CookedIngredientSO cooked = DataManager.instance.cookedIngredientDatabase.GetCookedIngredientById(id);
+
+                Sprite temp;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    int ingreId = cooked.ingredientIds[i];
+
+                    if (ingreId == -1) continue;
+                    
+                    temp = DataManager.instance.ingredientDatabase.GetIngredientById(ingreId).icon;
+
+                    slots[slotIndex].sprite = temp;
+                    slotIndex++;
+                }
+            }
         }
     }
 
@@ -56,15 +94,35 @@ public class OrderUI : MonoBehaviour
         timer.OnCompleted -= HandleTimerComplete;
     }
 
-    public void InitIngreImage(int id, int index)
+    // 아이디 받으면 그 id의 재료 갯수 리턴
+    public int GetCountIngre(int id)
     {
-        if (id < 100)    // 재료 아이콘
+        if(id > 0 && id < 100)
         {
-            slots[index].sprite = DataManager.instance.ingredientDatabase.GetIngredientById(id).icon;
+            return 1;
         }
-        else    // 1차 조리품 아이콘 적용
+        else if (id < 200)
         {
-            slots[index].sprite = DataManager.instance.cookedIngredientDatabase.GetCookedIngredientById(id).icon;
+            CookedIngredientSO cooked = DataManager.instance.cookedIngredientDatabase.GetCookedIngredientById(id);
+
+            return FilterListCount(cooked);
         }
+
+        return 0;
+    }
+
+    // 1차 조리품 데이터를 받으면 필요한 재료의 갯수 리턴
+    private int FilterListCount(CookedIngredientSO data)
+    {
+        int count = 0;
+
+        for (int i = 0; i < data.ingredientIds.Count; i++)
+        {
+            if (data.ingredientIds[i] == -1) continue;
+
+            count++;
+        }
+
+        return count;
     }
 }

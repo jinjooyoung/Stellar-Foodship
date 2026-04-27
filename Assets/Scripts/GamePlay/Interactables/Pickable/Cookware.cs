@@ -34,29 +34,18 @@ public class Cookware : Pickable
         Debug.Log($"{currentIngredientIds[0]},{currentIngredientIds[1]},{currentIngredientIds[2]},{currentIngredientIds[3]}");
     }*/
 
-    public override void Interact(Player player)
+    /*public override void Interact(Player player)
     {
-        Debug.Log("조리도구 인터랙트 호출됨");
-        if (player.heldItem != null)
+        if (player.heldItem == null)
         {
-            Debug.Log("조리도구 인터랙트 플레이어 헬드아이템 있음");
-            if (player.heldItem is Ingredient ingredient)
-            {
-                Debug.Log("조리도구 인터랙트 플레이어가 재료를 들고있음");
-                HandleIngredientInput(player, ingredient);
-            }
-        }
-        else
-        {
-            Debug.Log("조리도구 인터랙트 플레이어 헬드아이템 없음");
             if (TryPickUp(player))
             {
                 player.heldItem = this;
             }
         }
-    }
+    }*/
 
-    private void HandleIngredientInput(Player player, Ingredient ingredient)
+    /*private void HandleIngredientInput(Player player, Ingredient ingredient)
     {
         Debug.Log("핸들 재료 인풋 호출됨");
         bool canAdd = !ingredient.ingredientData.isCutable || ingredient.isCut;
@@ -70,7 +59,7 @@ public class Cookware : Pickable
         {
             Debug.Log("재료가 썰리지 않아 넣을 수 없습니다.");
         }
-    }
+    }*/
 
     public void AddIngredient(Ingredient ingredient)
     {

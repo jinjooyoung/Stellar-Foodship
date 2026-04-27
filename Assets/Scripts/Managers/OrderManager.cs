@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class OrderManager : MonoBehaviour
@@ -14,9 +15,12 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private float spawnTimer = 0f;
     [SerializeField] private int orderIndexCounter = 0;
 
+    public TextMeshProUGUI comboText;
+
     void Update()
     {
         HandleOrderSpawn();
+        comboText.text = comboCount.ToString();
     }
 
     //====================================주문 생성====================================
@@ -98,6 +102,7 @@ public class OrderManager : MonoBehaviour
 
         comboCount = 0;
         scoreManager.AddScore(LevelManager.Instance.penaltyScore);
+        SoundManager.instance.PlaySound("Incorrect");
 
         RemoveOrder(index);
     }
@@ -111,11 +116,13 @@ public class OrderManager : MonoBehaviour
             if (orders[i].dishId == id)
             {
                 CompleteOrder(i);
+                SoundManager.instance.PlaySound("Correct");
                 return true;
             }
         }
 
         // 제출했는데 요리가 없으면 콤보만 끊김
+        SoundManager.instance.PlaySound("Incorrect");
         comboCount = 0;
         return false;
     }
