@@ -59,7 +59,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1908198116768598811}
   m_Father: {fileID: 5213317923556619557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6169369549956296789
@@ -76,9 +77,12 @@ GameObject:
   - component: {fileID: 1143582394769356869}
   - component: {fileID: 1764318670042160674}
   - component: {fileID: 8594374518970189994}
-  - component: {fileID: 170224164170443928}
+  - component: {fileID: 6490952015409356918}
+  - component: {fileID: 8523345859188605658}
   - component: {fileID: 8436439106858648293}
   - component: {fileID: 4093342842338775115}
+  - component: {fileID: 1814537991113793473}
+  - component: {fileID: 5063324448172745749}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -178,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901fe37a994404240886055f34ce3089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  player: {fileID: 0}
+  player: {fileID: 8594374518970189994}
 --- !u!114 &8594374518970189994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,14 +219,15 @@ MonoBehaviour:
   lastDashTime: 0
   dashCooldown: 1
   respawnPosition: {fileID: 0}
+  DiePosition: {fileID: 0}
   oxygen: 12
   maxOxygen: 12
-  oxygenUI: {fileID: 0}
+  oxygenUI: {fileID: 8523345859188605658}
   isInOxygenZone: 0
   showDashGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   high: 0
---- !u!114 &170224164170443928
+--- !u!114 &6490952015409356918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,16 +236,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 6169369549956296789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b1e49f8d87e5634c80a353efad90ae4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f005d9ee54cabb44b9c165f4ce67ce8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationController
+  m_EditorClassIdentifier: Assembly-CSharp::OxygenSystem
   player: {fileID: 8594374518970189994}
-  bottomTransform: {fileID: 85086634261773864}
-  tiltAmount: 20
-  leanDuration: 0.3
-  stopBouncePower: 1.5
-  idleStretch: 1.1
-  idleDuration: 0.8
+  decreaseRate: 1
+  increaseRate: 24
+--- !u!114 &8523345859188605658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169369549956296789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f615d41e56ed264689d3b947be04e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OxygenUI
+  player: {fileID: 8594374518970189994}
+  slider: {fileID: 0}
 --- !u!114 &8436439106858648293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +429,42 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1814537991113793473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169369549956296789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 3847637431
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 5063324448172745749}
+  ForceRemoteRenderTimeframe: 0
+--- !u!114 &5063324448172745749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169369549956296789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkTransform
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &8843816599359011023
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,3 +496,100 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5213317923556619557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &321945848978922941
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 85086634261773864}
+    m_Modifications:
+    - target: {fileID: 4938065796119620, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0030000187
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.939
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330995525429809387, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_Name
+      value: capsule_lite_female
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7330995525429809387, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 226847098874325822}
+  m_SourcePrefab: {fileID: 100100000, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+--- !u!4 &1908198116768598811 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2165246363611371174, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+  m_PrefabInstance: {fileID: 321945848978922941}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7046767402259058006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7330995525429809387, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+  m_PrefabInstance: {fileID: 321945848978922941}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &226847098874325822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046767402259058006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1e49f8d87e5634c80a353efad90ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationController
+  player: {fileID: 8594374518970189994}
+  bottomTransform: {fileID: 85086634261773864}
+  maxTiltAngle: 20
+  leanInDuration: 0.5
+  leanInEase: 5
+  bounce1: 10
+  bounce2: -5
+  bounce3: 3
+  bounceDuration: 0.15
+  idleStretch: 1.1
+  idleDuration: 0.8
