@@ -1,21 +1,21 @@
 using UnityEngine;
 
-// 행성 정보를 담는 클래스 (스크립트 상단에 배치)
 [System.Serializable]
 public class PlanetInfo
 {
-    public string planetName;    // 행성 이름
+    public string planetName;
     [Range(1, 5)]
-    public int difficulty;       // 난이도 (1~5)
+    public int difficulty;
     [TextArea]
-    public string description;   // 행성 정보/설명
+    public string description;
+    public int stageNumber; // <-- 추가: 스테이지 번호 (예: 1, 2, 3...)
 }
 
 public class Planet : MonoBehaviour
 {
     public bool isMain = false;
     public bool isSpecialPlanetA = false;
-    public PlanetInfo info; // <-- 여기에 정보 입력
+    public PlanetInfo info;
 
     private Vector3 targetPosition;
     private Vector3 targetScale;
@@ -30,7 +30,6 @@ public class Planet : MonoBehaviour
 
     void Awake()
     {
-        // 초기 위치/크기 설정
         if (isMain)
         {
             targetPosition = mainPosition;

@@ -1,5 +1,6 @@
 using UnityEngine;
-using TMPro; // 텍스트를 쓰기 위해 꼭 필요합니다!
+using TMPro;
+using UnityEngine.SceneManagement; // <-- 추가: 씬 전환 기능을 위해 필요합니다.
 
 public class PlanetSelector : MonoBehaviour
 {
@@ -8,13 +9,12 @@ public class PlanetSelector : MonoBehaviour
     public Transform mainSpot;
 
     [Header("[UI 설정]")]
-    public TextMeshProUGUI nameText;       // 행성 이름 UI 연결
-    public TextMeshProUGUI difficultyText; // 난이도 UI 연결
-    public TextMeshProUGUI infoText;       // 설명 UI 연결
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI difficultyText;
+    public TextMeshProUGUI infoText;
 
     void Start()
     {
-        // 시작하자마자 메인 행성이 있다면 UI를 먼저 한번 보여줍니다.
         if (currentMainPlanet != null)
         {
             UpdatePlanetUI(currentMainPlanet);
@@ -35,7 +35,6 @@ public class PlanetSelector : MonoBehaviour
                     {
                         SwapPlanets(clickedPlanet);
                     }
-                    // 클릭한 행성의 정보를 UI에 표시
                     UpdatePlanetUI(clickedPlanet);
                 }
             }
@@ -51,7 +50,6 @@ public class PlanetSelector : MonoBehaviour
         currentMainPlanet = newMain;
     }
 
-    // UI를 갱신하는 함수
     void UpdatePlanetUI(Planet planet)
     {
         if (nameText != null) nameText.text = planet.info.planetName;
@@ -65,6 +63,20 @@ public class PlanetSelector : MonoBehaviour
                 stars += (i < planet.info.difficulty) ? "★" : "☆";
             }
             difficultyText.text = stars;
+        }
+    }
+
+    // --- 추가된 부분: 버튼을 누르면 호출할 함수 ---
+    public void StartStage()
+    {
+        if (currentMainPlanet != null)
+        {
+            // 숫자를 "001" 형식의 3자리 문자열로 변환합니다.
+            string stageNumberString = currentMainPlanet.info.stageNumber.ToString("D3");
+            string sceneName = "Stage_" + stageNumberString;
+
+            Debug.Log(sceneName + "으로 진입합니다!");
+            SceneManager.LoadScene(sceneName);
         }
     }
 }
