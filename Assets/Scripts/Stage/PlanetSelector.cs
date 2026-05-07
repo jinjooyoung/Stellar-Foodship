@@ -1,26 +1,42 @@
 using UnityEngine;
+using TMPro; // 텍스트를 쓰기 위해 꼭 필요합니다!
 
 public class PlanetSelector : MonoBehaviour
 {
-    public Planet currentMainPlanet; // 현재 빨간 박스에 있는 행성
-    public Transform mainSpot;      // 빨간 박스의 위치(Transform)
+    [Header("[참조 설정]")]
+    public Planet currentMainPlanet;
+    public Transform mainSpot;
+
+    [Header("[UI 설정]")]
+    public TextMeshProUGUI nameText;       // 행성 이름 UI 연결
+    public TextMeshProUGUI difficultyText; // 난이도 UI 연결
+    public TextMeshProUGUI infoText;       // 설명 UI 연결
+
+    void Start()
+    {
+        // 시작하자마자 메인 행성이 있다면 UI를 먼저 한번 보여줍니다.
+        if (currentMainPlanet != null)
+        {
+            UpdatePlanetUI(currentMainPlanet);
+        }
+    }
 
     void Update()
     {
-        // 마우스 클릭 감지
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Planet clickedPlanet = hit.collider.GetComponent<Planet>();
-
-                // 클릭한 게 행성이고, 현재 메인이 아닌 경우에만 스왑
-                if (clickedPlanet != null && !clickedPlanet.isMain)
+                if (clickedPlanet != null)
                 {
-                    SwapPlanets(clickedPlanet);
+                    if (!clickedPlanet.isMain)
+                    {
+                        SwapPlanets(clickedPlanet);
+                    }
+                    // 클릭한 행성의 정보를 UI에 표시
+                    UpdatePlanetUI(clickedPlanet);
                 }
             }
         }
@@ -28,14 +44,27 @@ public class PlanetSelector : MonoBehaviour
 
     void SwapPlanets(Planet newMain)
     {
-        // 1. 현재 메인 행성을 자신의 노란 박스(Sub Position)로 보냄
         Vector3 oldMainSubPos = currentMainPlanet.subPosition;
         currentMainPlanet.MoveToSub(oldMainSubPos);
 
-        // 2. 클릭된 행성을 메인 자리(Main Spot)로 보냄
         newMain.MoveToMain(mainSpot.position);
-
-        // 3. 매니저의 메인 행성 참조 변경
         currentMainPlanet = newMain;
+    }
+
+    // UI를 갱신하는 함수
+    void UpdatePlanetUI(Planet planet)
+    {
+        if (nameText != null) nameText.text = planet.info.planetName;
+        if (infoText != null) infoText.text = planet.info.description;
+
+        if (difficultyText != null)
+        {
+            string stars = "난이도: ";
+            for (int i = 0; i < 5; i++)
+            {
+                stars += (i < planet.info.difficulty) ? "★" : "☆";
+            }
+            difficultyText.text = stars;
+        }
     }
 }
