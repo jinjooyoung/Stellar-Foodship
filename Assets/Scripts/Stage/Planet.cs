@@ -17,7 +17,7 @@ public class Planet : MonoBehaviour
     public bool isSpecialPlanetA = false;
     public PlanetInfo info;
 
-    private Vector3 targetPosition;
+    public Vector3 targetPosition;
     private Vector3 targetScale;
     public float lerpSpeed = 5f;
 

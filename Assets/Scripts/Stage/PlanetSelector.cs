@@ -13,6 +13,11 @@ public class PlanetSelector : MonoBehaviour
     public TextMeshProUGUI difficultyText;
     public TextMeshProUGUI infoText;
 
+    void Awake()
+    {
+        Time.timeScale = 1f;
+    }
+
     void Start()
     {
         if (currentMainPlanet != null)
@@ -45,7 +50,7 @@ public class PlanetSelector : MonoBehaviour
     {
         Vector3 oldMainSubPos = currentMainPlanet.subPosition;
         currentMainPlanet.MoveToSub(oldMainSubPos);
-
+                            
         newMain.MoveToMain(mainSpot.position);
         currentMainPlanet = newMain;
     }
