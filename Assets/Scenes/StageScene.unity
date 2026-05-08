@@ -675,7 +675,7 @@ MonoBehaviour:
   info:
     planetName: "\uD30C\uC778 \uD589\uC131"
     difficulty: 1
-    description: "\uC9F1\uC9F1 \uC26C\uC6B4\uAC8C \uD2B9\uC9D5\uC774\uB2F7"
+    description: "1\uB2E8\uACC4 \uB9F5"
     stageNumber: 1
   lerpSpeed: 5
   subPosition: {x: -11.7, y: 39, z: -56.6}
@@ -798,7 +798,7 @@ MonoBehaviour:
   info:
     planetName: "\uC624\uB80C\uC9C0 \uD589\uC131"
     difficulty: 2
-    description: "\uCABC\uAE08 \uC5B4\uB824\uC6CC\uC84C\uB2F7"
+    description: "2\uB2E8\uACC4 \uB9F5"
     stageNumber: 2
   lerpSpeed: 5
   subPosition: {x: -1.9, y: 51.9, z: -58}
@@ -1654,7 +1654,7 @@ MonoBehaviour:
   info:
     planetName: "\uC544\uC774\uC2A4\uADF8\uB808\uC774\uD589\uC131"
     difficulty: 2
-    description: "\uCABC\uAE08 \uB354\uB354 \uC5B4\uB824\uC6CC\uC84C\uB2F7"
+    description: "3\uB2E8\uACC4 \uB9F5"
     stageNumber: 3
   lerpSpeed: 5
   subPosition: {x: -36.6, y: 51.9, z: -50.7}
@@ -2386,7 +2386,7 @@ MonoBehaviour:
   info:
     planetName: "\uC544\uC774\uC2A4 \uD589\uC131"
     difficulty: 3
-    description: "\uC5B4\uB835\uB2F7"
+    description: "4\uB2E8\uACC4 \uB9F5 \uC0C8\uB85C\uC6B4 \uAE30\uBBF9 \uCD94\uAC00 "
     stageNumber: 4
   lerpSpeed: 5
   subPosition: {x: -29.8, y: 38.7, z: -55.3}
