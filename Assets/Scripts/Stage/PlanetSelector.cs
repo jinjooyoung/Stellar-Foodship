@@ -81,7 +81,7 @@ public class PlanetSelector : MonoBehaviour
             string sceneName = "Stage_" + stageNumberString;
 
             Debug.Log(sceneName + "으로 진입합니다!");
-            SceneManager.LoadScene(sceneName);
+            LoadingManager.instance.LoadSceneWithLoadingScreen(sceneName);
         }
     }
 }

@@ -31,6 +31,6 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
-    public void StageButton() => SceneManager.LoadScene("StageScene");
+    public void StageButton() => LoadingManager.instance.LoadSceneWithLoadingScreen("StageScene");
     public void ExitButton() => Application.Quit();
 }

@@ -677,6 +677,7 @@ MonoBehaviour:
     difficulty: 1
     description: "1\uB2E8\uACC4 \uB9F5"
     stageNumber: 1
+  targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
   subPosition: {x: -11.7, y: 39, z: -56.6}
   mainPosition: {x: -18.6, y: 54.9, z: -56.6}
@@ -800,6 +801,7 @@ MonoBehaviour:
     difficulty: 2
     description: "2\uB2E8\uACC4 \uB9F5"
     stageNumber: 2
+  targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
   subPosition: {x: -1.9, y: 51.9, z: -58}
   mainPosition: {x: -1.95, y: 51.9, z: -58}
@@ -923,6 +925,7 @@ MonoBehaviour:
     difficulty: 5
     description: "\uC644\uC804 \uC9F1 \uC5B4\uB835\uB2E4 "
     stageNumber: 7
+  targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
   subPosition: {x: -3.3, y: 65.7, z: -57.4}
   mainPosition: {x: -18.8, y: 52.6, z: -57.4}
@@ -1122,6 +1125,7 @@ MonoBehaviour:
     difficulty: 4
     description: "\uC655 \uC5B4\uB835\uB2E4"
     stageNumber: 6
+  targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
   subPosition: {x: -15.9, y: 72.1, z: -54.7}
   mainPosition: {x: -19.2, y: 54.9, z: -54.7}
@@ -1656,6 +1660,7 @@ MonoBehaviour:
     difficulty: 2
     description: "3\uB2E8\uACC4 \uB9F5"
     stageNumber: 3
+  targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
   subPosition: {x: -36.6, y: 51.9, z: -50.7}
   mainPosition: {x: -14.6, y: 51.9, z: -50.7}
@@ -1860,6 +1865,56 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1679266361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1679266363}
+  - component: {fileID: 1679266362}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1679266362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679266361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b97a892d1a38b479c1ba7f49f24c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadingManager
+  loadingSceneName: Loading
+  minimumLoadingTime: 2
+  useLoadingScreen: 1
+  useFadeEffect: 1
+  fadeSpeed: 1
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!4 &1679266363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679266361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.49576, y: 0, z: -9.43388}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2102,6 +2157,7 @@ MonoBehaviour:
     difficulty: 4
     description: "\uC870\uAE08 \uB354 \uC5B4\uB835\uB2F7"
     stageNumber: 5
+  targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
   subPosition: {x: -32.2, y: 69.7, z: -39.5}
   mainPosition: {x: -16, y: 54.5, z: -39.5}
@@ -2388,6 +2444,7 @@ MonoBehaviour:
     difficulty: 3
     description: "4\uB2E8\uACC4 \uB9F5 \uC0C8\uB85C\uC6B4 \uAE30\uBBF9 \uCD94\uAC00 "
     stageNumber: 4
+  targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
   subPosition: {x: -29.8, y: 38.7, z: -55.3}
   mainPosition: {x: -16, y: 53.6, z: -55.3}
@@ -2494,3 +2551,4 @@ SceneRoots:
   - {fileID: 549623811}
   - {fileID: 2105917468}
   - {fileID: 2058603055}
+  - {fileID: 1679266363}
