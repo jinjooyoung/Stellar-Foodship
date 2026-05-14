@@ -1373,15 +1373,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FusionBootstrap
   sessionName: Room_01
   playerPrefab:
-    RawGuidValue: b6bb0bbfba31bb44b8212dc7ad17761a
+    RawGuidValue:
+    - 4952606893362887606
+    - 1906737527376388536
   spawnPoints:
   - {fileID: 1589125545}
   - {fileID: 538106433}
   testPickablePrefab:
-    RawGuidValue: cfb137ef71230c14c9db6f28791d555e
+    RawGuidValue:
+    - 1444568552730767823
+    - 6797371618792299465
   pickableSpawnPoints:
   - {fileID: 353012480}
   - {fileID: 304296892}
+  pickableSpawned: 0
+  runner: {fileID: 0}
 --- !u!4 &1707606041
 Transform:
   m_ObjectHideFlags: 0
