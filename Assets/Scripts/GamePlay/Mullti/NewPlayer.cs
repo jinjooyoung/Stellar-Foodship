@@ -6,12 +6,16 @@ public class NewPlayer : NetworkBehaviour
     [Header("State")]
     [Networked] public PlayerState State { get; set; }
 
-    [Header("References")]
-    public Transform holdPoint;
-
     [Header("Interaction")]
-    public Pickable heldItem;
-    public IInteractable target;
+    [SerializeField] private Transform holdPoint;
+    [SerializeField] private float pickupDistance = 3.0f;
+    [SerializeField] private float dropForce = 2.0f;
+    [SerializeField] private LayerMask pickupMask;
+
+    [Networked] private NetworkObject HeldItem {  get; set; }
+
+    public Vector3 HoldPointPos =>
+        holdPoint != null ? holdPoint.position : transform.position + transform.forward * 1.2f + Vector3.up * 1.2f;
 
     [Header("Move")]
     public float moveSpeed = 5f;
@@ -66,7 +70,8 @@ public class NewPlayer : NetworkBehaviour
         // ================= 좌클릭 =================
         if (input.buttons.WasPressed(PrevButtons, (int)FusionBootstrap.InputButton.InteractPrimary))
         {
-            InteractPrimary();
+            if (!TryDropHeldBox())
+                TryPickUp();
         }
 
         // ================= 우클릭 =================
@@ -74,7 +79,7 @@ public class NewPlayer : NetworkBehaviour
         // 누르고 있는 동안
         if (input.buttons.IsSet((int)FusionBootstrap.InputButton.InteractSecondary))
         {
-            if (heldItem != null)
+            if (HeldItem != null)
             {
                 State = PlayerState.IsAiming;
             }
@@ -83,7 +88,7 @@ public class NewPlayer : NetworkBehaviour
         // 누른 순간
         if (input.buttons.WasPressed(PrevButtons, (int)FusionBootstrap.InputButton.InteractSecondary) && State == PlayerState.Controllable && State != PlayerState.IsAiming)
         {
-            InteractSecondary();
+            //InteractSecondary();
         }
 
         // 뗀 순간
@@ -91,7 +96,7 @@ public class NewPlayer : NetworkBehaviour
         {
             if (State == PlayerState.IsAiming)
             {
-                Throw();
+                //Throw();
                 State = PlayerState.Controllable;
             }
         }
@@ -186,7 +191,50 @@ public class NewPlayer : NetworkBehaviour
     }
 
     // ================= 상호작용 =================
-    void InteractPrimary()
+
+    void TryPickUp()
+    {
+        if (!Object.HasStateAuthority) return;
+
+        if (HeldItem != null) return;
+
+        Vector3 origin = transform.position;
+        Vector3 direction = transform.forward;
+
+        Debug.DrawRay(origin, direction * pickupDistance, Color.red, 3f);
+
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, pickupDistance, pickupMask))
+        {
+            Debug.Log("집기 히트 됨");
+            Debug.Log($"{Object}");
+
+            NewPickable pickable = hit.collider.GetComponentInChildren<NewPickable>();
+            if (pickable == null) return;
+
+            pickable.PickUp(Object.InputAuthority);
+            HeldItem = pickable.Object;
+        }
+        else
+        {
+            Debug.Log("집기 히트 안 됨");
+        }
+    }
+
+    private bool TryDropHeldBox()
+    {
+        if (!Object.HasStateAuthority) return false;
+
+        if (HeldItem == null) return false;
+
+        NewPickable pickable = HeldItem.GetComponent<NewPickable>();
+        if (pickable == null) return false;
+
+        pickable.Drop(transform.forward * dropForce);
+        HeldItem = null;
+        return true;
+    }
+
+    /*void InteractPrimary()
     {
         if (target == null)
         {
@@ -219,5 +267,5 @@ public class NewPlayer : NetworkBehaviour
         heldItem = null;
 
         Debug.Log($"{item} 던지기 호출");
-    }
+    }*/
 }

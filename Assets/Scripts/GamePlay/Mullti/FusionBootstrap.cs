@@ -15,6 +15,12 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] private NetworkPrefabRef playerPrefab;
     [SerializeField] private Transform[] spawnPoints;
 
+    [Header("Pickable Spawn")]
+    [SerializeField] private NetworkPrefabRef testPickablePrefab;
+    [SerializeField] private Transform[] pickableSpawnPoints;
+
+    private bool pickableSpawned = false;
+
     private const int MAX_PLAYERS = 2;
 
     private NetworkRunner runner;
@@ -57,9 +63,38 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         });
 
         if (result.Ok)
+        {
             Debug.Log($"[Fusion] StartGame OK - {mode}");
+
+            if (runner.IsServer)
+            {
+                PickableSpawn();
+            }
+        }
         else
+        {
             Debug.LogError($"[Fusion] StartGame FAILED - {result.ShutdownReason}");
+        }
+    }
+
+    public void PickableSpawn()
+    {
+        if (!runner.IsServer) return;
+
+        if (pickableSpawned) return;
+
+        pickableSpawned = true;
+
+        if (pickableSpawnPoints == null || pickableSpawnPoints.Length == 0) return;
+
+        foreach (var point in pickableSpawnPoints)
+        {
+            if(point == null) continue;
+
+            runner.Spawn(testPickablePrefab, point.position, point.rotation, null);
+        }
+
+        Debug.Log($"상자 {pickableSpawnPoints.Length} 개 생성 완료");
     }
 
     // ========================= PLAYER JOIN =========================
@@ -71,7 +106,7 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         if (!runner.IsServer)
             return;
 
-        // ❗ 2명 초과 차단
+        // 2명 초과 차단
         if (runner.ActivePlayers.Count() > MAX_PLAYERS)
         {
             Debug.LogWarning("룸이 가득 찼습니다. 입장 거부");
