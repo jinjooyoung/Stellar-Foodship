@@ -226,7 +226,10 @@ public class NewPlayer : NetworkBehaviour
 
         if (HeldItem == null) return false;
 
+        Debug.Log("TryDropHeldBox »£√‚µ ");
+
         NewPickable pickable = HeldItem.GetComponent<NewPickable>();
+        Debug.Log($"pickable : {pickable}");
         if (pickable == null) return false;
 
         pickable.Drop(transform.forward * dropForce);

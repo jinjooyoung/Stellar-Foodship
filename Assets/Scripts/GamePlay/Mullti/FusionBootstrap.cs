@@ -123,6 +123,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
             player
         );
 
+        runner.SetPlayerObject(player, obj);
+
         playerObjects[player] = obj;
 
         // 2명 아니면 게임 시작 안됨

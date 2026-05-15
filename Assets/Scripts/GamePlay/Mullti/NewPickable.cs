@@ -6,6 +6,9 @@ using UnityEngine;
 public class NewPickable : NetworkBehaviour
 {
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private Collider itemCollider;
+    [SerializeField] private Collider holderCollider;
+    [SerializeField] private NetworkObject holderObj;
 
     [Networked] public NetworkBool IsHeld { get; set; }
     [Networked] public PlayerRef Holder { get; set; }
@@ -13,21 +16,25 @@ public class NewPickable : NetworkBehaviour
     private void Reset()
     {
         rb = GetComponent<Rigidbody>();
+        itemCollider = GetComponent<Collider>();
     }
 
     public override void Spawned()
     {
         if (rb == null)
             rb = GetComponent<Rigidbody>();
+
+        if (itemCollider == null)
+            itemCollider = GetComponent<Collider>();
     }
 
     public override void FixedUpdateNetwork()
     {
         if (!Object.HasStateAuthority) return;
 
-        if (IsHeld && Runner.TryGetPlayerObject(Holder, out NetworkObject playerObj))
+        if (IsHeld && holderObj != null)
         {
-            NewPlayer player = playerObj.GetComponent<NewPlayer>();
+            NewPlayer player = holderObj.GetComponent<NewPlayer>();
 
             if (player != null)
             {
@@ -40,10 +47,27 @@ public class NewPickable : NetworkBehaviour
 
     public void PickUp(PlayerRef holder)
     {
-        if (!Object.HasStateAuthority) return;
+        Debug.Log($"PickUp »£√‚µ  / holder = {holder}");
+
+        if (!Object.HasStateAuthority)
+        {
+            Debug.Log("StateAuthority æ¯¿Ω");
+            return;
+        }
 
         Holder = holder;
         IsHeld = true;
+
+        if (Runner.TryGetPlayerObject(holder, out NetworkObject playerObj))
+        {
+            holderObj = playerObj;
+            holderCollider = holderObj.GetComponent<Collider>();
+
+            if (holderCollider != null && itemCollider != null)
+            {
+                Physics.IgnoreCollision(holderCollider, itemCollider, true);
+            }
+        }
 
         if (rb != null)
         {
@@ -55,7 +79,13 @@ public class NewPickable : NetworkBehaviour
 
     public void Drop(Vector3 impulse)
     {
-        if (!Object.HasInputAuthority) return;
+        Debug.Log("Drop »£√‚µ ");
+        if (!Object.HasStateAuthority) return;
+
+        if (holderCollider != null && itemCollider != null)
+        {
+            Physics.IgnoreCollision(holderCollider, itemCollider, false);
+        }
 
         Holder = default;
         IsHeld = false;
@@ -67,5 +97,8 @@ public class NewPickable : NetworkBehaviour
             rb.isKinematic = false;
             rb.AddForce(impulse, ForceMode.VelocityChange);
         }
+
+        holderCollider = null;
+        holderObj = null;
     }
 }
