@@ -7,8 +7,6 @@ public class NewPickable : NetworkBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider itemCollider;
-    [SerializeField] private Collider holderCollider;
-    [SerializeField] private NetworkObject holderObj;
 
     [Networked] public NetworkBool IsHeld { get; set; }
     [Networked] public PlayerRef Holder { get; set; }
@@ -28,77 +26,56 @@ public class NewPickable : NetworkBehaviour
             itemCollider = GetComponent<Collider>();
     }
 
-    public override void FixedUpdateNetwork()
+    public override void Render()
     {
-        if (!Object.HasStateAuthority) return;
+        if (!IsHeld)
+            return;
 
-        if (IsHeld && holderObj != null)
+        if (Runner.TryGetPlayerObject(Holder, out NetworkObject playerObj))
         {
-            NewPlayer player = holderObj.GetComponent<NewPlayer>();
+            NewPlayer player = playerObj.GetComponent<NewPlayer>();
 
-            if (player != null)
-            {
-                rb.isKinematic = true;
-                transform.position = player.HoldPointPos;
-                transform.rotation = Quaternion.LookRotation(player.transform.forward, Vector3.up);
-            }
+            if (player == null)
+                return;
+
+            transform.position = player.HoldPointPos;
+
+            transform.rotation =
+                Quaternion.LookRotation(player.transform.forward, Vector3.up);
         }
     }
 
     public void PickUp(PlayerRef holder)
     {
-        Debug.Log($"PickUp »£√‚µ  / holder = {holder}");
-
         if (!Object.HasStateAuthority)
-        {
-            Debug.Log("StateAuthority æ¯¿Ω");
             return;
-        }
 
         Holder = holder;
         IsHeld = true;
 
-        if (Runner.TryGetPlayerObject(holder, out NetworkObject playerObj))
-        {
-            holderObj = playerObj;
-            holderCollider = holderObj.GetComponent<Collider>();
+        rb.isKinematic = true;
 
-            if (holderCollider != null && itemCollider != null)
-            {
-                Physics.IgnoreCollision(holderCollider, itemCollider, true);
-            }
-        }
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
-        }
+        itemCollider.enabled = false;
     }
 
     public void Drop(Vector3 impulse)
     {
-        Debug.Log("Drop »£√‚µ ");
-        if (!Object.HasStateAuthority) return;
-
-        if (holderCollider != null && itemCollider != null)
-        {
-            Physics.IgnoreCollision(holderCollider, itemCollider, false);
-        }
+        if (!Object.HasStateAuthority)
+            return;
 
         Holder = default;
         IsHeld = false;
 
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = false;
-            rb.AddForce(impulse, ForceMode.VelocityChange);
-        }
+        rb.isKinematic = false;
 
-        holderCollider = null;
-        holderObj = null;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        itemCollider.enabled = true;
+
+        rb.AddForce(impulse, ForceMode.VelocityChange);
     }
 }

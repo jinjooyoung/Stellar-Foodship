@@ -12,6 +12,8 @@ public class NewPlayer : NetworkBehaviour
     [SerializeField] private float dropForce = 2.0f;
     [SerializeField] private LayerMask pickupMask;
 
+    public Transform HoldPoint => holdPoint;
+
     [Networked] private NetworkObject HeldItem {  get; set; }
 
     public Vector3 HoldPointPos =>
@@ -35,6 +37,12 @@ public class NewPlayer : NetworkBehaviour
     private bool isDashing;
 
     [Networked] private NetworkButtons PrevButtons { get; set; }
+
+    private void Awake()
+    {
+        Application.runInBackground = true;
+        Application.targetFrameRate = 120;
+    }
 
     // ========================= 포톤 업데이트 =========================
     public override void FixedUpdateNetwork()
