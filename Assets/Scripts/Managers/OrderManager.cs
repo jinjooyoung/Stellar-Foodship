@@ -45,7 +45,8 @@ public class OrderManager : MonoBehaviour
     void CreateOrder()
     {
         // 랜덤 요리 id 선택
-        int id = Random.Range(LevelManager.Instance.minOrderId, LevelManager.Instance.maxOrderId + 1);
+        int idindex = Random.Range(0, LevelManager.Instance.dishIDs.Count);
+        int id = LevelManager.Instance.dishIDs[idindex];
 
         // 데이터매니저에서 요리SO 가져오기
         DishSO dish = DataManager.instance.dishDatabase.GetDishById(id);
