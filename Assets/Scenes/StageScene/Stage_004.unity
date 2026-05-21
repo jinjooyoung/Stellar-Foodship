@@ -670,6 +670,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 1837532730}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -848,7 +852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   orderSpawnInterval: 10
   maxOrderCount: 3
-  dishIDs: 
+  dishIDs: ca000000cb000000cc000000
   penaltyScore: -50
   stageTimeLimit: 80
   ingreTime: 30
@@ -1084,6 +1088,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 27943055}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10676,6 +10684,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 1671772552}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

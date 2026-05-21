@@ -18,6 +18,6 @@ MonoBehaviour:
   isCutable: 1
   isRawPlatable: 1
   icon: {fileID: 21300000, guid: ac87849d9b523144db72170dd1a834e5, type: 3}
-  basicModel: {fileID: 3683028061234011040, guid: 9d23a0ba97ddfe94bb50bf68240a5a16, type: 3}
-  cutModel: {fileID: 0}
-  cookingModel: {fileID: 0}
+  basicModel: {fileID: 8203622035638806019, guid: 7fbd25df50d18e843ad73bf810800e9e, type: 3}
+  cutModel: {fileID: 3440356221352197283, guid: db78e0459a949b145a3188f88f506f68, type: 3}
+  cookingModel: {fileID: 1776124925185460401, guid: 7a9742943546c52468ccca3d26296866, type: 3}

@@ -848,7 +848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   orderSpawnInterval: 10
   maxOrderCount: 3
-  dishIDs: 
+  dishIDs: cb000000cc000000cf000000
   penaltyScore: -50
   stageTimeLimit: 80
   ingreTime: 30
@@ -1177,6 +1177,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1578786275}
     m_Modifications:
+    - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 1837532730}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5026,6 +5030,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1578786275}
     m_Modifications:
+    - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 27943055}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7136,6 +7144,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1578786275}
     m_Modifications:
+    - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 1671772552}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 

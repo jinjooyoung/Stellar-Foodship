@@ -238,17 +238,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6319914266722764413, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
   m_PrefabInstance: {fileID: 25817713}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &27943055 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2910524415127432076, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
-  m_PrefabInstance: {fileID: 611218796}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba517fe5d0d4df342b6f1b7d23ac0326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cookware
 --- !u!4 &27943059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 458766637009599619, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
@@ -702,7 +691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   orderSpawnInterval: 10
   maxOrderCount: 3
-  dishIDs: 
+  dishIDs: c9000000ca000000d1000000
   penaltyScore: -50
   stageTimeLimit: 80
   ingreTime: 30
@@ -1700,7 +1689,7 @@ PrefabInstance:
     - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: heldItem
       value: 
-      objectReference: {fileID: 1671772552}
+      objectReference: {fileID: 0}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3364,6 +3353,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+--- !u!114 &611218797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2910524415127432076, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+  m_PrefabInstance: {fileID: 611218796}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba517fe5d0d4df342b6f1b7d23ac0326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cookware
 --- !u!1 &612311122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5865,6 +5865,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1885046421}
     m_Modifications:
+    - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 1678384248}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5938,7 +5942,7 @@ PrefabInstance:
     - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: heldItem
       value: 
-      objectReference: {fileID: 1837532730}
+      objectReference: {fileID: 0}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7210,6 +7214,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1885046421}
     m_Modifications:
+    - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 611218797}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8098,7 +8106,7 @@ PrefabInstance:
     - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: heldItem
       value: 
-      objectReference: {fileID: 27943055}
+      objectReference: {fileID: 0}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8860,17 +8868,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 458766637009599619, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
   m_PrefabInstance: {fileID: 4731682981556113985}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1671772552 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2910524415127432076, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
-  m_PrefabInstance: {fileID: 4731682981556113985}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba517fe5d0d4df342b6f1b7d23ac0326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cookware
 --- !u!1 &1677202289
 GameObject:
   m_ObjectHideFlags: 0
@@ -8992,6 +8989,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+--- !u!114 &1678384248 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2910524415127432076, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+  m_PrefabInstance: {fileID: 1678384247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba517fe5d0d4df342b6f1b7d23ac0326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cookware
 --- !u!1 &1681933483
 GameObject:
   m_ObjectHideFlags: 0
@@ -10030,17 +10038,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826263869}
   m_CullTransparentMesh: 1
---- !u!114 &1837532730 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2910524415127432076, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
-  m_PrefabInstance: {fileID: 1678384247}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba517fe5d0d4df342b6f1b7d23ac0326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cookware
 --- !u!4 &1837532734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 458766637009599619, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
@@ -10916,6 +10913,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1885046421}
     m_Modifications:
+    - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
+      propertyPath: heldItem
+      value: 
+      objectReference: {fileID: 4731682981556113986}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -15204,6 +15205,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+--- !u!114 &4731682981556113986 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2910524415127432076, guid: a94c2cbcda3eab645a94eff184c1d4ee, type: 3}
+  m_PrefabInstance: {fileID: 4731682981556113985}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba517fe5d0d4df342b6f1b7d23ac0326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cookware
 --- !u!1001 &6041015354059790085
 PrefabInstance:
   m_ObjectHideFlags: 0
