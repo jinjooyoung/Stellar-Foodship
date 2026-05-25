@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -7,8 +8,7 @@ public class LevelManager : MonoBehaviour
     [Header("주문 설정")]
     public float orderSpawnInterval = 30f;  // 주문 생성 주기
     public int maxOrderCount = 5;           // 최대 주문 수
-    public int minOrderId = 200;            // 최소 요리 id
-    public int maxOrderId = 209;            // 최대 요리 id
+    public List<int> dishIDs = new List<int>(); // 주문 ID 리스트
 
     [Header("점수 설정")]
     public int penaltyScore = -50;          // 주문 실패 패널티 점수
