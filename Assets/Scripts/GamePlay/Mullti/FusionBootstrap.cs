@@ -12,7 +12,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] private string sessionName = "Room_01";
 
     [Header("Player")]
-    [SerializeField] private NetworkPrefabRef playerPrefab;
+    //[SerializeField] private NetworkPrefabRef playerPrefab;
+    [SerializeField] private NetworkPrefabRef[] playerPrefab;
     [SerializeField] private Transform[] spawnPoints;
 
     [Header("Pickable Spawn")]
@@ -20,6 +21,13 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] private Transform[] pickableSpawnPoints;
 
     private bool pickableSpawned = false;
+
+    [SerializeField] private int maxPlayers = 2;
+
+    [Header("Lobby")]
+    [SerializeField] private NetworkPrefabRef lobbyDataPrefab;
+
+    private Dictionary<PlayerRef, NetworkObject> lobbyObjects = new();
 
     private const int MAX_PLAYERS = 2;
 
@@ -107,28 +115,22 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
             return;
 
         // 2명 초과 차단
-        if (runner.ActivePlayers.Count() > MAX_PLAYERS)
+        if (lobbyObjects.Count >= maxPlayers)
         {
-            Debug.LogWarning("룸이 가득 찼습니다. 입장 거부");
-            runner.Disconnect(player);
+            Debug.LogWarning($"최대 인원 초과 : {player}");
             return;
         }
 
-        Vector3 spawnPos = GetSpawnPosition(player);
-
-        var obj = runner.Spawn(
-            playerPrefab,
-            spawnPos,
+        NetworkObject lobbyObj = runner.Spawn(
+            lobbyDataPrefab,
+            Vector3.zero,
             Quaternion.identity,
             player
         );
 
-        runner.SetPlayerObject(player, obj);
+        lobbyObjects[player] = lobbyObj;
 
-        playerObjects[player] = obj;
-
-        // 2명 아니면 게임 시작 안됨
-        TryStartGame();
+        Debug.Log($"로비 데이터 생성 완료 : {player}");
     }
 
     private void TryStartGame()
