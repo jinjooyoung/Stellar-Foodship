@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 {
     [Header("Session")]
-    [SerializeField] private string sessionName = "Room_01";
+    [SerializeField] private string sessionName;
 
     [Header("Player")]
     //[SerializeField] private NetworkPrefabRef playerPrefab;
@@ -23,6 +24,9 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     private bool pickableSpawned = false;
 
     [SerializeField] private int maxPlayers = 2;
+
+    [SerializeField]
+    private TMP_InputField roomCodeInput;
 
     [Header("Lobby")]
     [SerializeField] private NetworkPrefabRef lobbyDataPrefab;
@@ -47,6 +51,36 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         Dash = 2
     }
 
+    // ========================= 메인화면 ===========================
+
+    public void CreateRoom()
+    {
+        string roomCode = GenerateRoomCode();
+
+        sessionName = roomCode;
+
+        Debug.Log($"방 생성 : {roomCode}");
+
+        StartHost();
+    }
+
+    private string GenerateRoomCode()
+    {
+        return UnityEngine.Random.Range(100000, 1000000).ToString();
+    }
+
+    public void JoinRoomPopup()
+    {
+
+    }
+
+    public void TryJoinRoom()
+    {
+        sessionName = roomCodeInput.text;
+
+        StartClient();
+    }
+
     // ========================= START =========================
 
     public void StartHost() => _ = StartGame(GameMode.Host);
@@ -67,7 +101,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
             GameMode = mode,
             SessionName = sessionName,
             SceneManager = sceneManager,
-            PlayerCount = MAX_PLAYERS   // 2명 제한
+            PlayerCount = MAX_PLAYERS,   // 2명 제한
+            EnableClientSessionCreation = false
         });
 
         if (result.Ok)
@@ -81,7 +116,16 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         }
         else
         {
-            Debug.LogError($"[Fusion] StartGame FAILED - {result.ShutdownReason}");
+            switch (result.ShutdownReason)
+            {
+                case ShutdownReason.GameNotFound:
+                    Debug.Log("존재하지 않는 방입니다.");
+                    break;
+
+                case ShutdownReason.GameIsFull:
+                    Debug.Log("이미 방이 가득 찼습니다.");
+                    break;
+            }
         }
     }
 
