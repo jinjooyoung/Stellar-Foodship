@@ -11,6 +11,7 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 {
     [Header("Session")]
     [SerializeField] private string sessionName;
+    private List<SessionInfo> cachedSessions = new();
 
     [Header("Player")]
     //[SerializeField] private NetworkPrefabRef playerPrefab;
@@ -24,9 +25,6 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     private bool pickableSpawned = false;
 
     [SerializeField] private int maxPlayers = 2;
-
-    [SerializeField]
-    private TMP_InputField roomCodeInput;
 
     [Header("Lobby")]
     [SerializeField] private NetworkPrefabRef lobbyDataPrefab;
@@ -62,23 +60,53 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         Debug.Log($"방 생성 : {roomCode}");
 
         StartHost();
+        UIManager.Instance.CreateRoomUISetting(roomCode);
     }
 
     private string GenerateRoomCode()
     {
-        return UnityEngine.Random.Range(100000, 1000000).ToString();
+        string code;
+
+        do
+        {
+            code = UnityEngine.Random
+                .Range(100000, 1000000)
+                .ToString();
+        }
+        while (SessionExists(code));
+
+        return code;
     }
 
-    public void JoinRoomPopup()
+    private bool SessionExists(string roomCode)
     {
+        foreach (var session in cachedSessions)
+        {
+            if (session.Name == roomCode)
+                return true;
+        }
 
+        return false;
     }
 
     public void TryJoinRoom()
     {
-        sessionName = roomCodeInput.text;
+        if (!UIManager.Instance.TryGetRoomCode(out string roomCode))
+            return;
+
+        sessionName = roomCode;
 
         StartClient();
+    }
+
+    public async void LeaveRoom()
+    {
+        if (runner == null)
+            return;
+
+        await runner.Shutdown();
+
+        UIManager.Instance.ShowMainMenu();
     }
 
     // ========================= START =========================
@@ -107,26 +135,55 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
         if (result.Ok)
         {
-            Debug.Log($"[Fusion] StartGame OK - {mode}");
+            if (mode == GameMode.Client)
+            {
+                UIManager.Instance.ShowLobby();
+                UIManager.Instance.SetPlayerCount(2);
+                UIManager.Instance.SetClientUI();
+            }
+            
+            /*Debug.Log($"[Fusion] StartGame OK - {mode}");
 
             if (runner.IsServer)
             {
                 PickableSpawn();
-            }
+            }*/
         }
         else
         {
+            if (mode == GameMode.Host) return;
+
             switch (result.ShutdownReason)
             {
                 case ShutdownReason.GameNotFound:
-                    Debug.Log("존재하지 않는 방입니다.");
+                    UIManager.Instance.ShowToast("존재하지 않는 방입니다.");
                     break;
 
                 case ShutdownReason.GameIsFull:
-                    Debug.Log("이미 방이 가득 찼습니다.");
+                    UIManager.Instance.ShowToast("이미 가득 찬 방입니다.");
+                    break;
+
+                default:
+                    UIManager.Instance.ShowToast("접속에 실패했습니다.");
                     break;
             }
         }
+    }
+
+    public async void StartStageSelectScene()
+    {
+        if (runner == null)
+            return;
+
+        if (!runner.IsServer)
+            return;
+
+        Debug.Log("게임 시작");
+
+        await runner.LoadScene(
+            SceneRef.FromIndex(1),
+            UnityEngine.SceneManagement.LoadSceneMode.Single
+        );
     }
 
     public void PickableSpawn()
@@ -175,6 +232,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         lobbyObjects[player] = lobbyObj;
 
         Debug.Log($"로비 데이터 생성 완료 : {player}");
+
+        UIManager.Instance.SetPlayerCount(lobbyObjects.Count);
     }
 
     private void TryStartGame()
@@ -197,6 +256,49 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         }
 
         Debug.Log($"플레이어 퇴장: {player}");
+
+        UIManager.Instance.SetPlayerCount(lobbyObjects.Count);
+    }
+
+    private void Update()
+    {
+        if (runner == null)
+            return;
+
+        if (!runner.IsServer)
+            return;
+
+        CheckReadyState();
+    }
+
+    private void CheckReadyState()
+    {
+        PlayerLobbyData[] datas =
+       FindObjectsByType<PlayerLobbyData>(FindObjectsSortMode.None);
+
+        bool allReady = true;
+        int validCount = 0;
+
+        foreach (var data in datas)
+        {
+            if (data.Object == null)
+                continue;
+
+            if (!data.Object.IsValid)
+                continue;
+
+            validCount++;
+
+            if (!data.IsReady)
+            {
+                allReady = false;
+                break;
+            }
+        }
+
+        UIManager.Instance.SetStartButtonInteractable(
+            validCount == 2 && allReady
+        );
     }
 
     // ========================= INPUT =========================
@@ -243,6 +345,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
     {
         Debug.Log($"Disconnected: {reason}");
+        UIManager.Instance.ShowToast("호스트가 방을 종료했습니다.");
+        UIManager.Instance.ShowMainMenu();
     }
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason reason)
@@ -253,7 +357,10 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
-    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) { }
+    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
+    {
+        cachedSessions = sessionList;
+    }
     public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
     public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
 

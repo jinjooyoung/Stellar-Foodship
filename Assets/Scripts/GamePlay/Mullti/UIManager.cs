@@ -69,6 +69,16 @@ public class UIManager : MonoBehaviour
         ShowMainMenu();
     }
 
+    public void CreateRoomUISetting(string roomCode)
+    {
+        ShowLobby();
+        SetRoomCode(roomCode);
+        SetHostUI();
+        SetPlayerCount(1);
+        SetReadyState(false, false);
+        SetStartButtonInteractable(false);
+    }
+
     // ===============================
     // SCREEN
     // ===============================
@@ -129,13 +139,11 @@ public class UIManager : MonoBehaviour
     public void SetHostUI()
     {
         startButton.gameObject.SetActive(true);
-        readyButton.gameObject.SetActive(false);
     }
 
     public void SetClientUI()
     {
         startButton.gameObject.SetActive(false);
-        readyButton.gameObject.SetActive(true);
     }
 
     public void SetStartButtonInteractable(bool value)
