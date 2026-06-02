@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -261,6 +262,11 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
             player
         );
 
+        PlayerLobbyData lobbyData =
+    lobbyObj.GetComponent<PlayerLobbyData>();
+
+        lobbyData.SlotIndex = lobbyObjects.Count;
+
         lobbyObjects[player] = lobbyObj;
 
         Debug.Log($"로비 데이터 생성 완료 : {player}");
@@ -289,24 +295,33 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
         Debug.Log($"플레이어 퇴장: {player}");
 
-        UIManager.Instance.SetPlayerCount(lobbyObjects.Count);
+        if (SceneManager.GetActiveScene().name == "2_Lobby")
+        {
+            UIManager.Instance.SetPlayerCount(lobbyObjects.Count);
+        }
     }
 
-    /*private void Update()
+    private void Update()
     {
         if (runner == null)
             return;
 
-        if (!runner.IsServer)
+        if (SceneManager.GetActiveScene().name != "2_Lobby")
             return;
 
         CheckReadyState();
-    }*/
+    }
 
     public void CheckReadyState()
     {
+        if (runner == null)
+            return;
+
+        if (SceneManager.GetActiveScene().name != "2_Lobby")
+            return;
+
         PlayerLobbyData[] datas =
-        FindObjectsByType<PlayerLobbyData>(FindObjectsSortMode.None);
+            FindObjectsByType<PlayerLobbyData>(FindObjectsSortMode.None);
 
         bool p1Ready = false;
         bool p2Ready = false;
@@ -323,11 +338,14 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
             playerCount++;
 
-            if (playerCount == 1)
+            if (data.SlotIndex == 0)
+            {
                 p1Ready = data.IsReady;
-
-            if (playerCount == 2)
+            }
+            else if (data.SlotIndex == 1)
+            {
                 p2Ready = data.IsReady;
+            }
         }
 
         UIManager.Instance.SetPlayerCount(playerCount);
@@ -338,7 +356,7 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
             p1Ready &&
             p2Ready;
 
-        if (runner.IsServer)
+        if (runner != null && runner.IsServer)
         {
             UIManager.Instance.SetStartButtonInteractable(allReady);
         }

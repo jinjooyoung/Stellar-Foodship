@@ -36,9 +36,11 @@ public class LobbySelectUI : MonoBehaviour
 
     public void Ready()
     {
-        if (localLobbyData == null) return;
-        bool newReady = !localLobbyData.IsReady;
+        if (localLobbyData == null)
+            return;
 
-        localLobbyData.RPC_SetReady(newReady);
+        localLobbyData.RPC_SetReady(
+            !localLobbyData.IsReady
+        );
     }
 }

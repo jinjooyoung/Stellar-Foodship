@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerLobbyData : NetworkBehaviour
 {
+    [Networked] public int SlotIndex { get; set; }
     [Networked] public int CharacterIndex { get; set; }
     [Networked] public NetworkBool IsReady { get; set; }
 
