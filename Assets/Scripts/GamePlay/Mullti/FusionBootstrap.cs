@@ -35,6 +35,7 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     private const int MAX_PLAYERS = 2;
 
     private NetworkRunner runner;
+    public NetworkRunner Runner => runner;
     private Dictionary<PlayerRef, NetworkObject> playerObjects = new();
 
     public struct NetworkInputData : INetworkInput
@@ -216,6 +217,14 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         await runner.LoadScene(
             SceneRef.FromIndex(1),
             UnityEngine.SceneManagement.LoadSceneMode.Single
+        );
+    }
+
+    public async void StartGameScene()
+    {
+        await runner.LoadScene(
+            SceneRef.FromIndex(3),  // 임시로 3으로 둠 나중에 수정 필요
+            LoadSceneMode.Single
         );
     }
 

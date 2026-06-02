@@ -13,6 +13,10 @@ public class PlanetSelector : MonoBehaviour
     public TextMeshProUGUI difficultyText;
     public TextMeshProUGUI infoText;
 
+    [Header("[멀티 추가]")]
+    private StageSelectData stageSelectData;
+    private FusionBootstrap bootstrap;
+
     void Awake()
     {
         Time.timeScale = 1f;
@@ -20,6 +24,12 @@ public class PlanetSelector : MonoBehaviour
 
     void Start()
     {
+        stageSelectData =
+        FindFirstObjectByType<StageSelectData>();
+
+        bootstrap =
+            FindFirstObjectByType<FusionBootstrap>();
+
         if (currentMainPlanet != null)
         {
             UpdatePlanetUI(currentMainPlanet);
@@ -28,20 +38,68 @@ public class PlanetSelector : MonoBehaviour
 
     void Update()
     {
+        if (bootstrap == null)
+            return;
+
+        if (!bootstrap.Runner.IsServer)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray =
+                Camera.main.ScreenPointToRay(Input.mousePosition);
+
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Planet clickedPlanet = hit.collider.GetComponent<Planet>();
-                if (clickedPlanet != null)
+                Planet clickedPlanet =
+                    hit.collider.GetComponent<Planet>();
+
+                if (clickedPlanet == null)
+                    return;
+
+                if (!clickedPlanet.isMain)
                 {
-                    if (!clickedPlanet.isMain)
-                    {
-                        SwapPlanets(clickedPlanet);
-                    }
-                    UpdatePlanetUI(clickedPlanet);
+                    SwapPlanets(clickedPlanet);
                 }
+
+                UpdatePlanetUI(clickedPlanet);
+
+                if (stageSelectData != null)
+                {
+                    stageSelectData.RPC_SetPlanet(
+                        clickedPlanet.info.stageNumber
+                    );
+                }
+            }
+        }
+    }
+
+    private int lastPlanet = -1;
+
+    private void LateUpdate()
+    {
+        if (stageSelectData == null)
+            return;
+
+        if (lastPlanet == stageSelectData.SelectedPlanet)
+            return;
+
+        lastPlanet = stageSelectData.SelectedPlanet;
+
+        Planet[] planets =
+            FindObjectsByType<Planet>(FindObjectsSortMode.None);
+
+        foreach (Planet p in planets)
+        {
+            if (p.info.stageNumber == lastPlanet)
+            {
+                if (!p.isMain)
+                {
+                    SwapPlanets(p);
+                }
+
+                UpdatePlanetUI(p);
+                break;
             }
         }
     }
@@ -74,14 +132,12 @@ public class PlanetSelector : MonoBehaviour
     // --- 추가된 부분: 버튼을 누르면 호출할 함수 ---
     public void StartStage()
     {
-        if (currentMainPlanet != null)
-        {
-            // 숫자를 "001" 형식의 3자리 문자열로 변환합니다.
-            string stageNumberString = currentMainPlanet.info.stageNumber.ToString("D3");
-            string sceneName = "Stage_" + stageNumberString;
+        if (bootstrap == null)
+            return;
 
-            Debug.Log(sceneName + "으로 진입합니다!");
-            LoadingManager.instance.LoadSceneWithLoadingScreen(sceneName);
-        }
+        if (!bootstrap.Runner.IsServer)
+            return;
+
+        bootstrap.StartGameScene();
     }
 }
