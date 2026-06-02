@@ -49,10 +49,22 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         Dash = 2
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+
+    private void OnDestroy()
+    {
+        Debug.Log("FusionBootstrap Destroy");
+    }
+
     // ========================= 메인화면 ===========================
 
     public void CreateRoom()
     {
+        Debug.Log($"방 생성 버튼 눌림");
         string roomCode = GenerateRoomCode();
 
         sessionName = roomCode;
@@ -104,7 +116,18 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         if (runner == null)
             return;
 
+        GameObject runnerObject = runner.gameObject;
+
         await runner.Shutdown();
+
+        Destroy(runnerObject);
+
+        runner = null;
+
+        lobbyObjects.Clear();
+        playerObjects.Clear();
+
+        pickableSpawned = false;
 
         UIManager.Instance.ShowMainMenu();
     }
@@ -116,20 +139,29 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
     private async Task StartGame(GameMode mode)
     {
-        if (runner != null) return;
+        if (runner != null)
+            return;
 
-        runner = gameObject.AddComponent<NetworkRunner>();
+        GameObject runnerObject =
+            new GameObject("NetworkRunnerObject");
+
+        runnerObject.transform.SetParent(transform);
+
+        runner =
+            runnerObject.AddComponent<NetworkRunner>();
+
         runner.ProvideInput = true;
         runner.AddCallbacks(this);
 
-        var sceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>();
+        var sceneManager =
+            runnerObject.AddComponent<NetworkSceneManagerDefault>();
 
         var result = await runner.StartGame(new StartGameArgs
         {
             GameMode = mode,
             SessionName = sessionName,
             SceneManager = sceneManager,
-            PlayerCount = MAX_PLAYERS,   // 2명 제한
+            PlayerCount = MAX_PLAYERS,
             EnableClientSessionCreation = false
         });
 
@@ -260,7 +292,7 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         UIManager.Instance.SetPlayerCount(lobbyObjects.Count);
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (runner == null)
             return;
@@ -269,15 +301,17 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
             return;
 
         CheckReadyState();
-    }
+    }*/
 
-    private void CheckReadyState()
+    public void CheckReadyState()
     {
         PlayerLobbyData[] datas =
-       FindObjectsByType<PlayerLobbyData>(FindObjectsSortMode.None);
+        FindObjectsByType<PlayerLobbyData>(FindObjectsSortMode.None);
 
-        bool allReady = true;
-        int validCount = 0;
+        bool p1Ready = false;
+        bool p2Ready = false;
+
+        int playerCount = 0;
 
         foreach (var data in datas)
         {
@@ -287,18 +321,27 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
             if (!data.Object.IsValid)
                 continue;
 
-            validCount++;
+            playerCount++;
 
-            if (!data.IsReady)
-            {
-                allReady = false;
-                break;
-            }
+            if (playerCount == 1)
+                p1Ready = data.IsReady;
+
+            if (playerCount == 2)
+                p2Ready = data.IsReady;
         }
 
-        UIManager.Instance.SetStartButtonInteractable(
-            validCount == 2 && allReady
-        );
+        UIManager.Instance.SetPlayerCount(playerCount);
+        UIManager.Instance.SetReadyState(p1Ready, p2Ready);
+
+        bool allReady =
+            playerCount == 2 &&
+            p1Ready &&
+            p2Ready;
+
+        if (runner.IsServer)
+        {
+            UIManager.Instance.SetStartButtonInteractable(allReady);
+        }
     }
 
     // ========================= INPUT =========================

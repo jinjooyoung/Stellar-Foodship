@@ -1674,7 +1674,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1192698984}
-  - {fileID: 1860136821}
   - {fileID: 1081386950}
   - {fileID: 1905032555}
   m_Father: {fileID: 0}
@@ -2267,8 +2266,8 @@ CanvasGroup:
   m_GameObject: {fileID: 794422993}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &796740910
 GameObject:
@@ -3601,6 +3600,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1860136822}
+        m_TargetAssemblyTypeName: FusionBootstrap, Assembly-CSharp
+        m_MethodName: CheckReadyState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1198081311
 GameObject:
   m_ObjectHideFlags: 0
@@ -3647,8 +3658,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1198081311}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1248606223
 GameObject:
@@ -4204,8 +4215,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1469708892}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1478783377
 GameObject:
@@ -5208,7 +5219,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 533247544}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1860136822
 MonoBehaviour:
@@ -6236,4 +6247,5 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 228099473}
   - {fileID: 1170329974}
+  - {fileID: 1860136821}
   - {fileID: 533247544}
