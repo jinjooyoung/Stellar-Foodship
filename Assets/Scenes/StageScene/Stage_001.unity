@@ -642,6 +642,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: smokeEffect
+      value: 
+      objectReference: {fileID: 4452357034008345244, guid: 372e4a91af61fd144adbba91c3c35073, type: 3}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: smokeEffectPlace
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: smokeEffectPrefab
+      value: 
+      objectReference: {fileID: 4452357034008345244, guid: 372e4a91af61fd144adbba91c3c35073, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1190,14 +1202,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CookingStation
       objectReference: {fileID: 0}
-    - target: {fileID: 532958189249370555, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 6787609227317786249, guid: 2ebacb2c9dffcaa4182aa71b24b36a06, type: 3}
-    - target: {fileID: 7539238900132528701, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: fd1393e4d772fa24486d4f26e05a72b9, type: 2}
     - target: {fileID: 8404932228564479321, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5230002
@@ -10094,6 +10098,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: smokeEffect
+      value: 
+      objectReference: {fileID: 4452357034008345244, guid: 372e4a91af61fd144adbba91c3c35073, type: 3}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: smokeEffectPlace
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918222601705747547, guid: 638b1cb74ea8b524aae54eff21c1cd52, type: 3}
+      propertyPath: smokeEffectPrefab
+      value: 
+      objectReference: {fileID: 4452357034008345244, guid: 372e4a91af61fd144adbba91c3c35073, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
