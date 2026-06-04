@@ -10291,14 +10291,6 @@ PrefabInstance:
       propertyPath: orderManager
       value: 
       objectReference: {fileID: 1325330658}
-    - target: {fileID: 1446117642151131508, guid: f9b723af43afea043a0862477adc0811, type: 3}
-      propertyPath: successEffectPrefab
-      value: 
-      objectReference: {fileID: 8404576841783043474, guid: 14885a3087ddcbc40b24a0799c8cd68d, type: 3}
-    - target: {fileID: 3905104430756764053, guid: f9b723af43afea043a0862477adc0811, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 6787609227317786249, guid: 2ebacb2c9dffcaa4182aa71b24b36a06, type: 3}
     - target: {fileID: 4411979059889738284, guid: f9b723af43afea043a0862477adc0811, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.10000014
@@ -10339,10 +10331,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.202
       objectReference: {fileID: 0}
-    - target: {fileID: 5235298362698227413, guid: f9b723af43afea043a0862477adc0811, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: a9468dbf8f1bbbd4b8fa146bd55e75a9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
