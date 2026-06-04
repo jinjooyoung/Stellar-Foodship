@@ -63,7 +63,7 @@ public class CookingStation : NonPickable
 
                         if (cookware.timer.CurrentTime > 0f)
                         {
-                                cookware.timer.Resume();
+                            cookware.timer.Resume();
                             SoundManager.instance.PlaySound("Cooking");
                         }
                         else
