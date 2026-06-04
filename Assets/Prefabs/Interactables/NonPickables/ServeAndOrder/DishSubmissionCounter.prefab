@@ -70,6 +70,9 @@ MonoBehaviour:
   heldItem: {fileID: 0}
   holdPoint: {fileID: 0}
   orderManager: {fileID: 0}
+  dishReturner: {fileID: 0}
+  successEffectPrefab: {fileID: 8404576841783043474, guid: 14885a3087ddcbc40b24a0799c8cd68d, type: 3}
+  successEffect: {fileID: 0}
   _canPlace: 0
 --- !u!1001 &2267261040827453177
 PrefabInstance:

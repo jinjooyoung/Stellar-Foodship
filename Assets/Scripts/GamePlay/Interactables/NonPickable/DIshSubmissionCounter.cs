@@ -6,11 +6,12 @@ public class DishSubmissionCounter : NonPickable
     [SerializeField] private OrderManager orderManager;
     public DishReturner dishReturner;
 
+    [Header("이펙트")]
+    public GameObject successEffectPrefab;
+    public GameObject successEffect;
+
     public bool _canPlace;
     public override bool canPlace => _canPlace;
-
-
-
 
     public override void Interact(Player player)
     {
@@ -36,6 +37,7 @@ public class DishSubmissionCounter : NonPickable
 
         if (success)
         {
+            successEffect = Instantiate(successEffectPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
             Debug.Log("주문 성공");
         }
         else
