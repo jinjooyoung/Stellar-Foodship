@@ -34,6 +34,9 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
     private const int MAX_PLAYERS = 2;
 
+    [Header("Selected Stage")]
+    public int SelectedStageNumber { get; set; } = 1;
+
     private NetworkRunner runner;
     public NetworkRunner Runner => runner;
     private Dictionary<PlayerRef, NetworkObject> playerObjects = new();
@@ -222,9 +225,20 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
     public async void StartGameScene()
     {
+        if (runner == null)
+            return;
+
+        if (!runner.IsServer)
+            return;
+
+        string sceneName =
+            $"Stage_{SelectedStageNumber:D3}";
+
+        Debug.Log($"게임 시작 : {sceneName}");
+
         await runner.LoadScene(
-            SceneRef.FromIndex(3),  // 임시로 3으로 둠 나중에 수정 필요
-            LoadSceneMode.Single
+            SceneRef.FromPath(sceneName),
+            UnityEngine.SceneManagement.LoadSceneMode.Single
         );
     }
 

@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Multi/2_Lobby.unity
     guid: ecec1f2e31082fd49b0ceaaef12b901e
   - enabled: 1
-    path: Assets/Scenes/StageScene.unity
+    path: Assets/Scenes/Multi/StageScene.unity
     guid: e5467d5d1d1bf2b43863add6813e07f5
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
