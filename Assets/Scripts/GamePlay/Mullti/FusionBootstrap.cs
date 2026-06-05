@@ -231,13 +231,14 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         if (!runner.IsServer)
             return;
 
-        string sceneName =
-            $"Stage_{SelectedStageNumber:D3}";
+        int buildIndex = SelectedStageNumber + 1;   // 빌드세팅 씬 리스트에서 인덱스 바뀌면 바꿔줘야함. 씬 이름 말고 인덱스로 불러오는중
 
-        Debug.Log($"게임 시작 : {sceneName}");
+        Debug.Log(
+            $"Stage_{SelectedStageNumber:D3} 진입 / BuildIndex : {buildIndex}"
+        );
 
         await runner.LoadScene(
-            SceneRef.FromPath(sceneName),
+            SceneRef.FromIndex(buildIndex),
             UnityEngine.SceneManagement.LoadSceneMode.Single
         );
     }
