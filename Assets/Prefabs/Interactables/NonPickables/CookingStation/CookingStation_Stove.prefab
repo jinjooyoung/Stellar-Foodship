@@ -75,6 +75,7 @@ MonoBehaviour:
   cookTime: 5
   currentCookware: {fileID: 0}
   _canPlace: 1
+  smokeEffectPrefab: {fileID: 4452357034008345244, guid: 372e4a91af61fd144adbba91c3c35073, type: 3}
 --- !u!1 &3640842145771860781
 GameObject:
   m_ObjectHideFlags: 0

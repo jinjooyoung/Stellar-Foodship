@@ -10,6 +10,10 @@ public class CookingStation : NonPickable
     public bool _canPlace;
     public override bool canPlace => _canPlace;
 
+    [Header("¿¬±â ÀÌÆåÆ®")]
+    public GameObject smokeEffectPrefab; 
+    private GameObject spawnedSmokeEffect;
+
     private void Awake()
     {
         currentCookware = null;
@@ -63,7 +67,7 @@ public class CookingStation : NonPickable
 
                         if (cookware.timer.CurrentTime > 0f)
                         {
-                                cookware.timer.Resume();
+                            cookware.timer.Resume();
                             SoundManager.instance.PlaySound("Cooking");
                         }
                         else
@@ -103,6 +107,7 @@ public class CookingStation : NonPickable
         }
         if (heldItem is Cookware cookware)
         {
+            spawnedSmokeEffect = Instantiate(smokeEffectPrefab, cookware.transform.position, Quaternion.identity);
             currentCookware.timer.OnCompleted += cookware.OnCookingComplete;
         }
     }
@@ -115,6 +120,7 @@ public class CookingStation : NonPickable
         if (currentCookware.timer == null) return;
         if (heldItem is Cookware cookware)
         {
+            Destroy(spawnedSmokeEffect);
             currentCookware.timer.OnCompleted -= cookware.OnCookingComplete;
         }
     }
