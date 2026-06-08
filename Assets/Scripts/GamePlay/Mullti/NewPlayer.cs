@@ -14,7 +14,7 @@ public class NewPlayer : NetworkBehaviour
 
     public Transform HoldPoint => holdPoint;
 
-    [Networked] private NetworkObject HeldItem {  get; set; }
+    [Networked] public NetworkObject HeldItem { get; set; }
 
     public Vector3 HoldPointPos =>
         holdPoint != null ? holdPoint.position : transform.position + transform.forward * 1.2f + Vector3.up * 1.2f;
@@ -196,6 +196,11 @@ public class NewPlayer : NetworkBehaviour
         {
             isDashing = false;
         }
+    }
+
+    public void SetHeldItem(NetworkObject obj)
+    {
+        HeldItem = obj;
     }
 
     // ================= 상호작용 =================
