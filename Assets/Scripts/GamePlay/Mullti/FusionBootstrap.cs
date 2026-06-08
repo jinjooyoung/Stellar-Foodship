@@ -17,7 +17,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     [Header("Player")]
     //[SerializeField] private NetworkPrefabRef playerPrefab;
     [SerializeField] private NetworkPrefabRef[] playerPrefab;
-    [SerializeField] private Transform[] spawnPoints;
+    //[SerializeField] private Transform[] spawnPoints;
+    private Vector3[] spawnPoints = { new Vector3(-4f, 0.5f, 0f), new Vector3(4f, 0.5f, 0f) };
 
     [Header("Pickable Spawn")]
     [SerializeField] private NetworkPrefabRef testPickablePrefab;
@@ -263,6 +264,26 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         Debug.Log($"상자 {pickableSpawnPoints.Length} 개 생성 완료");
     }
 
+    // =================== 캐릭터 프리팹 생성 ====================
+
+    public void SpawnPlayer(NetworkRunner runner, PlayerRef player)
+    {
+        Debug.Log($"플레이어 생성 : {player}");
+
+        if (playerObjects.ContainsKey(player))
+            return;
+
+        int index = player.RawEncoded % playerPrefab.Length;
+
+        NetworkObject obj = runner.Spawn(
+            playerPrefab[index],
+            spawnPoints[index],
+            Quaternion.identity,
+            player);
+
+        playerObjects[player] = obj;
+    }
+
     // ========================= PLAYER JOIN =========================
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -410,7 +431,7 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
     // ========================= SPAWN =========================
 
-    private Vector3 GetSpawnPosition(PlayerRef player)
+    /*private Vector3 GetSpawnPosition(PlayerRef player)
     {
         if (spawnPoints != null && spawnPoints.Length >= 2)
         {
@@ -419,7 +440,7 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         }
 
         return new Vector3(player.RawEncoded * 2, 1, 0);
-    }
+    }*/
 
     // ========================= REQUIRED CALLBACKS =========================
 
@@ -453,7 +474,21 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data) { }
     public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
     public void OnSceneLoadStart(NetworkRunner runner) { }
-    public void OnSceneLoadDone(NetworkRunner runner) { }
+    public void OnSceneLoadDone(NetworkRunner runner)
+    {
+        if (!runner.IsServer)
+            return;
+
+        if (SceneManager.GetActiveScene().name == "2_Lobby" || SceneManager.GetActiveScene().name == "StageScene")
+            return;
+
+        foreach (PlayerRef player in runner.ActivePlayers)
+        {
+            SpawnPlayer(runner, player);
+        }
+
+        PickableSpawn();
+    }
     public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
     public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
 }
