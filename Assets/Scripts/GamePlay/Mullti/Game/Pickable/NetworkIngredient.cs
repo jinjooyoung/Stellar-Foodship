@@ -7,21 +7,26 @@ public class NetworkIngredient : NewPickable
 
     public IngredientSO ingredientData;
 
-    [SerializeField]
-    private int ingredientID;
+    [Networked]
+    public int IngredientID { get; set; }
 
     [Networked]
     public NetworkBool IsCut { get; set; }
 
     public GameObject currentModel;
 
-    public override int ID => ingredientID;
+    private int cachedIngredientId = -1;
+    private bool cachedCutState;
+
+    public override int ID => IngredientID;
 
     //------------------------------------------------
 
     public override void Spawned()
     {
         base.Spawned();
+
+        RefreshData();
 
         UpdateVisual();
     }
@@ -30,7 +35,29 @@ public class NetworkIngredient : NewPickable
     {
         base.Render();
 
-        UpdateVisual();
+        if (cachedIngredientId != IngredientID ||
+        cachedCutState != IsCut)
+        {
+            cachedIngredientId = IngredientID;
+            cachedCutState = IsCut;
+
+            RefreshData();
+            UpdateVisual();
+        }
+    }
+
+    public void Initialize(int ingredientId)
+    {
+        IngredientID = ingredientId;
+        IsCut = false;
+    }
+
+    void RefreshData()
+    {
+        ingredientData =
+            DataManager.instance
+            .ingredientDatabase
+            .GetIngredientById(IngredientID);
     }
 
     //------------------------------------------------
@@ -50,30 +77,27 @@ public class NetworkIngredient : NewPickable
 
     void UpdateVisual()
     {
-        if (!IsCut)
-            return;
-
-        // 이미 잘린 모델이면 생성 안함
-        if (currentModel != null &&
-            currentModel.name.Contains("Cut"))
+        if (ingredientData == null)
             return;
 
         if (currentModel != null)
             Destroy(currentModel);
 
-        if (ingredientData != null &&
-            ingredientData.cutModel != null)
-        {
-            currentModel =
-                Instantiate(
-                    ingredientData.cutModel,
-                    transform);
+        GameObject prefab =
+            IsCut
+            ? ingredientData.cutModel
+            : ingredientData.basicModel;
 
-            currentModel.transform.localPosition =
-                Vector3.zero;
+        if (prefab == null)
+            return;
 
-            currentModel.transform.localRotation =
-                Quaternion.identity;
-        }
+        currentModel =
+            Instantiate(prefab, transform);
+
+        currentModel.transform.localPosition =
+            Vector3.zero;
+
+        currentModel.transform.localRotation =
+            Quaternion.identity;
     }
 }

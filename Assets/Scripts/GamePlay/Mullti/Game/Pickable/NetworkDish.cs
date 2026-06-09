@@ -93,10 +93,14 @@ public class NetworkDish : NewPickable
         if (cookware.IngredientCount == 0)
             return false;
 
-        IngredientIds.Set(
-            IngredientCount,
-            cookware.ResultId);
+        int resultId =
+        CookingSystem.GetCookedIngredientId(
+            cookware.GetIngredientList(),
+            cookware.cookwareType,
+            cookware.IsBurnt
+        );
 
+        IngredientIds.Set(IngredientCount, resultId);
         IngredientCount++;
 
         cookware.Clear();
