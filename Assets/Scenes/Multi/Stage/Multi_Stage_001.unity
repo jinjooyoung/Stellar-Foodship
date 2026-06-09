@@ -1147,7 +1147,7 @@ PrefabInstance:
     - target: {fileID: 1770114121049104009, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: uiTargetTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1364896783808406449}
     - target: {fileID: 5314108219225732288, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1238,6 +1238,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5314108219225732288, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
   m_PrefabInstance: {fileID: 224760845}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &224760847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4473514585495881140, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
+  m_PrefabInstance: {fileID: 224760845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &228873337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1265,7 +1276,7 @@ PrefabInstance:
     - target: {fileID: 1770114121049104009, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: uiTargetTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1959825666}
     - target: {fileID: 5314108219225732288, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1356,6 +1367,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5314108219225732288, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
   m_PrefabInstance: {fileID: 228873337}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &228873339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4473514585495881140, guid: 680d4cc555909db4aa6a8ff003e59fa3, type: 3}
+  m_PrefabInstance: {fileID: 228873337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &254130133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8298,6 +8320,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 15594713}
     m_Modifications:
+    - target: {fileID: 252045424098161821, guid: 6148b31570723eb4b8f906721aa6802d, type: 3}
+      propertyPath: progressBar
+      value: 
+      objectReference: {fileID: 228873339}
     - target: {fileID: 2617738704295915617, guid: 6148b31570723eb4b8f906721aa6802d, type: 3}
       propertyPath: SortKey
       value: 966145428
@@ -9618,6 +9644,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 15594713}
     m_Modifications:
+    - target: {fileID: 252045424098161821, guid: 6148b31570723eb4b8f906721aa6802d, type: 3}
+      propertyPath: progressBar
+      value: 
+      objectReference: {fileID: 224760847}
     - target: {fileID: 2617738704295915617, guid: 6148b31570723eb4b8f906721aa6802d, type: 3}
       propertyPath: SortKey
       value: 974669171

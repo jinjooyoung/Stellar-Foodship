@@ -108,6 +108,10 @@ public class NewPlayer : NetworkBehaviour
         // 누른 순간
         if (input.buttons.WasPressed(PrevButtons, (int)FusionBootstrap.InputButton.InteractSecondary) && State == PlayerState.Controllable && State != PlayerState.IsAiming)
         {
+            if (target != null)
+            {
+                target.InteractSecondary(this);
+            }
             //InteractSecondary();
         }
 
