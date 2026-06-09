@@ -51,9 +51,10 @@ public class NetworkCookware : NewPickable
     public override void Spawned()
     {
         base.Spawned();
-        Debug.Log($"{name} Spawned");
         OnIngredientChanged();
-
+        Debug.Log($"{name} Spawned");
+        Debug.Log($"HasStateAuthority : {Object.HasStateAuthority}");
+        Debug.Log($"Runner : {Runner}");
         checkImage.SetActive(IsComplete);
     }
 
@@ -69,9 +70,11 @@ public class NetworkCookware : NewPickable
     public override void FixedUpdateNetwork()
     {
         base.FixedUpdateNetwork();
-
+        Debug.Log($"{name} FixedUpdate");
         if (!Object.HasStateAuthority)
             return;
+
+        Debug.Log($"Tick : {timer.CurrentTime}");
 
         if (timer.Tick(Runner.DeltaTime))
         {
@@ -148,6 +151,11 @@ public class NetworkCookware : NewPickable
         if (IngredientCount >= 4)
             return false;
 
+        bool canAdd = !ingredient.ingredientData.isCutable || ingredient.IsCut;
+
+        if (!canAdd)
+            return false;
+
         IngredientIds.Set(IngredientCount, ingredient.ID);
 
         IngredientCount++;
@@ -163,11 +171,15 @@ public class NetworkCookware : NewPickable
 
     public void StartCooking(float cookTime)
     {
+        Debug.Log($"StartCooking 호출 : {cookTime}");
+
         timer.Start(cookTime);
     }
 
     public void ResumeCooking()
     {
+        Debug.Log("ResumeCooking 호출");
+
         timer.Resume();
     }
 

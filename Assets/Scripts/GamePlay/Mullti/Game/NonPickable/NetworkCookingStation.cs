@@ -70,7 +70,7 @@ public class NetworkCookingStation : NewNonPickable
             return;
 
         // 이어서 조리
-        if (cookwarePlaced.NetCurrentTime > 0)
+        if (cookwarePlaced.NetMaxTime > 0)
         {
             cookwarePlaced.ResumeCooking();
         }

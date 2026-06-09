@@ -282,6 +282,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
             player);
 
         playerObjects[player] = obj;
+
+        runner.SetPlayerObject(player, obj);
     }
 
     // ========================= PLAYER JOIN =========================

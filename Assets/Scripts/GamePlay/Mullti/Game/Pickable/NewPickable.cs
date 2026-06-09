@@ -197,14 +197,14 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
     //================================================
 
-    public virtual void FixedUpdateNetwork()
+    /*public virtual void FixedUpdateNetwork()
     {
         if (!Object.HasStateAuthority)
             return;
 
         if (!isFlying)
             return;
-    }
+    }*/
 
     //================================================
 

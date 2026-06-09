@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewInteractionFinder
   targetTransform: {fileID: 851023212779078275}
   playerTransform: {fileID: 5213317923556619557}
-  radius: 3
+  radius: 1.6
 --- !u!1 &8843816599359011023
 GameObject:
   m_ObjectHideFlags: 0
