@@ -75,9 +75,9 @@ GameObject:
   - component: {fileID: 2234223138903501468}
   - component: {fileID: -840352711126873018}
   - component: {fileID: 3323750863570235508}
-  - component: {fileID: -5196868620290110196}
   - component: {fileID: 1814537991113793473}
   - component: {fileID: 5063324448172745749}
+  - component: {fileID: 852742648541597380}
   m_Layer: 3
   m_Name: Player Multi_1
   m_TagString: Player
@@ -172,25 +172,12 @@ MonoBehaviour:
   pickupMask:
     serializedVersion: 2
     m_Bits: 64
+  interactionFinder: {fileID: 0}
+  _HeldItem: {fileID: 0}
   moveSpeed: 5
   dashSpeed: 12
   dashTime: 0.3
   dashCooldown: 0.3
---- !u!114 &-5196868620290110196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6169369549956296789}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf68cf40a21d5a4d80b776dd4bb8c97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractionFinder
-  targetTransform: {fileID: 851023212779078275}
-  playerTransform: {fileID: 5213317923556619557}
-  radius: 3
 --- !u!114 &1814537991113793473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +215,21 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &852742648541597380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169369549956296789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589cfd6f7e043e3418c247b410f8f551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewInteractionFinder
+  targetTransform: {fileID: 851023212779078275}
+  playerTransform: {fileID: 5213317923556619557}
+  radius: 3
 --- !u!1 &8843816599359011023
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +269,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85086634261773864}
     m_Modifications:
+    - target: {fileID: 4938065796119620, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3703905256754109747, guid: 61ed7994a2e51644288198faf6a23e71, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0030000187
@@ -310,10 +316,6 @@ PrefabInstance:
     - target: {fileID: 8618018203274716382, guid: 61ed7994a2e51644288198faf6a23e71, type: 3}
       propertyPath: m_Name
       value: capsule_lite_male
-      objectReference: {fileID: 0}
-    - target: {fileID: 4938065796119620, guid: a397c6a682fd4fb4c8e0937572e133f6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5434970051429733648, guid: 61ed7994a2e51644288198faf6a23e71, type: 3}

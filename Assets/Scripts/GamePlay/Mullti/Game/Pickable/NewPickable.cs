@@ -208,7 +208,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
     //================================================
 
-    public virtual void OnCollisionEnter(Collision collision)
+    /*public virtual void OnCollisionEnter(Collision collision)
     {
         if (!Object.HasStateAuthority)
             return;
@@ -260,7 +260,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
         }
 
         isFlying = false;
-    }
+    }*/
 
     //================================================
 

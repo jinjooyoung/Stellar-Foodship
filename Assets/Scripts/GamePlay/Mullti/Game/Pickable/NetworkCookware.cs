@@ -1,6 +1,7 @@
 using Fusion;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetworkCookware : NewPickable
 {
@@ -39,15 +40,18 @@ public class NetworkCookware : NewPickable
     public GameObject visualObject;
 
     public GameObject checkImage;
+    [SerializeField] private Slider timerSlider;
 
     NetworkTimer timer = new();
 
     //----------------------------------------------------
 
+
+
     public override void Spawned()
     {
         base.Spawned();
-
+        Debug.Log($"{name} Spawned");
         OnIngredientChanged();
 
         checkImage.SetActive(IsComplete);
@@ -58,6 +62,8 @@ public class NetworkCookware : NewPickable
         base.Render();
 
         checkImage.SetActive(IsComplete);
+
+        UpdateTimerUI();
     }
 
     public override void FixedUpdateNetwork()
@@ -84,13 +90,40 @@ public class NetworkCookware : NewPickable
         NetIsRunning = timer.IsRunning;
     }
 
+    void UpdateTimerUI()
+    {
+        if (timerSlider == null)
+            return;
+
+        if (NetMaxTime <= 0)
+        {
+            timerSlider.gameObject.SetActive(false);
+            return;
+        }
+
+        timerSlider.gameObject.SetActive(NetIsRunning);
+
+        timerSlider.value =
+            1f - NetCurrentTime / NetMaxTime;
+    }
+
     //----------------------------------------------------
 
     void OnIngredientChanged()
     {
         visualObject.SetActive(IngredientCount > 0);
 
-        cookingIconUI?.UpdateUI(GetIngredientList());
+        Debug.Log($"OnIngredientChanged »£√‚");
+        Debug.Log($"IngredientCount = {IngredientCount}");
+
+        List<int> list = GetIngredientList();
+
+        Debug.Log($"List Count = {list.Count}");
+
+        foreach (var id in list)
+            Debug.Log($"ID : {id}");
+
+        cookingIconUI?.UpdateUI(list);
     }
 
     //----------------------------------------------------
