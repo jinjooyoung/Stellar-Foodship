@@ -11,10 +11,13 @@ public class NewPlayer : NetworkBehaviour
     [SerializeField] private float pickupDistance = 3.0f;
     [SerializeField] private float dropForce = 2.0f;
     [SerializeField] private LayerMask pickupMask;
+    [SerializeField] private NewInteractionFinder interactionFinder;
 
     public Transform HoldPoint => holdPoint;
 
-    [Networked] public NetworkObject HeldItem { get; set; }
+    [Networked] public NewPickable HeldItem { get; set; }
+    private INewInteractable target;
+    public INewInteractable Target => target;
 
     public Vector3 HoldPointPos =>
         holdPoint != null ? holdPoint.position : transform.position + transform.forward * 1.2f + Vector3.up * 1.2f;
@@ -42,6 +45,8 @@ public class NewPlayer : NetworkBehaviour
     {
         Application.runInBackground = true;
         Application.targetFrameRate = 120;
+
+        if (interactionFinder == null) interactionFinder = GetComponent<NewInteractionFinder>();
     }
 
     // ========================= 포톤 업데이트 =========================
@@ -50,6 +55,9 @@ public class NewPlayer : NetworkBehaviour
         // 인풋이 없으면 리턴
         if (!GetInput<FusionBootstrap.NetworkInputData>(out var input))
             return;
+
+        // 타겟 갱신
+        target = interactionFinder.FindClosestInteractable();
 
         // ================= 이동 =================
         Vector3 inputDir = new Vector3(input.move.x, 0, input.move.y);
@@ -78,8 +86,12 @@ public class NewPlayer : NetworkBehaviour
         // ================= 좌클릭 =================
         if (input.buttons.WasPressed(PrevButtons, (int)FusionBootstrap.InputButton.InteractPrimary))
         {
-            if (!TryDropHeldBox())
-                TryPickUp();
+            /*if (!TryDropHeldBox())
+                TryPickUp();*/
+            if (target != null)
+            {
+                target.Interact(this);
+            }
         }
 
         // ================= 우클릭 =================
@@ -198,7 +210,7 @@ public class NewPlayer : NetworkBehaviour
         }
     }
 
-    public void SetHeldItem(NetworkObject obj)
+    public void SetHeldItem(NewPickable obj)
     {
         HeldItem = obj;
     }
@@ -225,7 +237,7 @@ public class NewPlayer : NetworkBehaviour
             if (pickable == null) return;
 
             pickable.PickUp(Object.InputAuthority);
-            HeldItem = pickable.Object;
+            HeldItem = pickable;
         }
         else
         {

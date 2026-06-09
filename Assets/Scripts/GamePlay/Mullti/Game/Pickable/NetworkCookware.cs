@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Fusion;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NetworkCookware : NewPickable
@@ -7,35 +7,57 @@ public class NetworkCookware : NewPickable
     public override int ID => ResultId;
 
     [Header("Cookware")]
-    [Networked] public int ResultId { get; set; }
+
+    [Networked]
+    public int ResultId { get; set; }
+
     public CookwareType cookwareType;
 
-    public List<int> currentIngredientIds = new();
+    [Networked, Capacity(4), OnChangedRender(nameof(OnIngredientChanged))]
+    NetworkArray<int> IngredientIds => default;
+
+    [Networked]
+    public int IngredientCount { get; set; }
+
+    [Networked]
+    public NetworkBool IsComplete { get; set; }
+
+    [Networked]
+    public NetworkBool IsBurnt { get; set; }
+
+    [Networked]
+    public float NetCurrentTime { get; set; }
+
+    [Networked]
+    public float NetMaxTime { get; set; }
+
+    [Networked]
+    public NetworkBool NetIsRunning { get; set; }
 
     public CookingIconUI cookingIconUI;
+
     public GameObject visualObject;
+
     public GameObject checkImage;
 
-    [Networked] public NetworkBool IsComplete { get; set; }
-    [Networked] public NetworkBool IsBurnt { get; set; }
+    NetworkTimer timer = new();
 
-    [Networked] public float NetCurrentTime { get; set; }
-    [Networked] public float NetMaxTime { get; set; }
-    [Networked] public NetworkBool NetIsRunning { get; set; }
-
-    private NetworkTimer timer = new();
+    //----------------------------------------------------
 
     public override void Spawned()
     {
         base.Spawned();
 
-        if (visualObject != null)
-            visualObject.SetActive(currentIngredientIds.Count > 0);
+        OnIngredientChanged();
 
-        if (checkImage != null)
-            checkImage.SetActive(IsComplete);
+        checkImage.SetActive(IsComplete);
+    }
 
-        cookingIconUI?.UpdateUI(currentIngredientIds);
+    public override void Render()
+    {
+        base.Render();
+
+        checkImage.SetActive(IsComplete);
     }
 
     public override void FixedUpdateNetwork()
@@ -50,42 +72,64 @@ public class NetworkCookware : NewPickable
             CookingComplete();
         }
 
+        SyncTimer();
+    }
+
+    //----------------------------------------------------
+
+    void SyncTimer()
+    {
         NetCurrentTime = timer.CurrentTime;
         NetMaxTime = timer.MaxTime;
         NetIsRunning = timer.IsRunning;
     }
 
-    public override void Render()
-    {
-        base.Render();
+    //----------------------------------------------------
 
-        if (checkImage != null)
-            checkImage.SetActive(IsComplete);
+    void OnIngredientChanged()
+    {
+        visualObject.SetActive(IngredientCount > 0);
+
+        cookingIconUI?.UpdateUI(GetIngredientList());
     }
 
-    //================================================
+    //----------------------------------------------------
 
-    public void AddIngredient(NetworkIngredient ingredient)
+    public List<int> GetIngredientList()
     {
-        if (currentIngredientIds.Count >= 4)
-            return;
+        List<int> list = new();
 
-        currentIngredientIds.Add(ingredient.ID);
+        for (int i = 0; i < IngredientCount; i++)
+            list.Add(IngredientIds[i]);
 
-        visualObject?.SetActive(true);
+        return list;
+    }
 
-        cookingIconUI?.UpdateUI(currentIngredientIds);
+    //----------------------------------------------------
+
+    public bool TryAddIngredient(NetworkIngredient ingredient)
+    {
+        if (!Object.HasStateAuthority)
+            return false;
+
+        if (IngredientCount >= 4)
+            return false;
+
+        IngredientIds.Set(IngredientCount, ingredient.ID);
+
+        IngredientCount++;
 
         Runner.Despawn(ingredient.Object);
+
+        OnIngredientChanged();
+
+        return true;
     }
 
-    //================================================
+    //----------------------------------------------------
 
     public void StartCooking(float cookTime)
     {
-        if (timer.IsRunning)
-            return;
-
         timer.Start(cookTime);
     }
 
@@ -99,51 +143,48 @@ public class NetworkCookware : NewPickable
         timer.Stop();
     }
 
-    public void AddCookTime(float time)
+    public void AddCookTime(float t)
     {
-        timer.AddTime(time);
+        timer.AddTime(t);
     }
 
-    //================================================
+    //----------------------------------------------------
 
     void CookingComplete()
     {
         IsComplete = true;
 
-        if (checkImage != null)
-            checkImage.SetActive(true);
-
-        resultId = CookingSystem.GetCookedIngredientId(
-            currentIngredientIds,
-            cookwareType,
-            false
-        );
+        ResultId =
+            CookingSystem.GetCookedIngredientId(
+                GetIngredientList(),
+                cookwareType,
+                IsBurnt);
     }
 
-    //================================================
+    //----------------------------------------------------
 
-    public void ClearIds()
+    public void Clear()
     {
-        resultId = -1;
+        ResultId = -1;
 
-        currentIngredientIds.Clear();
+        for (int i = 0; i < 4; i++)
+            IngredientIds.Set(i, 0);
+
+        IngredientCount = 0;
 
         IsComplete = false;
         IsBurnt = false;
 
         timer.Reset();
 
-        NetCurrentTime = 0;
-        NetMaxTime = 0;
-        NetIsRunning = false;
+        SyncTimer();
 
-        visualObject?.SetActive(false);
-        checkImage?.SetActive(false);
+        OnIngredientChanged();
 
-        cookingIconUI?.UpdateUI(currentIngredientIds);
+        checkImage.SetActive(false);
     }
 
-    //================================================
+    //----------------------------------------------------
 
     public StationType GetRequiredStation()
     {

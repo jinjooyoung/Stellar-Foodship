@@ -54,16 +54,19 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
     public virtual void Interact(NewPlayer player)
     {
+        if (!Object.HasStateAuthority)
+            return;
+
+        // 이미 손에 들고 있으면 조합 시도
         if (player.HeldItem != null)
         {
             TryCombineWithHeld(player);
             return;
         }
 
-        if (TryPickUp(player))
-        {
-            player.SetHeldItem(Object);
-        }
+        // 집기
+        PickUp(player.Object.InputAuthority);
+        player.SetHeldItem(this);
     }
 
     public virtual void InteractSecondary(NewPlayer player)
@@ -128,16 +131,43 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
     protected virtual void TryCombineWithHeld(NewPlayer player)
     {
-        if (player.HeldItem == null)
-            return;
-
         NewPickable held =
-            player.HeldItem.GetComponent<NewPickable>();
+        player.HeldItem.GetComponent<NewPickable>();
 
         if (held == null)
             return;
 
-        // 여기 기존 Ingredient/Cookware/Dish 조합 코드 그대로 붙이면 됨
+        if (held is NetworkIngredient ingredient &&
+            this is NetworkCookware cookware)
+        {
+            if (cookware.TryAddIngredient(ingredient))
+                player.SetHeldItem(null);
+
+            return;
+        }
+
+        if (held is NetworkIngredient ingredient2 &&
+            this is NetworkDish dish)
+        {
+            if (dish.TryAddIngredient(ingredient2))
+                player.SetHeldItem(null);
+
+            return;
+        }
+
+        if (held is NetworkCookware cookware2 &&
+            this is NetworkDish dish2)
+        {
+            dish2.TryServe(cookware2);
+            return;
+        }
+
+        if (held is NetworkDish dish3 &&
+            this is NetworkCookware cookware3)
+        {
+            dish3.TryServe(cookware3);
+            return;
+        }
     }
 
     //================================================
@@ -197,7 +227,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
             {
                 if (player.HeldItem == null)
                 {
-                    player.SetHeldItem(Object);
+                    player.SetHeldItem(this);
 
                     Holder = player.Object.InputAuthority;
                     IsHeld = true;
