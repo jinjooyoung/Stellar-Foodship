@@ -17,13 +17,27 @@ public class NetworkDish : NewPickable
 
     public CookingIconUI cookingIconUI;
 
+    [SerializeField]
+    private GameObject uiGroupPrefab;
+
+    private bool uiCreated;
+
     //------------------------------------------------
 
     public override void Spawned()
     {
         base.Spawned();
 
+        TryCreateUI();
+
         OnIngredientChanged();
+    }
+
+    public override void Render()
+    {
+        base.Render();
+
+        TryCreateUI();
     }
 
     //------------------------------------------------
@@ -31,6 +45,44 @@ public class NetworkDish : NewPickable
     void OnIngredientChanged()
     {
         cookingIconUI?.UpdateUI(GetIngredientList());
+    }
+
+    void TryCreateUI()
+    {
+        if (uiCreated)
+            return;
+
+        if (uiGroupPrefab == null)
+            return;
+
+        CreateUI(uiGroupPrefab);
+
+        uiCreated = true;
+    }
+
+    public void CreateUI(GameObject uiGroupPrefab)
+    {
+        if (cookingIconUI != null)
+            return;
+
+        GameObject uiObj =
+            Instantiate(
+                uiGroupPrefab,
+                NetUIManager.Instance.WorldUIRoot);
+
+        FollowWorldUI follow =
+            uiObj.GetComponent<FollowWorldUI>();
+
+        cookingIconUI =
+            uiObj.GetComponent<CookingIconUI>();
+
+        if (follow != null)
+        {
+            follow.uiTargetTransform = transform;
+            follow.uiWorldCamera = Camera.main;
+        }
+
+        cookingIconUI.UpdateUI(GetIngredientList());
     }
 
     //------------------------------------------------

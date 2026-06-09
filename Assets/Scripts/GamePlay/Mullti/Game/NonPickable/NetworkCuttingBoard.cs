@@ -1,11 +1,15 @@
 using Fusion;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetworkCuttingBoard : NewNonPickable
 {
     [Header("Cutting")]
     [Networked]
     public int CutProgress { get; set; }
+
+    [SerializeField]
+    private Slider progressBar;
 
     public override bool CanPlace => true;
 
@@ -85,5 +89,21 @@ public class NetworkCuttingBoard : NewNonPickable
     public float GetNormalizedProgress()
     {
         return CutProgress / 100f;
+    }
+
+    public override void Render()
+    {
+        base.Render();
+
+        if (progressBar != null)
+        {
+            progressBar.value =
+                CutProgress / 100f;
+
+            progressBar.gameObject.SetActive(
+                HeldItem != null &&
+                CutProgress > 0 &&
+                CutProgress < 100);
+        }
     }
 }
