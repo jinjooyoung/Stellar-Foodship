@@ -82,7 +82,7 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
         // 그냥 올리기
         HeldItem = item;
 
-        item.PickUp(default);
+        item.Place();
 
         item.transform.position =
             holdPoint.position;

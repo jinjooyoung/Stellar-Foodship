@@ -127,6 +127,22 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
         rb.AddForce(impulse, ForceMode.VelocityChange);
     }
 
+    public virtual void Place()
+    {
+        if (!Object.HasStateAuthority)
+            return;
+
+        Holder = default;
+        IsHeld = false;
+
+        rb.isKinematic = true;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        itemCollider.isTrigger = true;
+    }
+
     //================================================
 
     protected virtual void TryCombineWithHeld(NewPlayer player)
