@@ -56,8 +56,11 @@ public class NewPlayer : NetworkBehaviour
         if (!GetInput<FusionBootstrap.NetworkInputData>(out var input))
             return;
 
+        if (State == PlayerState.Uncontrollable) return;
+
         // 타겟 갱신
         target = interactionFinder.FindClosestInteractable();
+        Debug.Log(target);
 
         // ================= 이동 =================
         Vector3 inputDir = new Vector3(input.move.x, 0, input.move.y);

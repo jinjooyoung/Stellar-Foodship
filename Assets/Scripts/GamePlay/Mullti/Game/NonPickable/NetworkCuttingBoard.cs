@@ -25,6 +25,7 @@ public class NetworkCuttingBoard : NewNonPickable
     // 우클릭
     public override void InteractSecondary(NewPlayer player)
     {
+        Debug.Log("도마 우클릭 호출");
         if (!Object.HasStateAuthority)
             return;
 
@@ -46,6 +47,8 @@ public class NetworkCuttingBoard : NewNonPickable
             return;
 
         CutProgress += 20;
+
+        Debug.Log($"도마 진행도 증가 : {CutProgress}");
 
         if (CutProgress >= 100)
         {
