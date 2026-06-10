@@ -14,7 +14,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
     [Networked] public NetworkBool IsHeld { get; set; }
     [Networked] public PlayerRef Holder { get; set; }
 
-    [Networked] public NetworkBool IsPlcaed { get; set; }
+    [Networked] public NetworkBool IsPlaced { get; set; }
     [Networked] public NewNonPickable NonP { get; set; }
 
 
@@ -37,7 +37,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
     public override void Render()
     {
-        if (!IsHeld && !IsPlcaed)
+        if (!IsHeld && !IsPlaced)
             return;
 
         if (IsHeld && Runner.TryGetPlayerObject(Holder, out NetworkObject playerObj))
@@ -52,8 +52,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
             transform.rotation =
                 Quaternion.LookRotation(player.transform.forward, Vector3.up);
         }
-
-        if (IsPlcaed && NonP != null)
+        else if (IsPlaced && NonP != null)
         {
             transform.position = NonP.holdPoint.position;
             transform.rotation = Quaternion.identity;
@@ -111,7 +110,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
         Holder = holder;
         IsHeld = true;
 
-        IsPlcaed = false;
+        IsPlaced = false;
         NonP = null;
 
         rb.isKinematic = true;
@@ -149,7 +148,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
         Holder = default;
         IsHeld = false;
-        IsPlcaed = true;
+        IsPlaced = true;
         NonP = non;
 
         rb.isKinematic = true;
