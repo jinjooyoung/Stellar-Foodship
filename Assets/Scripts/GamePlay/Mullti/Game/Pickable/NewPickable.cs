@@ -14,6 +14,10 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
     [Networked] public NetworkBool IsHeld { get; set; }
     [Networked] public PlayerRef Holder { get; set; }
 
+    [Networked] public NetworkBool IsPlcaed { get; set; }
+    [Networked] public NewNonPickable NonP { get; set; }
+
+
     protected bool isFlying;
 
     protected virtual void Reset()
@@ -33,10 +37,10 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
     public override void Render()
     {
-        if (!IsHeld)
+        if (!IsHeld && !IsPlcaed)
             return;
 
-        if (Runner.TryGetPlayerObject(Holder, out NetworkObject playerObj))
+        if (IsHeld && Runner.TryGetPlayerObject(Holder, out NetworkObject playerObj))
         {
             NewPlayer player = playerObj.GetComponent<NewPlayer>();
 
@@ -47,6 +51,12 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
             transform.rotation =
                 Quaternion.LookRotation(player.transform.forward, Vector3.up);
+        }
+
+        if (IsPlcaed && NonP != null)
+        {
+            transform.position = NonP.holdPoint.position;
+            transform.rotation = Quaternion.identity;
         }
     }
 
@@ -101,6 +111,9 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
         Holder = holder;
         IsHeld = true;
 
+        IsPlcaed = false;
+        NonP = null;
+
         rb.isKinematic = true;
 
         rb.linearVelocity = Vector3.zero;
@@ -127,13 +140,17 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
         rb.AddForce(impulse, ForceMode.VelocityChange);
     }
 
-    public virtual void Place()
+    public virtual void Place(NewNonPickable non)
     {
         if (!Object.HasStateAuthority)
             return;
 
+        Debug.Log($"{Object.HasStateAuthority} Pickable : Place »£√‚µ !");
+
         Holder = default;
         IsHeld = false;
+        IsPlcaed = true;
+        NonP = non;
 
         rb.isKinematic = true;
 

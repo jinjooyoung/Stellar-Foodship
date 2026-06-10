@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(NetworkObject))]
 public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
 {
-    [SerializeField] protected Transform holdPoint;
+    [SerializeField] public Transform holdPoint;
 
     [Networked]
     public NewPickable HeldItem { get; set; }
@@ -82,7 +82,7 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
         // 그냥 올리기
         HeldItem = item;
 
-        item.Place();
+        item.Place(this);
 
         item.transform.position =
             holdPoint.position;
