@@ -7271,6 +7271,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2574656278854063247, guid: adfca17b268f46f4db11dee70233d653, type: 3}
   m_PrefabInstance: {fileID: 1383505523}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1384810270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1384810271}
+  - component: {fileID: 1384810272}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1384810271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384810270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1715788193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1384810272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384810270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c8e4e989d2d744ba062ee3121b91ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  orderSpawnInterval: 30
+  maxOrderCount: 5
+  dishIDs: c9000000
+  penaltyScore: -50
+  stageTimeLimit: 180
+  ingreTime: 30
+  cookedIngreTime: 60
+  maxDishCount: 5
 --- !u!1 &1401415830
 GameObject:
   m_ObjectHideFlags: 0
@@ -8323,6 +8375,8 @@ Transform:
   m_Children:
   - {fileID: 305984499}
   - {fileID: 139499504}
+  - {fileID: 1384810271}
+  - {fileID: 2053674835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1718013578
@@ -9744,6 +9798,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9150342862895704705, guid: 4297db35a133e9d4b9314d4b6a57df2d, type: 3}
   m_PrefabInstance: {fileID: 2006388703}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2053674834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2053674835}
+  m_Layer: 0
+  m_Name: OrderUiManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2053674835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053674834}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1715788193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2058800156
 GameObject:
   m_ObjectHideFlags: 0
@@ -11109,12 +11194,12 @@ SceneRoots:
   - {fileID: 15594713}
   - {fileID: 2000893230}
   - {fileID: 655413121}
-  - {fileID: 1715788193}
   - {fileID: 1766306644}
   - {fileID: 425572899}
   - {fileID: 785274866}
   - {fileID: 35929764}
   - {fileID: 2111360862}
   - {fileID: 2111559432}
+  - {fileID: 1715788193}
   - {fileID: 419531786}
   - {fileID: 1073114565}

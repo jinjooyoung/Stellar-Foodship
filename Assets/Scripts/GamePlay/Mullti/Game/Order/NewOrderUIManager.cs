@@ -33,7 +33,7 @@ public class NewOrderUIManager : MonoBehaviour
 
         orderUIs.Add(ui);
 
-        ui.timer.StartTimer(timeLimit);
+        ui.timer.Start(timeLimit);
     }
 
     //------------------------------------------------

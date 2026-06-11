@@ -5,7 +5,7 @@ using UnityEngine;
 public class NetworkOrderManager : NetworkBehaviour
 {
     [Header("Reference")]
-    public OrderUIManager uiManager;
+    public NewOrderUIManager uiManager;
     public NetworkScoreManager scoreManager;
 
     [Networked]
@@ -73,6 +73,13 @@ public class NetworkOrderManager : NetworkBehaviour
         OrderCount++;
 
         OrderIndexCounter++;
+
+        DishSO data = DataManager.instance.dishDatabase.GetDishById(dishId);
+
+        float timeLimit = CalculateTimeLimit(data.ingredientIds);
+
+        // UI »ý¼º
+        uiManager.CreateOrderUI(dishId, timeLimit);
     }
 
     //------------------------------------------------
@@ -140,6 +147,8 @@ public class NetworkOrderManager : NetworkBehaviour
         }
 
         OrderCount--;
+
+        uiManager.RemoveOrderUI(index);
     }
 
     //------------------------------------------------
