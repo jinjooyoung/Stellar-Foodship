@@ -51,10 +51,15 @@ public class NetworkCookware : NewPickable
     public override void Spawned()
     {
         base.Spawned();
+
+        if (Object.HasStateAuthority)
+        {
+            for (int i = 0; i < 4; i++)
+                IngredientIds.Set(i, -1);
+        }
+
         OnIngredientChanged();
-        Debug.Log($"{name} Spawned");
-        Debug.Log($"HasStateAuthority : {Object.HasStateAuthority}");
-        Debug.Log($"Runner : {Runner}");
+        
         checkImage.SetActive(IsComplete);
     }
 
@@ -213,7 +218,9 @@ public class NetworkCookware : NewPickable
         ResultId = -1;
 
         for (int i = 0; i < 4; i++)
-            IngredientIds.Set(i, 0);
+        {
+            IngredientIds.Set(i, -1);
+        }
 
         IngredientCount = 0;
 
