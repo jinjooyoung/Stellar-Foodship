@@ -5,20 +5,22 @@ using UnityEngine.UI;
 public class NewOrderUI : MonoBehaviour
 {
     [Header("ÂüÁ¶")]
-    public NetworkTimer timer;
     public NetworkOrderManager manager;
 
     [Header("UI")]
     public Image dishIcon;
     public Image[] slots;
+    public Slider timerSlider;
 
     private int dishId;
+    private int orderIndex;
 
     //------------------------------------------------
 
-    public void Init(int dishId, NetworkOrderManager manager)
+    public void Init(int dishId, int orderIndex, NetworkOrderManager manager)
     {
         this.dishId = dishId;
+        this.orderIndex = orderIndex;
         this.manager = manager;
 
         DishSO data = DataManager.instance.dishDatabase.GetDishById(dishId);
@@ -26,8 +28,6 @@ public class NewOrderUI : MonoBehaviour
         if (data == null) return;
 
         dishIcon.sprite = data.icon;
-
-        timer.OnCompleted += HandleTimerComplete;
 
         int ingreCount = 0;
 
@@ -53,6 +53,17 @@ public class NewOrderUI : MonoBehaviour
         }
 
         SetImage(data);
+    }
+
+    void Update()
+    {
+        if (manager == null)
+            return;
+
+        if (timerSlider == null)
+            return;
+
+        timerSlider.value = manager.GetOrderProgress(orderIndex);
     }
 
     //------------------------------------------------
@@ -94,18 +105,9 @@ public class NewOrderUI : MonoBehaviour
         }
     }
 
-    //------------------------------------------------
-
-    void HandleTimerComplete()
+    public void SetIndex(int index)
     {
-        manager.FailOrder(dishId);
-    }
-
-    //------------------------------------------------
-
-    void OnDestroy()
-    {
-        timer.OnCompleted -= HandleTimerComplete;
+        orderIndex = index;
     }
 
     //------------------------------------------------

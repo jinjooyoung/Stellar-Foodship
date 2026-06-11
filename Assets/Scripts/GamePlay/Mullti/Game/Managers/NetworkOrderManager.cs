@@ -1,6 +1,7 @@
 using Fusion;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class NetworkOrderManager : NetworkBehaviour
 {
@@ -20,6 +21,64 @@ public class NetworkOrderManager : NetworkBehaviour
     [Networked, Capacity(5)]
     public NetworkArray<int> OrderIds => default;
 
+    //------------------오더 타이머-------------------
+
+    [Networked, Capacity(5)]
+    public NetworkArray<float> NetCurrentTimes => default;
+
+    [Networked, Capacity(5)]
+    public NetworkArray<float> NetMaxTimes => default;
+
+    [Networked, Capacity(5)]
+    public NetworkArray<NetworkBool> NetIsRunning => default;
+
+    private NetworkTimer[] orderTimers =
+    {
+        new(),
+        new(),
+        new(),
+        new(),
+        new()
+    };
+
+    void TickOrderTimers()
+    {
+        for (int i = OrderCount - 1; i >= 0; i--)
+        {
+            if (orderTimers[i].Tick(Runner.DeltaTime))
+            {
+                FailOrder(i);
+            }
+        }
+
+        SyncTimers();
+    }
+
+    void SyncTimers()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            NetCurrentTimes.Set(i, orderTimers[i].CurrentTime);
+
+            NetMaxTimes.Set(i, orderTimers[i].MaxTime);
+
+            NetIsRunning.Set(i, orderTimers[i].IsRunning);
+        }
+    }
+
+    public float GetOrderProgress(int index)
+    {
+        if (index < 0 || index >= OrderCount)
+            return 0f;
+
+        float maxTime = NetMaxTimes[index];
+
+        if (maxTime <= 0)
+            return 0f;
+
+        return (NetCurrentTimes[index] / maxTime);
+    }
+
     //------------------------------------------------
 
     public override void FixedUpdateNetwork()
@@ -28,6 +87,8 @@ public class NetworkOrderManager : NetworkBehaviour
             return;
 
         HandleOrderSpawn();
+
+        TickOrderTimers();
     }
 
     //------------------------------------------------
@@ -68,15 +129,18 @@ public class NetworkOrderManager : NetworkBehaviour
         int dishId =
             LevelManager.Instance.dishIDs[randomIndex];
 
+        DishSO data = DataManager.instance.dishDatabase.GetDishById(dishId);
+
+        float timeLimit = CalculateTimeLimit(data.ingredientIds);
+
+        // 주문 등록
         OrderIds.Set(OrderCount, dishId);
+        // 타이머 시작
+        orderTimers[OrderCount].Start(timeLimit);
 
         OrderCount++;
 
         OrderIndexCounter++;
-
-        DishSO data = DataManager.instance.dishDatabase.GetDishById(dishId);
-
-        float timeLimit = CalculateTimeLimit(data.ingredientIds);
 
         // UI 생성
         uiManager.CreateOrderUI(dishId, timeLimit);
@@ -144,7 +208,11 @@ public class NetworkOrderManager : NetworkBehaviour
         for (int i = index; i < OrderCount - 1; i++)
         {
             OrderIds.Set(i, OrderIds[i + 1]);
+
+            orderTimers[i].CopyFrom(orderTimers[i + 1]);
         }
+
+        orderTimers[OrderCount - 1].Reset();
 
         OrderCount--;
 

@@ -1,8 +1,9 @@
 using Fusion;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
-public class NetworkScoreManager : NetworkBehaviour
+public class NetworkScoreManager : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField]
@@ -15,18 +16,9 @@ public class NetworkScoreManager : NetworkBehaviour
 
     //------------------------------------------------
 
-    public override void Spawned()
+    void Awake()
     {
-        if (Object.HasStateAuthority)
-        {
-            Score = 0;
-        }
-
-        RefreshUI();
-    }
-
-    public override void Render()
-    {
+        Score = 0;
         RefreshUI();
     }
 
@@ -44,10 +36,8 @@ public class NetworkScoreManager : NetworkBehaviour
 
     public void AddScore(int amount)
     {
-        if (!Object.HasStateAuthority)
-            return;
-
         Score += amount;
+        RefreshUI();
     }
 
     //------------------------------------------------

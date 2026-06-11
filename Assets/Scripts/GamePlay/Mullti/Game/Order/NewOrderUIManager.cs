@@ -29,11 +29,9 @@ public class NewOrderUIManager : MonoBehaviour
 
         if (ui == null) return;
 
-        ui.Init(dishId, manager);
+        ui.Init(dishId, orderUIs.Count, manager);
 
         orderUIs.Add(ui);
-
-        ui.timer.Start(timeLimit);
     }
 
     //------------------------------------------------
@@ -47,6 +45,11 @@ public class NewOrderUIManager : MonoBehaviour
         orderUIs.RemoveAt(index);
 
         Destroy(obj);
+
+        for (int i = index; i < orderUIs.Count; i++)
+        {
+            orderUIs[i].SetIndex(i);
+        }
     }
 
     //------------------------------------------------
