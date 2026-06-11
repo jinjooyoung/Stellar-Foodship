@@ -21,6 +21,8 @@ public class NetworkOrderManager : NetworkBehaviour
     [Networked, Capacity(5)]
     public NetworkArray<int> OrderIds => default;
 
+    private int prevOrderCount = -1;
+
     //------------------오더 타이머-------------------
 
     [Networked, Capacity(5)]
@@ -91,6 +93,26 @@ public class NetworkOrderManager : NetworkBehaviour
         TickOrderTimers();
     }
 
+    public override void Render()
+    {
+        if (prevOrderCount == OrderCount)
+            return;
+
+        prevOrderCount = OrderCount;
+
+        RebuildUI();
+    }
+
+    void RebuildUI()
+    {
+        uiManager.ClearAll();
+
+        for (int i = 0; i < OrderCount; i++)
+        {
+            uiManager.CreateOrderUI(OrderIds[i], NetMaxTimes[i]);
+        }
+    }
+
     //------------------------------------------------
 
     void HandleOrderSpawn()
@@ -141,9 +163,6 @@ public class NetworkOrderManager : NetworkBehaviour
         OrderCount++;
 
         OrderIndexCounter++;
-
-        // UI 생성
-        uiManager.CreateOrderUI(dishId, timeLimit);
     }
 
     //------------------------------------------------
