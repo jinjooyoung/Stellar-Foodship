@@ -26,18 +26,6 @@ namespace JinJooYoung
             Initialize();
         }
 
-        private void Start()
-        {
-            StartCoroutine(AutoOpen());
-        }
-
-        IEnumerator AutoOpen()
-        {
-            yield return new WaitForSeconds(1f);
-
-            Open();
-        }
-
         public void Initialize()
         {
             canvasGroup.alpha = 0f;
