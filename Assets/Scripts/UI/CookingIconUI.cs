@@ -28,13 +28,25 @@ public class CookingIconUI : MonoBehaviour
             {
                 var ingredient = ingredientDB.GetIngredientById(id);
                 if (ingredient != null)
+                {
                     sprites.Add(ingredient.icon);
+                }
+                else
+                {
+                    Debug.LogWarning($"재료 SO 찾기 실패 id : {id}");
+                }
             }
             else // 1차 조리품
             {
                 var cooked = cookedDB.GetCookedIngredientById(id);
                 if (cooked != null)
+                {
                     sprites.Add(cooked.icon);
+                }
+                else
+                {
+                    Debug.LogWarning($"1차 조리품 SO 찾기 실패 id : {id}");
+                }
             }
         }
 

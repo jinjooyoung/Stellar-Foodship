@@ -174,7 +174,7 @@ public class NetworkDish : NewPickable
         ResultId = -1;
 
         for (int i = 0; i < 4; i++)
-            IngredientIds.Set(i, 0);
+            IngredientIds.Set(i, -1);
 
         IngredientCount = 0;
 
