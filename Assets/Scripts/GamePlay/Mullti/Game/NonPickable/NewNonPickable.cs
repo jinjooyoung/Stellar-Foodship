@@ -32,8 +32,22 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
         if (item == null)
             return;
 
+        NewPickable placed = null;
+
+        if (HeldItem != null)
+        {
+            placed = HeldItem.GetComponent<NewPickable>();
+        }
+
         if (TryPlaceItem(item))
         {
+            // 팬 -> 접시 조합은 플레이어가 계속 들고 있음
+            if (placed is NetworkDish &&
+                item is NetworkCookware)
+            {
+                return;
+            }
+
             player.SetHeldItem(null);
         }
     }
@@ -144,8 +158,10 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
         if (placed is NetworkIngredient ing1 &&
             incoming is NetworkCookware cook1)
         {
-            if (cook1.TryAddIngredient(ing1))
-                return cook1;
+            /*if (cook1.TryAddIngredient(ing1))
+                return cook1;*/
+
+            return null;
         }
 
         if (placed is NetworkCookware cook2 &&
@@ -160,8 +176,10 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
         if (placed is NetworkIngredient ing3 &&
             incoming is NetworkDish dish1)
         {
-            if (dish1.TryAddIngredient(ing3))
-                return dish1;
+            /*if (dish1.TryAddIngredient(ing3))
+                return dish1;*/
+
+            return null;
         }
 
         if (placed is NetworkDish dish2 &&
@@ -176,8 +194,10 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
         if (placed is NetworkCookware cook3 &&
             incoming is NetworkDish dish3)
         {
-            if (dish3.TryServe(cook3))
-                return dish3;
+            /*if (dish3.TryServe(cook3))
+                return dish3;*/
+
+            return null;
         }
 
         if (placed is NetworkDish dish4 &&
