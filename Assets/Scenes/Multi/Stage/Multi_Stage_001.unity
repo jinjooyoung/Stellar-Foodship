@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b9ad9afaffabf42aeb88de577a6083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowWorldUI
-  uiTargetTransform: {fileID: 0}
+  uiTargetTransform: {fileID: 785274867}
   uiWorldCamera: {fileID: 279500617}
   uiOffset: {x: 0, y: -1.5, z: 0}
 --- !u!114 &3136921
@@ -5700,18 +5700,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 15594713}
     m_Modifications:
-    - target: {fileID: 2507825046768754546, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: a9468dbf8f1bbbd4b8fa146bd55e75a9, type: 2}
-    - target: {fileID: 3806334107188682298, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 3822247309040838107, guid: b1e59f094a16cfa4eb3f996668df52e5, type: 3}
-    - target: {fileID: 8856318152632264526, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
-      propertyPath: targetIngredientId
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1273877440725980064, guid: 7ff9121e9cf3a19448a34b2ed88b160e, type: 3}
       propertyPath: m_Name
       value: NetworkIngredientBox (1)
@@ -5767,6 +5755,18 @@ PrefabInstance:
     - target: {fileID: 7594819047072314617, guid: 7ff9121e9cf3a19448a34b2ed88b160e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507825046768754546, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9468dbf8f1bbbd4b8fa146bd55e75a9, type: 2}
+    - target: {fileID: 3806334107188682298, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3822247309040838107, guid: b1e59f094a16cfa4eb3f996668df52e5, type: 3}
+    - target: {fileID: 8856318152632264526, guid: 4176f0304e7c59743b727f76ebb8e12c, type: 3}
+      propertyPath: targetIngredientId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6705,7 +6705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b9ad9afaffabf42aeb88de577a6083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowWorldUI
-  uiTargetTransform: {fileID: 0}
+  uiTargetTransform: {fileID: 2111360863}
   uiWorldCamera: {fileID: 279500617}
   uiOffset: {x: 0, y: -1.5, z: 0}
 --- !u!114 &1401415833
@@ -8685,7 +8685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b9ad9afaffabf42aeb88de577a6083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowWorldUI
-  uiTargetTransform: {fileID: 0}
+  uiTargetTransform: {fileID: 35929765}
   uiWorldCamera: {fileID: 279500617}
   uiOffset: {x: 0, y: -1.5, z: 0}
 --- !u!114 &2004940494

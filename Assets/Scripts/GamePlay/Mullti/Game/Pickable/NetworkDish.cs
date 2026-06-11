@@ -28,6 +28,11 @@ public class NetworkDish : NewPickable
     {
         base.Spawned();
 
+        for (int i = 0; i < 4; i++)
+        {
+            IngredientIds.Set(i, -1);
+        }
+
         TryCreateUI();
 
         OnIngredientChanged();
