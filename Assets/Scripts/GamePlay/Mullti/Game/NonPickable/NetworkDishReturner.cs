@@ -81,7 +81,7 @@ public class NetworkDishReturner : NewNonPickable
 
         dish.PickUp(player.Object.InputAuthority);
 
-        player.SetHeldItem(dish);
+        player.SetHeldItem(dishObj);
 
         DishCount++;
     }

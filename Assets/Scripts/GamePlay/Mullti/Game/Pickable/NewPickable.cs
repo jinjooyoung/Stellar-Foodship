@@ -15,7 +15,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
     [Networked] public PlayerRef Holder { get; set; }
 
     [Networked] public NetworkBool IsPlaced { get; set; }
-    [Networked] public NewNonPickable NonP { get; set; }
+    [Networked] public NetworkObject NonP { get; set; }
 
 
     protected bool isFlying;
@@ -54,7 +54,11 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
         }
         else if (IsPlaced && NonP != null)
         {
-            transform.position = NonP.holdPoint.position;
+            NewNonPickable nonp = NonP.GetComponent<NewNonPickable>();
+
+            if (nonp == null) return;
+
+            transform.position = nonp.holdPoint.position;
             transform.rotation = Quaternion.identity;
         }
     }
@@ -75,7 +79,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
 
         // Áý±â
         PickUp(player.Object.InputAuthority);
-        player.SetHeldItem(this);
+        player.SetHeldItem(this.Object);
     }
 
     public virtual void InteractSecondary(NewPlayer player)
@@ -119,6 +123,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
         rb.angularVelocity = Vector3.zero;
 
         itemCollider.enabled = false;
+        itemCollider.isTrigger = false;
     }
 
     public virtual void Drop(Vector3 impulse)
@@ -149,7 +154,7 @@ public abstract class NewPickable : NetworkBehaviour, INewInteractable
         Holder = default;
         IsHeld = false;
         IsPlaced = true;
-        NonP = non;
+        NonP = non.Object;
 
         rb.isKinematic = true;
 

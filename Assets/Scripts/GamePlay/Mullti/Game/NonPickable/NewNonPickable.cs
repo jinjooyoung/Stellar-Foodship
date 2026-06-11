@@ -7,7 +7,7 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
     [SerializeField] public Transform holdPoint;
 
     [Networked]
-    public NewPickable HeldItem { get; set; }
+    public NetworkObject HeldItem { get; set; }
 
     public virtual bool CanPlace => true;
 
@@ -66,7 +66,7 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
             if (result == null)
                 return false;
 
-            HeldItem = result;
+            HeldItem = result.Object;
 
             result.transform.position =
                 holdPoint.position;
@@ -80,7 +80,7 @@ public abstract class NewNonPickable : NetworkBehaviour, INewInteractable
         }
 
         // 그냥 올리기
-        HeldItem = item;
+        HeldItem = item.Object;
 
         item.Place(this);
 

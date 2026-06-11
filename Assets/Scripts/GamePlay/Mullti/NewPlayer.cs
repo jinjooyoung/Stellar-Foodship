@@ -15,7 +15,7 @@ public class NewPlayer : NetworkBehaviour
 
     public Transform HoldPoint => holdPoint;
 
-    [Networked] public NewPickable HeldItem { get; set; }
+    [Networked] public NetworkObject HeldItem { get; set; }
     private INewInteractable target;
     public INewInteractable Target => target;
 
@@ -217,7 +217,7 @@ public class NewPlayer : NetworkBehaviour
         }
     }
 
-    public void SetHeldItem(NewPickable obj)
+    public void SetHeldItem(NetworkObject obj)
     {
         HeldItem = obj;
     }
@@ -244,7 +244,7 @@ public class NewPlayer : NetworkBehaviour
             if (pickable == null) return;
 
             pickable.PickUp(Object.InputAuthority);
-            HeldItem = pickable;
+            HeldItem = pickable.Object;
         }
         else
         {

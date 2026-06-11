@@ -48,11 +48,17 @@ public class NetworkCookingStation : NewNonPickable
         if (pickable == null)
             return;
 
-        if (!TryPlaceItem(pickable))
+        if (TryPlaceItem(pickable))
+        {
+            player.SetHeldItem(null);
+        }
+        else
+        {
             return;
+        }
 
-        NetworkCookware cookwarePlaced =
-            pickable.GetComponent<NetworkCookware>();
+            NetworkCookware cookwarePlaced =
+                pickable.GetComponent<NetworkCookware>();
 
         if (cookwarePlaced == null)
             return;

@@ -62,7 +62,7 @@ public class NetworkIngredientBox : NewNonPickable
         NewPickable newPickable =
             obj.GetComponent<NewPickable>();
 
-        player.SetHeldItem(newPickable);
+        player.SetHeldItem(obj);
     }
 
     public override void InteractSecondary(NewPlayer player)
