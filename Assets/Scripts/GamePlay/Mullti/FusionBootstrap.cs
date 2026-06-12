@@ -365,6 +365,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
         Debug.Log($"플레이어 퇴장: {player}");
 
+        UIManager.Instance.ShowToast("상대 플레이어가 퇴장했습니다. 게임을 재시작해주세요.");
+
         if (SceneManager.GetActiveScene().name == "2_Lobby")
         {
             UIManager.Instance.SetPlayerCount(lobbyObjects.Count);
@@ -476,13 +478,29 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
     {
         Debug.Log($"Disconnected: {reason}");
-        UIManager.Instance.ShowToast("호스트가 방을 종료했습니다.");
-        UIManager.Instance.ShowMainMenu();
+        UIManager.Instance.ShowToast("서버와 연결이 끊어졌습니다.");
     }
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason reason)
     {
         Debug.Log($"Shutdown: {reason}");
+
+        switch (reason)
+        {
+            case ShutdownReason.Ok:
+                break;
+
+            case ShutdownReason.ConnectionTimeout:
+                UIManager.Instance.ShowToast(
+                    "서버 연결 시간이 초과되었습니다.");
+                break;
+
+            default:
+                UIManager.Instance.ShowToast(
+                    "네트워크가 종료되었습니다.");
+                break;
+        }
+
         this.runner = null;
     }
 
@@ -517,6 +535,7 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
         PickableSpawn();
     }
+
     public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
     public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
 }
