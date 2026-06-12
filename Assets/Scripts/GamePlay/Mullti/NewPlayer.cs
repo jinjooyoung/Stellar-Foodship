@@ -37,6 +37,8 @@ public class NewPlayer : NetworkBehaviour
     public float MaxOxygen = 12f;
     [SerializeField]
     private float oxygenStartDelay = 3f;
+    [Networked]
+    private TickTimer RespawnTimer { get; set; }
 
     [Header("리스폰 / 사망")]
     [SerializeField]
@@ -76,6 +78,8 @@ public class NewPlayer : NetworkBehaviour
         int index =
             Object.InputAuthority.PlayerId - 1;
 
+        Oxygen = MaxOxygen;
+
         OxygenUIManager.Instance.RegisterPlayer(
             this,
             index);
@@ -88,13 +92,12 @@ public class NewPlayer : NetworkBehaviour
         if (!GetInput<FusionBootstrap.NetworkInputData>(out var input))
             return;
 
-        if (State == PlayerState.Uncontrollable) return;
-
         // 타겟 갱신
         target = interactionFinder.FindClosestInteractable();
         Debug.Log(target);
 
         // ================= 이동 =================
+
         Vector3 inputDir = new Vector3(input.move.x, 0, input.move.y);
 
         if (State == PlayerState.IsAiming)
@@ -202,12 +205,21 @@ public class NewPlayer : NetworkBehaviour
         {
             Die();
         }
+
+        if (Object.HasStateAuthority &&
+    isDead &&
+    RespawnTimer.Expired(Runner))
+        {
+            Respawn();
+        }
     }
 
     // ================= 이동 =================
 
     void SetMoveInput(Vector3 dir)
     {
+        if (State == PlayerState.Uncontrollable) return;
+
         if (dir.sqrMagnitude > 0.001f)
         {
             lastInputDir = dir.normalized;
@@ -371,6 +383,8 @@ public class NewPlayer : NetworkBehaviour
 
     void Die()
     {
+        Debug.Log("Die 호출");
+
         if (isDead)
             return;
 
@@ -382,13 +396,31 @@ public class NewPlayer : NetworkBehaviour
 
         State = PlayerState.Uncontrollable;
 
-        StartCoroutine(RespawnRoutine());
+        RespawnTimer =
+        TickTimer.CreateFromSeconds(
+            Runner,
+            respawnDelay);
+    }
+
+    void Respawn()
+    {
+        transform.position = spawnPoint;
+
+        Oxygen = MaxOxygen;
+
+        State = PlayerState.Controllable;
+
+        isDead = false;
     }
 
     IEnumerator RespawnRoutine()
     {
+        Debug.Log("RespawnRoutine 시작");
+
         yield return new WaitForSeconds(
             respawnDelay);
+
+        Debug.Log("리스폰 실행");
 
         transform.position = spawnPoint;
 
