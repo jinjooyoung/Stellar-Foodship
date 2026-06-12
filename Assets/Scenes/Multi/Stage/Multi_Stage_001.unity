@@ -6375,6 +6375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NetworkOrderManager
   uiManager: {fileID: 2053674836}
   scoreManager: {fileID: 479788492}
+  gameFlowManager: {fileID: 294758689}
   _SpawnTimer: 0
   _OrderIndexCounter: 0
   _OrderCount: 0

@@ -8,6 +8,7 @@ public class NetworkOrderManager : NetworkBehaviour
     [Header("Reference")]
     public NewOrderUIManager uiManager;
     public NetworkScoreManager scoreManager;
+    public NetworkGameFlowManager gameFlowManager;
 
     [Networked]
     public float SpawnTimer { get; set; }
@@ -45,6 +46,9 @@ public class NetworkOrderManager : NetworkBehaviour
 
     void TickOrderTimers()
     {
+        if (gameFlowManager.IsGameOver)
+            return;
+
         for (int i = OrderCount - 1; i >= 0; i--)
         {
             if (orderTimers[i].Tick(Runner.DeltaTime))
@@ -70,6 +74,9 @@ public class NetworkOrderManager : NetworkBehaviour
 
     public float GetOrderProgress(int index)
     {
+        if (!Object || !Object.IsValid)
+            return 0f;
+
         if (index < 0 || index >= OrderCount)
             return 0f;
 

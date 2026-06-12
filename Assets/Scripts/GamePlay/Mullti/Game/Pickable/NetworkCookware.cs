@@ -43,6 +43,7 @@ public class NetworkCookware : NewPickable
     [SerializeField] private Slider timerSlider;
 
     NetworkTimer timer = new();
+    public NetworkGameFlowManager gameFlowManager;
 
     //----------------------------------------------------
 
@@ -61,6 +62,8 @@ public class NetworkCookware : NewPickable
         OnIngredientChanged();
         
         checkImage.SetActive(IsComplete);
+
+        gameFlowManager = FindFirstObjectByType<NetworkGameFlowManager>();
     }
 
     public override void Render()
@@ -80,6 +83,9 @@ public class NetworkCookware : NewPickable
             return;
 
         Debug.Log($"Tick : {timer.CurrentTime}");
+
+        if (gameFlowManager.IsGameOver)
+            return;
 
         if (timer.Tick(Runner.DeltaTime))
         {

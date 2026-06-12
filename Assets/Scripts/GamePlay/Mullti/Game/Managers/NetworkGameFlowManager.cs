@@ -93,6 +93,9 @@ public class NetworkGameFlowManager : NetworkBehaviour
             return;
         }
 
+        if (IsGameOver)
+            return;
+
         if (timer.Tick(Runner.DeltaTime))
         {
             EndGame();
