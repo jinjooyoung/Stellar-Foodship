@@ -6,10 +6,14 @@ public class FollowWorldUI : MonoBehaviour
     public Transform uiTargetTransform; // 접시 위치
     public Camera uiWorldCamera; // 메인 카메라
     public Vector3 uiOffset = new Vector3(0, 1.5f, 0);
+    public bool isPlayerFollow = false;
 
     void Update()
     {
-        if (uiTargetTransform == null)
+        if (!OxygenUIManager.Instance.player0set || !OxygenUIManager.Instance.player1set)
+            return;
+
+        if (uiTargetTransform == null && isPlayerFollow)
         {
             Destroy(gameObject);
             return;

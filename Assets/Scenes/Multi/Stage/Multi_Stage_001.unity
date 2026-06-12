@@ -172,6 +172,7 @@ MonoBehaviour:
   uiTargetTransform: {fileID: 785274867}
   uiWorldCamera: {fileID: 279500617}
   uiOffset: {x: 0, y: -1.5, z: 0}
+  isPlayerFollow: 0
 --- !u!114 &3136921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,6 +1096,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1766306644}
     m_Modifications:
     - target: {fileID: 3025217459719546679, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025217459719546679, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -1191,12 +1196,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 279500617}
     - target: {fileID: 7298149475278785310, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      propertyPath: isPlayerFollow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298149475278785310, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
       propertyPath: uiTargetTransform
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9162371713020278809, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
       propertyPath: m_Name
-      value: OxygenSlider_1
+      value: OxygenSlider_0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1208,6 +1217,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3061123860788982683, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
   m_PrefabInstance: {fileID: 179439060}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &179439062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 750616337866039601, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+  m_PrefabInstance: {fileID: 179439060}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &180607351
 GameObject:
   m_ObjectHideFlags: 0
@@ -3415,6 +3435,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1766306644}
     m_Modifications:
     - target: {fileID: 3025217459719546679, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025217459719546679, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -3511,12 +3535,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 279500617}
     - target: {fileID: 7298149475278785310, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      propertyPath: isPlayerFollow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298149475278785310, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
       propertyPath: uiTargetTransform
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9162371713020278809, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
       propertyPath: m_Name
-      value: OxygenSlider_2
+      value: OxygenSlider_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3528,6 +3556,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3061123860788982683, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
   m_PrefabInstance: {fileID: 470778954}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &470778956 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 750616337866039601, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+  m_PrefabInstance: {fileID: 470778954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &479041988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4487,11 +4526,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2417271702069966925, guid: c72e1411e2e4ff84a87796edeb13556e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2447226645435551360, guid: c72e1411e2e4ff84a87796edeb13556e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 655413123}
   m_SourcePrefab: {fileID: 100100000, guid: c72e1411e2e4ff84a87796edeb13556e, type: 3}
+--- !u!1 &655413122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2447226645435551360, guid: c72e1411e2e4ff84a87796edeb13556e, type: 3}
+  m_PrefabInstance: {fileID: 655413121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &655413123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655413122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04f3506b6c71e04eae97d38da422cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewOxygenZone
 --- !u!1001 &662343270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8774,6 +8834,7 @@ MonoBehaviour:
   uiTargetTransform: {fileID: 2111360863}
   uiWorldCamera: {fileID: 279500617}
   uiOffset: {x: 0, y: -1.5, z: 0}
+  isPlayerFollow: 0
 --- !u!114 &1401415833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10089,7 +10150,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663757021}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -10271,6 +10332,7 @@ Transform:
   - {fileID: 1146495732}
   - {fileID: 2053674835}
   - {fileID: 294758687}
+  - {fileID: 2044304942}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1718013578
@@ -11513,11 +11575,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2417271702069966925, guid: c72e1411e2e4ff84a87796edeb13556e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2447226645435551360, guid: c72e1411e2e4ff84a87796edeb13556e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2000893232}
   m_SourcePrefab: {fileID: 100100000, guid: c72e1411e2e4ff84a87796edeb13556e, type: 3}
+--- !u!1 &2000893231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2447226645435551360, guid: c72e1411e2e4ff84a87796edeb13556e, type: 3}
+  m_PrefabInstance: {fileID: 2000893230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2000893232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000893231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04f3506b6c71e04eae97d38da422cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewOxygenZone
 --- !u!1 &2004940491
 GameObject:
   m_ObjectHideFlags: 0
@@ -11571,6 +11654,7 @@ MonoBehaviour:
   uiTargetTransform: {fileID: 35929765}
   uiWorldCamera: {fileID: 279500617}
   uiOffset: {x: 0, y: -1.5, z: 0}
+  isPlayerFollow: 0
 --- !u!114 &2004940494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11907,6 +11991,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043365855}
   m_CullTransparentMesh: 1
+--- !u!1 &2044304941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2044304942}
+  - component: {fileID: 2044304943}
+  m_Layer: 0
+  m_Name: OxygenUIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2044304942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044304941}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1715788193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2044304943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044304941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421aac3f31053f743b83c57b9a979b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OxygenUIManager
+  player0Slider: {fileID: 179439062}
+  player1Slider: {fileID: 470778956}
+  player0set: 0
+  player1set: 0
+  player0: {fileID: 0}
+  player1: {fileID: 0}
 --- !u!1 &2053674834
 GameObject:
   m_ObjectHideFlags: 0

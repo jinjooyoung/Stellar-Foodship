@@ -42,6 +42,8 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     public NetworkRunner Runner => runner;
     private Dictionary<PlayerRef, NetworkObject> playerObjects = new();
 
+    private int spawnIndex = 0;
+
     public struct NetworkInputData : INetworkInput
     {
         public Vector2 move;
@@ -284,6 +286,12 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         playerObjects[player] = obj;
 
         runner.SetPlayerObject(player, obj);
+
+        NewPlayer newPlayer = obj.GetComponent<NewPlayer>();
+
+        OxygenUIManager.Instance.RegisterPlayer(newPlayer, spawnIndex);
+
+        spawnIndex++;
     }
 
     void DespawnAllPlayers()

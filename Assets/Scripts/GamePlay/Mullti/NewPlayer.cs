@@ -1,4 +1,5 @@
 using Fusion;
+using System.Collections;
 using UnityEngine;
 
 public class NewPlayer : NetworkBehaviour
@@ -30,6 +31,20 @@ public class NewPlayer : NetworkBehaviour
     [Header("Dash Cooldown")]
     [SerializeField] private float dashCooldown = 0.3f;
 
+    [Header("Oxygen")]
+    [Networked] public float Oxygen { get; set; }
+    [Networked] public NetworkBool IsInOxygenZone { get; set; }
+    public float MaxOxygen = 12f;
+
+    [Header("리스폰 / 사망")]
+    [SerializeField]
+    private Vector3 spawnPoint;
+    [SerializeField]
+    private Vector3 diePosition = new Vector3(0f, -50f, 0f);
+    [SerializeField]
+    private float respawnDelay = 5f;
+    public bool isDead;
+
     [Networked] private TickTimer DashCooldownTimer { get; set; }
 
     private Vector3 targetMoveDir;
@@ -47,6 +62,11 @@ public class NewPlayer : NetworkBehaviour
         Application.targetFrameRate = 120;
 
         if (interactionFinder == null) interactionFinder = GetComponent<NewInteractionFinder>();
+    }
+
+    public override void Spawned()
+    {
+        spawnPoint = transform.position;
     }
 
     // ========================= 포톤 업데이트 =========================
@@ -137,6 +157,29 @@ public class NewPlayer : NetworkBehaviour
         HandleDash();
 
         PrevButtons = input.buttons;
+
+        //================= 산소 =================
+
+        if (!Object.HasStateAuthority)
+            return;
+
+        float delta = Runner.DeltaTime;
+
+        if (IsInOxygenZone)
+        {
+            Oxygen += 24f * delta;
+        }
+        else
+        {
+            Oxygen -= 1f * delta;
+        }
+
+        Oxygen = Mathf.Clamp(Oxygen, 0f, MaxOxygen);
+
+        if (Oxygen <= 0f && State != PlayerState.Uncontrollable)
+        {
+            Die();
+        }
     }
 
     // ================= 이동 =================
@@ -303,4 +346,34 @@ public class NewPlayer : NetworkBehaviour
 
         Debug.Log($"{item} 던지기 호출");
     }*/
+
+    void Die()
+    {
+        if (isDead)
+            return;
+
+        isDead = true;
+
+        Debug.Log("플레이어 사망");
+
+        transform.position = diePosition;
+
+        State = PlayerState.Uncontrollable;
+
+        StartCoroutine(RespawnRoutine());
+    }
+
+    IEnumerator RespawnRoutine()
+    {
+        yield return new WaitForSeconds(
+            respawnDelay);
+
+        transform.position = spawnPoint;
+
+        Oxygen = MaxOxygen;
+
+        State = PlayerState.Controllable;
+
+        isDead = false;
+    }
 }
