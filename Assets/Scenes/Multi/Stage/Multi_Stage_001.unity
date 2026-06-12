@@ -1095,6 +1095,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1766306644}
     m_Modifications:
+    - target: {fileID: 750616337866039601, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      propertyPath: m_Value
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 750616337866039601, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      propertyPath: m_MaxValue
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3025217459719546679, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1210,7 +1218,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9162371713020278809, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 179439065}
   m_SourcePrefab: {fileID: 100100000, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
 --- !u!224 &179439061 stripped
 RectTransform:
@@ -1222,12 +1233,42 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 750616337866039601, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
   m_PrefabInstance: {fileID: 179439060}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 179439064}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
+--- !u!114 &179439063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3735419256258966615, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+  m_PrefabInstance: {fileID: 179439060}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &179439064 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9162371713020278809, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+  m_PrefabInstance: {fileID: 179439060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &179439065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179439064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd83c08548e8d2469dd756ca863c27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OxygenSliderColorChanger
+  slider: {fileID: 179439062}
+  fillImage: {fileID: 179439063}
 --- !u!1 &180607351
 GameObject:
   m_ObjectHideFlags: 0
@@ -3434,6 +3475,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1766306644}
     m_Modifications:
+    - target: {fileID: 750616337866039601, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      propertyPath: m_Value
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 750616337866039601, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      propertyPath: m_MaxValue
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3025217459719546679, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3549,7 +3598,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9162371713020278809, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 470778959}
   m_SourcePrefab: {fileID: 100100000, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
 --- !u!224 &470778955 stripped
 RectTransform:
@@ -3561,12 +3613,42 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 750616337866039601, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
   m_PrefabInstance: {fileID: 470778954}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 470778958}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
+--- !u!114 &470778957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3735419256258966615, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+  m_PrefabInstance: {fileID: 470778954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &470778958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9162371713020278809, guid: 21ac64dc0fa884b4cab2424f57b0ad5c, type: 3}
+  m_PrefabInstance: {fileID: 470778954}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &470778959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470778958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd83c08548e8d2469dd756ca863c27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OxygenSliderColorChanger
+  slider: {fileID: 470778956}
+  fillImage: {fileID: 470778957}
 --- !u!1001 &479041988
 PrefabInstance:
   m_ObjectHideFlags: 0
