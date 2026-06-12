@@ -130,7 +130,7 @@ public class NetworkOrderManager : NetworkBehaviour
 
     //------------------------------------------------
 
-    void TryCreateOrder()
+    public void TryCreateOrder()
     {
         if (OrderCount >=
             LevelManager.Instance.maxOrderCount)

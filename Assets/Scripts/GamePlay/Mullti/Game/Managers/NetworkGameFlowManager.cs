@@ -19,6 +19,7 @@ public class NetworkGameFlowManager : NetworkBehaviour
     [SerializeField]
     private NetworkScoreManager scoreManager;
     private FusionBootstrap bootstrap;
+    private NetworkOrderManager orderManager;
 
     //------------------------------------------------
 
@@ -63,6 +64,8 @@ public class NetworkGameFlowManager : NetworkBehaviour
 
         bootstrap =
             FindFirstObjectByType<FusionBootstrap>();
+
+        orderManager = FindFirstObjectByType<NetworkOrderManager>();
     }
 
     //------------------------------------------------
@@ -84,6 +87,7 @@ public class NetworkGameFlowManager : NetworkBehaviour
                 StartDelay = 0;
 
                 timer.Resume();
+                orderManager.TryCreateOrder();
             }
 
             return;
@@ -170,7 +174,7 @@ public class NetworkGameFlowManager : NetworkBehaviour
         if (finalScoreText != null)
         {
             finalScoreText.text =
-                $"최종 점수 : {scoreManager.GetCurrentScore()}";
+                $"{scoreManager.GetCurrentScore()}";
         }
     }
 
