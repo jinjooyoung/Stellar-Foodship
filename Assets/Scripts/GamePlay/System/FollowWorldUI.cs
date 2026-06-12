@@ -10,10 +10,12 @@ public class FollowWorldUI : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(
+    $"{name} target = {uiTargetTransform}");
         if (!OxygenUIManager.Instance.player0set || !OxygenUIManager.Instance.player1set)
             return;
 
-        if (uiTargetTransform == null && isPlayerFollow)
+        if (uiTargetTransform == null)
         {
             Destroy(gameObject);
             return;

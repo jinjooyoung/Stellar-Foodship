@@ -35,6 +35,8 @@ public class NewPlayer : NetworkBehaviour
     [Networked] public float Oxygen { get; set; }
     [Networked] public NetworkBool IsInOxygenZone { get; set; }
     public float MaxOxygen = 12f;
+    [SerializeField]
+    private float oxygenStartDelay = 3f;
 
     [Header("리스폰 / 사망")]
     [SerializeField]
@@ -67,6 +69,16 @@ public class NewPlayer : NetworkBehaviour
     public override void Spawned()
     {
         spawnPoint = transform.position;
+
+        if (OxygenUIManager.Instance == null)
+            return;
+
+        int index =
+            Object.InputAuthority.PlayerId - 1;
+
+        OxygenUIManager.Instance.RegisterPlayer(
+            this,
+            index);
     }
 
     // ========================= 포톤 업데이트 =========================
@@ -162,6 +174,16 @@ public class NewPlayer : NetworkBehaviour
 
         if (!Object.HasStateAuthority)
             return;
+
+        if (oxygenStartDelay > 0f)
+        {
+            oxygenStartDelay -= Runner.DeltaTime;
+
+            if (oxygenStartDelay <= 0f)
+                oxygenStartDelay = 0f;
+
+            return;
+        }
 
         float delta = Runner.DeltaTime;
 

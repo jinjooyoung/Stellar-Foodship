@@ -289,8 +289,6 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
 
         NewPlayer newPlayer = obj.GetComponent<NewPlayer>();
 
-        OxygenUIManager.Instance.RegisterPlayer(newPlayer, spawnIndex);
-
         spawnIndex++;
     }
 
