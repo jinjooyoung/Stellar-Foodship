@@ -1,7 +1,8 @@
+using JinJooYoung;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -160,7 +161,7 @@ public class UIManager : MonoBehaviour
         if (toastRoutine != null)
             StopCoroutine(toastRoutine);
 
-        toastRoutine = StartCoroutine(CoToast(message));
+        toastRoutine = StartCoroutine(ShowRoutine(message));
     }
 
     IEnumerator CoToast(string msg)
@@ -172,6 +173,29 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(toastDuration);
 
         SetCanvas(toastUI, false);
+    }
+
+    IEnumerator ShowRoutine(string message)
+    {
+        toastText.text = message;
+
+        MyTween.Fade(
+            toastUI,
+            1f,
+            0.2f);
+
+        yield return new WaitForSeconds(
+            0.2f + 1.5f);
+
+        MyTween.Fade(
+            toastUI,
+            0f,
+            0.2f);
+
+        yield return new WaitForSeconds(
+            0.2f);
+
+        toastRoutine = null;
     }
 
     // ===============================
