@@ -9,8 +9,11 @@ public class FollowWorldUI : MonoBehaviour
 
     void Update()
     {
-        // 1. 타겟 확인
-        if (uiTargetTransform == null) return;
+        if (uiTargetTransform == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         // 2. 카메라 확인 및 할당
         if (uiWorldCamera == null) uiWorldCamera = Camera.main;

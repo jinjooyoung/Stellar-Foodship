@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4411979059889738284}
   - component: {fileID: 4214145227967054634}
-  - component: {fileID: 1446117642151131508}
+  - component: {fileID: 4352819858681081712}
+  - component: {fileID: 1575803990485470241}
   m_Layer: 7
   m_Name: NetworkDishSubmissionCounter
   m_TagString: Untagged
@@ -55,7 +56,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1.2, z: 1}
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!114 &1446117642151131508
+--- !u!114 &4352819858681081712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,16 +65,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 634557393679609359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87bc0cc33ccf4d943a486b16c10af55b, type: 3}
+  m_Script: {fileID: 11500000, guid: e58240977c3ebde41b09c42c6437fcd1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DishSubmissionCounter
-  heldItem: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkDishSubmissionCounter
   holdPoint: {fileID: 0}
+  _HeldItem: {fileID: 0}
   orderManager: {fileID: 0}
   dishReturner: {fileID: 0}
-  successEffectPrefab: {fileID: 8404576841783043474, guid: 14885a3087ddcbc40b24a0799c8cd68d, type: 3}
-  successEffect: {fileID: 0}
-  _canPlace: 0
+--- !u!114 &1575803990485470241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634557393679609359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 1569406102
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 4352819858681081712}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &2267261040827453177
 PrefabInstance:
   m_ObjectHideFlags: 0

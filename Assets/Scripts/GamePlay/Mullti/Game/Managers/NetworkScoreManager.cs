@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class NetworkScoreManager : MonoBehaviour
+public class NetworkScoreManager : NetworkBehaviour
 {
     [Header("UI")]
     [SerializeField]
@@ -14,11 +14,25 @@ public class NetworkScoreManager : MonoBehaviour
     [Networked]
     public int Score { get; set; }
 
+    private int prevScore = -1;
+
     //------------------------------------------------
 
-    void Awake()
+    public override void Spawned()
     {
-        Score = 0;
+        if (Object.HasStateAuthority)
+        {
+            Score = 0;
+        }
+    }
+
+    public override void Render()
+    {
+        if (prevScore == Score)
+            return;
+
+        prevScore = Score;
+
         RefreshUI();
     }
 
@@ -45,5 +59,15 @@ public class NetworkScoreManager : MonoBehaviour
     public int GetCurrentScore()
     {
         return Score;
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("ScoreManager Enable");
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("ScoreManager Disable");
     }
 }
