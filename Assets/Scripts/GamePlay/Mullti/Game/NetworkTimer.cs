@@ -12,8 +12,6 @@ public class NetworkTimer
     public float Normalized =>
         MaxTime == 0 ? 0 : CurrentTime / MaxTime;
 
-    public event Action OnCompleted;
-
     public void Start(float time)
     {
         MaxTime = time;
@@ -51,7 +49,6 @@ public class NetworkTimer
         {
             CurrentTime = 0;
             IsRunning = false;
-            OnCompleted?.Invoke();
             return true;
         }
 

@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 8429362059526576513}
   - component: {fileID: 8012818201226938655}
   - component: {fileID: 7628129749241553852}
-  - component: {fileID: 1340249887709222673}
-  - component: {fileID: 1010988661980851883}
   - component: {fileID: 4262301679210591841}
+  - component: {fileID: 1340249887709222673}
   m_Layer: 6
   m_Name: Pickable
   m_TagString: Untagged
@@ -133,9 +132,25 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 1010988661980851883}
   - {fileID: 4262301679210591841}
   ForceRemoteRenderTimeframe: 0
+--- !u!114 &4262301679210591841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2993625491155488569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkTransform
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!54 &1340249887709222673
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,33 +178,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1010988661980851883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993625491155488569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b630a653b9e9040b717d0bb02cf4d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NewPickable
-  rb: {fileID: 1340249887709222673}
---- !u!114 &4262301679210591841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993625491155488569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkTransform
-  _stateAuthorityChangeErrorCorrectionDelta: 0
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
