@@ -286,6 +286,21 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
         runner.SetPlayerObject(player, obj);
     }
 
+    void DespawnAllPlayers()
+    {
+        foreach (var pair in playerObjects)
+        {
+            if (pair.Value != null)
+            {
+                runner.Despawn(pair.Value);
+            }
+
+            runner.SetPlayerObject(pair.Key, null);
+        }
+
+        playerObjects.Clear();
+    }
+
     // ========================= PLAYER JOIN =========================
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -475,7 +490,10 @@ public class FusionBootstrap : MonoBehaviour, INetworkRunnerCallbacks
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data) { }
     public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
-    public void OnSceneLoadStart(NetworkRunner runner) { }
+    public void OnSceneLoadStart(NetworkRunner runner)
+    {
+        DespawnAllPlayers();
+    }
     public void OnSceneLoadDone(NetworkRunner runner)
     {
         if (!runner.IsServer)
