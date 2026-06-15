@@ -24,8 +24,8 @@ public class NewPlayer : NetworkBehaviour
         holdPoint != null ? holdPoint.position : transform.position + transform.forward * 1.2f + Vector3.up * 1.2f;
 
     [Header("Move")]
-    public float moveSpeed = 5f;
-    public float dashSpeed = 12f;
+    public float moveSpeed = 3.8f;
+    public float dashSpeed = 8f;
     public float dashTime = 0.3f;   // 대쉬가 정면 직선 이동이 아닌 순간 부스터 느낌임. 대쉬 지속 시간
     private NetworkCharacterController _ncc;
 
@@ -251,19 +251,13 @@ public class NewPlayer : NetworkBehaviour
 
     void Move()
     {
-        float speed = isDashing ? dashSpeed : moveSpeed;
-
-        /*if (currentMoveDir == Vector3.zero)
-            return;*/
-        Vector3 movement = currentMoveDir * speed;
-
-        //transform.position += currentMoveDir * speed * Runner.DeltaTime;
+        _ncc.maxSpeed = isDashing ? dashSpeed : moveSpeed;
+        
         if (_ncc != null)
         {
-            // 포톤 ncc 사용해서 러너델타타임 안 곱함
-            _ncc.Move(movement);
+            // NCC에게 이동 명령 전달
+            _ncc.Move(currentMoveDir);
         }
-
 
         // 회전 부드럽게
         Quaternion targetRot = Quaternion.LookRotation(lastInputDir);

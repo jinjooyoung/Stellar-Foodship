@@ -123,8 +123,8 @@ MonoBehaviour:
     m_Bits: 64
   interactionFinder: {fileID: 0}
   _HeldItem: {fileID: 0}
-  moveSpeed: 5
-  dashSpeed: 12
+  moveSpeed: 3.8
+  dashSpeed: 8
   dashTime: 0.3
   dashCooldown: 0.3
   _Oxygen: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   jumpImpulse: 8
   acceleration: 10000
   braking: 10
-  maxSpeed: 2
+  maxSpeed: 3.8
   rotationSpeed: 15
 --- !u!1 &8843816599359011023
 GameObject:
