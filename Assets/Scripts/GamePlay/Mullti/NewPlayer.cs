@@ -195,10 +195,12 @@ public class NewPlayer : NetworkBehaviour
         if (IsInOxygenZone)
         {
             Oxygen += 24f * delta;
+            Debug.Log("산소증가 플레이어스크립트");
         }
         else
         {
             Oxygen -= 1f * delta;
+            Debug.Log("산소감소 플레이어스크립트");
         }
 
         Oxygen = Mathf.Clamp(Oxygen, 0f, MaxOxygen);

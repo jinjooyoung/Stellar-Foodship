@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 4321166231039990459}
   - component: {fileID: 7490540853501770250}
   - component: {fileID: 2502903601173473931}
+  - component: {fileID: 6152949267184815873}
   m_Layer: 3
   m_Name: Player Multi_0
   m_TagString: Player
@@ -215,6 +216,29 @@ MonoBehaviour:
   braking: 10
   maxSpeed: 3.8
   rotationSpeed: 15
+--- !u!136 &6152949267184815873
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169369549956296789}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8843816599359011023
 GameObject:
   m_ObjectHideFlags: 0
