@@ -61,7 +61,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -122,6 +122,9 @@ MonoBehaviour:
   itemCollider: {fileID: 6095551079349253276}
   _IsHeld:
     _value: 0
+  _IsPlaced:
+    _value: 0
+  _NonP: {fileID: 0}
   _ResultId: 0
   cookwareType: 0
   _IngredientCount: 0
@@ -137,6 +140,7 @@ MonoBehaviour:
   visualObject: {fileID: 9063743424751232618}
   checkImage: {fileID: 0}
   timerSlider: {fileID: 0}
+  gameFlowManager: {fileID: 0}
 --- !u!114 &-544921984738594440
 MonoBehaviour:
   m_ObjectHideFlags: 0

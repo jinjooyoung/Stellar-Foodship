@@ -60,7 +60,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -121,6 +121,9 @@ MonoBehaviour:
   itemCollider: {fileID: 2593357180594048970}
   _IsHeld:
     _value: 0
+  _IsPlaced:
+    _value: 0
+  _NonP: {fileID: 0}
   _ResultId: 0
   _IngredientCount: 0
   cookingIconUI: {fileID: 0}
@@ -206,7 +209,8 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8526713959347241766, guid: b6d9e26087c61114485b9b1554439ad8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
