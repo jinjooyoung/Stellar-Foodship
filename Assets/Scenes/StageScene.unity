@@ -180,7 +180,6 @@ GameObject:
   - component: {fileID: 77358288}
   - component: {fileID: 77358287}
   - component: {fileID: 77358290}
-  - component: {fileID: 77358291}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -306,18 +305,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &77358291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77358286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45828abb5fba164fa4a5d8635988fc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::test
 --- !u!1 &272098149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2180,6 @@ GameObject:
   - component: {fileID: 1863410346}
   - component: {fileID: 1863410345}
   - component: {fileID: 1863410344}
-  - component: {fileID: 1863410347}
   - component: {fileID: 1863410348}
   m_Layer: 0
   m_Name: StageTrigger
@@ -2274,18 +2260,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2087687762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1863410347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863410342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86928937441c47c4198c4e33a1001192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageTrigger
 --- !u!135 &1863410348
 SphereCollider:
   m_ObjectHideFlags: 0

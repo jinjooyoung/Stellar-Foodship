@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonManager : MonoBehaviour
+public class StageButtonManager : MonoBehaviour
 {
     [Header("패널 설정")]
     [SerializeField] private GameObject mainCanvas;   // 메인 버튼들이 있는 Canvas
