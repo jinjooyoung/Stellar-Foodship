@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: garbage_can_001
       objectReference: {fileID: 0}
+    - target: {fileID: 6092270389514332505, guid: 0bcf857034c398742abafb7a9efc3d74, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f09d12f86e29df647b1354f55b1633fa, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
