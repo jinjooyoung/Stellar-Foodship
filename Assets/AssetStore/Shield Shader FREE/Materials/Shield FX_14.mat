@@ -80,7 +80,7 @@ Material:
     - _Enable_Texture: 1
     - _Float: 0.509
     - _Opacity_Global: 1
-    - _Opacity_On_Centre: 0.202
+    - _Opacity_On_Centre: 0.114
     - _Opacity_On_Side: 1
     - _Power: 4
     - _QueueControl: 0

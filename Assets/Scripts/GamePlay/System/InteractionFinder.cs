@@ -55,44 +55,4 @@ public class InteractionFinder : MonoBehaviour
 
         return null;
     }
-
-    // 인식 범위, 기준점 인식 기즈모
-    /*private void OnDrawGizmos()
-    {
-        if (playerTransform == null) return;
-
-        bool hasInteractable = false;
-
-        if (FindClosestInteractable() != null)      // 인식된 인터랙터블 클래스가 있는지
-        {
-            hasInteractable = true;
-        }
-        else
-        {
-            hasInteractable = false;
-        }
-
-        // 색상 설정
-        Gizmos.color = hasInteractable ? Color.green : Color.red;
-
-        *//*// 반투명 채우기
-        Color fillColor = Gizmos.color;
-        fillColor.a = 0.2f;
-        Gizmos.color = fillColor;
-        Gizmos.DrawSphere(playerTransform.position, radius);*//*
-
-        // 테두리
-        Gizmos.color = hasInteractable ? Color.green : Color.red;
-        Gizmos.DrawWireSphere(playerTransform.position, radius);
-
-        // targetTransform 표시 (노란색)
-        if (targetTransform != null)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(targetTransform.position, 0.2f);
-
-            // 방향선 (선택사항, 있으면 더 좋음)
-            Gizmos.DrawLine(playerTransform.position, targetTransform.position);
-        }
-    }*/
 }

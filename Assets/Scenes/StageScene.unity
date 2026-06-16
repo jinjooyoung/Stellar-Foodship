@@ -908,9 +908,9 @@ MonoBehaviour:
   isMain: 0
   isSpecialPlanetA: 0
   info:
-    planetName: "\uC9F1 \uC5B4\uB824\uC6C0 \uD589\uC131"
+    planetName: "\uC5D0\uC787 \uD589\uC131"
     difficulty: 5
-    description: "\uC644\uC804 \uC9F1 \uC5B4\uB835\uB2E4 "
+    description: "7\uB2E8\uACC4 \uB9F5 \uC644\uC804 \uC9F1 \uC5B4\uB835\uB2E4 "
     stageNumber: 7
   targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   info:
     planetName: "\uD3EC\uB808\uC2A4\uD2B8 \uD589\uC131"
     difficulty: 4
-    description: "\uC655 \uC5B4\uB835\uB2E4"
+    description: "6\uB2E8\uACC4 \uB9F5 \uC655 \uC5B4\uB835\uB2E4"
     stageNumber: 6
   targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
@@ -2142,7 +2142,7 @@ MonoBehaviour:
   info:
     planetName: "\uD558\uBCA0\uC774 \uD589\uC131"
     difficulty: 4
-    description: "\uC870\uAE08 \uB354 \uC5B4\uB835\uB2F7"
+    description: "5\uB2E8\uACC4 \uB9F5 \uC870\uAE08 \uB354 \uC5B4\uB835\uB2F7"
     stageNumber: 5
   targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
