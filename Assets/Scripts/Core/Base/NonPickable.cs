@@ -6,6 +6,14 @@ public abstract class NonPickable : MonoBehaviour, IInteractable
     public Transform holdPoint;
     public abstract bool canPlace { get; }
 
+    private void Update()
+    {
+        if (heldItem == null) return;
+
+        heldItem.transform.position = holdPoint.position;
+        heldItem.transform.rotation = Quaternion.identity;
+    }
+
     //==================================공통 기능======================================
 
     public virtual bool TryPlaceItem(Pickable item)

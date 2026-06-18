@@ -4305,7 +4305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b9ad9afaffabf42aeb88de577a6083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowWorldUI
-  uiTargetTransform: {fileID: 1671772551}
+  uiTargetTransform: {fileID: 1837532734}
   uiWorldCamera: {fileID: 330585545}
   uiOffset: {x: 0, y: -1.5, z: 0}
 --- !u!114 &612311124
