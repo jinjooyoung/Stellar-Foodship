@@ -8,12 +8,19 @@ public class PopupNext : MonoBehaviour
 
     private void Awake()
     {
+        ResetPopup();
+    }
+
+    public void ResetPopup()
+    {
         foreach (var group in popupGroups)
         {
             group.alpha = 0;
             group.interactable = false;
             group.blocksRaycasts = false;
         }
+
+        currentIndex = 0;
     }
 
     public void ShowNextPopup()
