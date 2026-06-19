@@ -1082,7 +1082,7 @@ MonoBehaviour:
   info:
     planetName: "\uC5D0\uC787 \uD589\uC131"
     difficulty: 5
-    description: "7\uB2E8\uACC4 \uB9F5 \uC644\uC804 \uC9F1 \uC5B4\uB835\uB2E4 "
+    description: "7\uB2E8\uACC4 \uB9F5\n\uC644\uC804 \uC9F1 \uC5B4\uB835\uB2E4 "
     stageNumber: 7
   targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
@@ -1600,7 +1600,7 @@ MonoBehaviour:
   info:
     planetName: "\uD3EC\uB808\uC2A4\uD2B8 \uD589\uC131"
     difficulty: 4
-    description: "6\uB2E8\uACC4 \uB9F5 \uC655 \uC5B4\uB835\uB2E4"
+    description: "6\uB2E8\uACC4 \uB9F5\n\uC655 \uC5B4\uB835\uB2E4"
     stageNumber: 6
   targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
@@ -2205,8 +2205,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 469, y: 282}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 590, y: 282}
+  m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246543060
 MonoBehaviour:
@@ -3035,8 +3035,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 469, y: 193}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 590, y: 193}
+  m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1702405934
 MonoBehaviour:
@@ -3236,7 +3236,7 @@ MonoBehaviour:
   info:
     planetName: "\uD558\uBCA0\uC774 \uD589\uC131"
     difficulty: 4
-    description: "5\uB2E8\uACC4 \uB9F5 \uC870\uAE08 \uB354 \uC5B4\uB835\uB2F7"
+    description: "5\uB2E8\uACC4 \uB9F5\n\uC870\uAE08 \uB354 \uC5B4\uB835\uB2F7"
     stageNumber: 5
   targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
@@ -3797,7 +3797,7 @@ MonoBehaviour:
   info:
     planetName: "\uC544\uC774\uC2A4 \uD589\uC131"
     difficulty: 3
-    description: "4\uB2E8\uACC4 \uB9F5 \uC0C8\uB85C\uC6B4 \uAE30\uBBF9 \uCD94\uAC00 "
+    description: "4\uB2E8\uACC4 \uB9F5\n\uC0C8\uB85C\uC6B4 \uAE30\uBBF9 \uCD94\uAC00 "
     stageNumber: 4
   targetPosition: {x: 0, y: 0, z: 0}
   lerpSpeed: 5
