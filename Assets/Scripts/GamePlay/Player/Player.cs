@@ -55,8 +55,8 @@ public class Player : MonoBehaviour
     public float dashCooldown = 1f; // 대시 쿨타임 (초)
 
     [Header("리스폰 / 사망")]
-    public GameObject respawnPosition;
-    public GameObject DiePosition;
+    public Transform respawnPosition;
+    public Transform DiePosition;
 
     [Header("산소 시스템")]
     public float oxygen = 12f;
@@ -486,21 +486,26 @@ public class Player : MonoBehaviour
     public void Die()
     {
         Debug.Log("플레이어 사망");
-        this.transform.position = DiePosition.transform.position;
 
         state = PlayerState.Uncontrollable;
         oxygenUI.slider.gameObject.SetActive(false);
 
+        playerRigidbody.linearVelocity = Vector3.zero;
+        playerRigidbody.angularVelocity = Vector3.zero;
 
         StartCoroutine(Respawn());
     }
 
     public IEnumerator Respawn()
     {
+        playerRigidbody.position = DiePosition.position;
+
         yield return new WaitForSeconds(5f);
+
         Debug.Log("플레이어 부활");
-        this.transform.position = respawnPosition.transform.position; 
-        
+
+        playerRigidbody.position = respawnPosition.position;
+
         state = PlayerState.Controllable;
         oxygenUI.slider.gameObject.SetActive(true);
         oxygen = maxOxygen;
