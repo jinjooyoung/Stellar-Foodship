@@ -40,6 +40,19 @@ public class LoadingManager : MonoBehaviour
         }
     }
 
+    public void TriggerLoadScene(string sceneName)
+    {
+        Debug.Log($"[SceneManager] 로딩 요청 들어옴. 현재 isLoading 상태: {isLoading}");
+
+        if (isLoading) return;
+
+        // 혹시 모를 메인 스레드 병목을 방지하기 위해 청소 한 번 실행
+        System.GC.Collect();
+
+        // 반드시 매니저 자신의 인스턴스로 코루틴 실행 보장
+        instance.StartCoroutine(instance.LoadSceneWithLoading(sceneName));
+    }
+
     /// <summary>
     /// 로딩 화면을 사용한 씬 로딩
     /// </summary>
@@ -62,46 +75,53 @@ public class LoadingManager : MonoBehaviour
     {
         isLoading = true;
 
-        // 로딩 화면 로드
         if (useLoadingScreen && !string.IsNullOrEmpty(loadingSceneName))
         {
+            Debug.Log("[Scene] 1. 로딩 화면 씬 로드 시작");
             yield return StartCoroutine(LoadSceneAsync(loadingSceneName));
 
-            // 최소 로딩 시간 대기
-            float startTime = Time.time;
+            yield return new WaitForSecondsRealtime(0.2f);
 
-            // 실제 씬 로딩
+          
+            float startRealTime = Time.realtimeSinceStartup;
+
+            Debug.Log($"[Scene] 2. 실제 목적지 씬 비동기 로드 시작 -> {sceneName}");
             AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+
+            if (asyncLoad == null) { isLoading = false; yield break; }
+
             asyncLoad.allowSceneActivation = false;
+
+            while (asyncLoad.progress < 0.9f)
+            {
+                LoadingProgress = asyncLoad.progress;
+                yield return null;
+            }
+
+            Debug.Log("[Scene] 3. 실제 씬 데이터 로드 완료 (90%), 최소 로딩 시간 대기 시작");
+            LoadingProgress = 1f;
+
+            while (Time.realtimeSinceStartup - startRealTime < minimumLoadingTime)
+            {
+                yield return null;
+            }
+
+            Debug.Log("[Scene] 4. 문 열기 (allowSceneActivation = true)");
+            asyncLoad.allowSceneActivation = true;
 
             while (!asyncLoad.isDone)
             {
-                LoadingProgress = asyncLoad.progress;
-
-                // 로딩이 90% 완료되면 대기
-                if (asyncLoad.progress >= 0.9f)
-                {
-                    LoadingProgress = 1f;
-
-                    // 최소 로딩 시간 체크
-                    if (Time.time - startTime >= minimumLoadingTime)
-                    {
-                        asyncLoad.allowSceneActivation = true;
-                    }
-                }
-
                 yield return null;
             }
         }
         else
         {
-            // 로딩 화면 없이 직접 로딩
             yield return StartCoroutine(LoadSceneAsync(sceneName));
         }
 
+        Debug.Log("[Scene] 5. 모든 로딩 프로세스 종료. isLoading = false 플래그 리셋");
         isLoading = false;
     }
-
     /// <summary>
     /// 비동기 씬 로딩
     /// </summary>

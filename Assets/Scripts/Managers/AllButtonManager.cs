@@ -30,12 +30,15 @@ public class AllButtonManager : MonoBehaviour
      {
         if (volumeCanvas != null && isOpen)
         {
-            volumeCanvas.SetActive(false);
+            volumeCanvas.SetActive( false);
             isOpen = false;
         }
     }
 
-    public void StageButton() => LoadingManager.instance.LoadSceneWithLoadingScreen("StageScene");
+    public void StageButton()
+    { 
+        LoadingManager.instance.TriggerLoadScene("StageScene"); 
+    }
     public void ExitButton()
     {
         Application.Quit();
