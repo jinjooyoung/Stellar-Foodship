@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   orderSpawnInterval: 10
   maxOrderCount: 3
-  dishIDs: cb000000cc000000cf000000
+  dishIDs: cb000000cc000000
   penaltyScore: -50
   stageTimeLimit: 80
   ingreTime: 30
