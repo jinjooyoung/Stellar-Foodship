@@ -1866,8 +1866,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+      - m_Target: {fileID: 448412422}
+        m_TargetAssemblyTypeName: AllButtonManager, Assembly-CSharp
         m_MethodName: StageButton
         m_Mode: 1
         m_Arguments:
@@ -9739,11 +9739,11 @@ PrefabInstance:
     - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: DiePosition
       value: 
-      objectReference: {fileID: 548366362}
+      objectReference: {fileID: 548366363}
     - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: respawnPosition
       value: 
-      objectReference: {fileID: 336004258}
+      objectReference: {fileID: 336004259}
     m_RemovedComponents:
     - {fileID: 170224164170443928, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
     m_RemovedGameObjects: []
@@ -18391,11 +18391,11 @@ PrefabInstance:
     - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: DiePosition
       value: 
-      objectReference: {fileID: 548366362}
+      objectReference: {fileID: 548366363}
     - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: respawnPosition
       value: 
-      objectReference: {fileID: 675695494}
+      objectReference: {fileID: 675695495}
     m_RemovedComponents:
     - {fileID: 170224164170443928, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
     m_RemovedGameObjects: []
