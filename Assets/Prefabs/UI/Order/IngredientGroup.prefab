@@ -683,6 +683,7 @@ GameObject:
   - component: {fileID: 6969502005125307832}
   - component: {fileID: 7729766458360083103}
   - component: {fileID: 1956784438960817757}
+  - component: {fileID: 7524709857007368776}
   m_Layer: 5
   m_Name: IngredientGroup
   m_TagString: Untagged
@@ -750,3 +751,23 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &7524709857007368776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8464748212342352664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de6478667a5c8344b8d00e16ca3b1ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientSlotUI
+  ingredientIcons:
+  - {fileID: 4645544864115011068}
+  - {fileID: 5405097248933759465}
+  - {fileID: 4900348258824257152}
+  - {fileID: 4744476332375782790}
+  underLine: {fileID: 1935244113192206838}
+  cookTypeIcon: {fileID: 2171641883730140833}
+  cookTypeBG: {fileID: 4314580418908568310}

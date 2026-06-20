@@ -5,7 +5,7 @@ public class OrderUIManager : MonoBehaviour
 {
     [Header("[참조]")]
     [SerializeField] private GameObject orderUIPrefab;
-    [SerializeField] private Transform uiParent;
+    [SerializeField] public Transform uiParent;
     public OrderManager manager;
     [Header("[런타임]")]
     [SerializeField] private List<OrderUI> orderUIs = new List<OrderUI>();

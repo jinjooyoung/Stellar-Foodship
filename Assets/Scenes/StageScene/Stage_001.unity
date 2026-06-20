@@ -20001,6 +20001,10 @@ PrefabInstance:
       propertyPath: uiParent
       value: 
       objectReference: {fileID: 125116524}
+    - target: {fileID: 1913384869520594477, guid: f5e41a3e65cfc0648bdd51108f524079, type: 3}
+      propertyPath: orderUIPrefab
+      value: 
+      objectReference: {fileID: 8464748212342352664, guid: 99ce0ba9ee2fd074ca19325098c8378f, type: 3}
     - target: {fileID: 3186222023320741531, guid: f5e41a3e65cfc0648bdd51108f524079, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

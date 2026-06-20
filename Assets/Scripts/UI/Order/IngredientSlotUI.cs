@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// UI 구조 바꿔서 이제는 필요없는 스크립트인데 혹시 모르니 일단 냅둠
 public class IngredientSlotUI : MonoBehaviour
 {
     [Header("UI 오브젝트")]
@@ -36,9 +35,18 @@ public class IngredientSlotUI : MonoBehaviour
         {
             CookedIngredientSO data = DataManager.instance.cookedIngredientDatabase.GetCookedIngredientById(id);
 
+            for (int i = 0; i < 4; i++)
+            {
+                if (data.ingredientIds[i] == -1)
+                {
+                    ingredientIcons[i].gameObject.SetActive(false);
 
+                    continue;
+                }
 
-
+                IngredientSO ingredientSO = DataManager.instance.ingredientDatabase.GetIngredientById(data.ingredientIds[i]);
+                ingredientIcons[i].sprite = ingredientSO.icon;
+            }
 
             underLine.gameObject.SetActive(true);
             cookTypeIcon.gameObject.SetActive(true);
@@ -73,37 +81,5 @@ public class IngredientSlotUI : MonoBehaviour
             underLine.color = temp;
             cookTypeBG.color = temp;
         }
-    }
-
-    private void SetIngredients(int?[] ids)
-    {
-        IngredientDatabaseSO db = DataManager.instance.ingredientDatabase;
-
-        for(int i = 0; i < 4; i++)
-        {
-            if (ids[i].HasValue)
-            {
-                ingredientIcons[i].sprite = db.GetIngredientById(ids[i].Value).icon;
-                ingredientIcons[i].gameObject.SetActive(true);
-            }
-            else
-            {
-                ingredientIcons[i].gameObject.SetActive(false);
-            }
-        }
-    }
-
-    private int FilterListCount(CookedIngredientSO data)
-    {
-        int count = 0;
-
-        for (int i = 0; i < data.ingredientIds.Count; i++)
-        {
-            if (data.ingredientIds[i] == -1) continue;
-
-            count++;
-        }
-
-        return count;
     }
 }
