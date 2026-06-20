@@ -14994,7 +14994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b9ad9afaffabf42aeb88de577a6083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowWorldUI
-  uiTargetTransform: {fileID: 0}
+  uiTargetTransform: {fileID: 1837532734}
   uiWorldCamera: {fileID: 330585545}
   uiOffset: {x: 0, y: -1.5, z: 0}
 --- !u!114 &612311124
@@ -24085,7 +24085,7 @@ PrefabInstance:
     - target: {fileID: 1704561973504780103, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: heldItem
       value: 
-      objectReference: {fileID: 1837532730}
+      objectReference: {fileID: 0}
     - target: {fileID: 2293147215146773349, guid: 33916f6f58ed4fd47aa1e9fd4cddaeaa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -30415,11 +30415,11 @@ PrefabInstance:
     - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: DiePosition
       value: 
-      objectReference: {fileID: 548366362}
+      objectReference: {fileID: 548366363}
     - target: {fileID: 8594374518970189994, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
       propertyPath: respawnPosition
       value: 
-      objectReference: {fileID: 336004258}
+      objectReference: {fileID: 336004259}
     m_RemovedComponents:
     - {fileID: 170224164170443928, guid: 9be8dcf640e0f064991310387a966dcf, type: 3}
     m_RemovedGameObjects: []
