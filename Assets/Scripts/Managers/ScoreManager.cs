@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
 
     public int GetComboBonus(int combo)
     {
-        if (combo < 0 || combo > 5) return 0;
+        if (combo <= 0 || combo > comboScore.Length) return 0;
 
         return comboScore[combo - 1];
     }
