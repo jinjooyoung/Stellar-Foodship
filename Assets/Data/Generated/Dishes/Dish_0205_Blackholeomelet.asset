@@ -18,5 +18,5 @@ MonoBehaviour:
   ingredientIds: ffffffffffffffff690000006c000000
   score: 80
   cookwareType: 5
-  icon: {fileID: 21300000, guid: 7a01f700b21a34a6d84f4c7b18be1f64, type: 3}
+  icon: {fileID: 21300000, guid: a09dbff8e7defa44a81917e4fd27f44a, type: 3}
   model: {fileID: 0}
